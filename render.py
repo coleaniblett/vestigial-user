@@ -143,9 +143,9 @@ def dump_examples(tok, rows, path, preceding=False):
             lines += [
                 f"### {cond} ({r.end - r.start} content tokens of {len(r.input_ids)})",
                 "",
-                "```",
+                "````",  # four backticks: texts may contain ``` code fences
                 f"{before}⟦{content}⟧{after}",
-                "```",
+                "````",
                 "",
             ]
     with open(path, "w") as f:

@@ -121,10 +121,11 @@ def main():
     if len(rows) < args.n:
         raise SystemExit(f"only found {len(rows)} usable pairs")
 
-    prefill = []
+    prefill, seen_sentences = [], set()
     for row in rows:
         s = first_sentence(row["user"])
-        if s:
+        if s and s not in seen_sentences:  # distinct conversations can share an opening sentence
+            seen_sentences.add(s)
             prefill.append(dict(id=f"prefill-{len(prefill):02d}", text_id=row["id"], prefill=s))
         if len(prefill) == args.n_prefill:
             break

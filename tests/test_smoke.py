@@ -13,7 +13,7 @@ import pytest
 import torch
 
 import config
-from render import load_jsonl, load_tokenizer, render_all
+from render import Rendered, load_jsonl, load_tokenizer, render_all
 from score import content_nll, load_model
 
 MODEL = "HuggingFaceTB/SmolLM2-135M-Instruct"
@@ -74,6 +74,19 @@ def test_generations_and_analysis(pipeline):
     assert (pipeline / "nll_by_stage.png").stat().st_size > 0
     md = (pipeline / "results.md").read_text()
     assert "slot effect, user text" in md and "slot effect, assistant text" in md
+
+
+def test_suffix_does_not_change_scores(pipeline):
+    """The end-of-turn suffix differs by role but follows the scored span, so it must not matter."""
+    tok = load_tokenizer(MODEL)
+    model, device = load_model(MODEL)
+    full = [((r["id"], c), x) for r in load_jsonl(pipeline / "texts.jsonl")[:4] for c, x in render_all(tok, r).items()]
+    cut = [(k, Rendered(x.input_ids[: x.end], x.start, x.end, x.text)) for k, x in full]
+    assert any(len(x.input_ids) > x.end for _, x in full)
+    a = content_nll(model, device, full, tok.pad_token_id, batch_size=1)
+    b = content_nll(model, device, cut, tok.pad_token_id, batch_size=1)
+    for k in a:
+        torch.testing.assert_close(a[k], b[k], atol=1e-4, rtol=1e-4)
 
 
 def test_batching_matches_single(pipeline):

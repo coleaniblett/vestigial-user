@@ -31,10 +31,17 @@ def tok():
 def test_slots_differ_only_in_role_header(tok):
     pu, su = template_parts(tok, "user")
     pa, sa = template_parts(tok, "assistant")
-    assert su == sa
     assert pu != pa
     common = os.path.commonprefix([pu, pa])
     assert pu[len(common) :].replace("user", "assistant") == pa[len(common) :]
+    # The OLMo template closes a user turn with <|im_end|>\n and a final assistant turn with
+    # <|endoftext|>. The suffix comes after the scored span, so under causal attention it cannot
+    # change content NLL (tests/test_smoke.py::test_suffix_does_not_change_scores); it must start
+    # with a special/added token so nothing can merge with the end of the content.
+    boundary_ids = set(tok.all_special_ids) | set(tok.get_added_vocab().values())
+    for suffix in (su, sa):
+        ids = tok(suffix, add_special_tokens=False)["input_ids"]
+        assert ids and ids[0] in boundary_ids, suffix
 
 
 @pytest.mark.parametrize("preceding", [False, True])

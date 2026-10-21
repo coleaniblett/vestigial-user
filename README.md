@@ -12,16 +12,12 @@ We look at one dimension, *vestigial regression* (Shiller 2026): the model losin
 | dpo | `allenai/Olmo-3-7B-Instruct-DPO` |
 | instruct (RL) | `allenai/Olmo-3-7B-Instruct` |
 
-`check_models.py` verifies IDs, licenses, sizes, and chat templates through the HF API and writes `docs/models.md`.
-
-## Status
-
-The code is in place, but `data/texts.jsonl`, `data/prefill.jsonl` and `docs/` are **not yet generated**. huggingface.co was unreachable from the build environment, so the model checks, data sampling and both test files are still pending. Run the first five commands under *Running on the GPU* to produce them. `source` in each row records which dataset the committed sample came from.
+`check_models.py` verifies IDs, licenses, sizes, chat templates and tokenizers through the HF API and writes `docs/models.md`. The template files of SFT/DPO and Instruct differ only in a tool-handling null check and render identically without tools; the four tokenizer.json files differ only in merge serialization and in the names of a few reserved tokens, so the check compares what they render and encode rather than file hashes.
 
 ## Design
 
-- **Data** (`prepare_data.py` → `data/texts.jsonl`, `data/prefill.jsonl`). We sample 300 English conversations and drop any flagged toxic or redacted. From each we keep the first user turn and the first assistant reply. Each text must be 20–300 tokens by the OLMo tokenizer and render cleanly (see below). The default dataset is `allenai/WildChat-1M`, which is gated and needs `HF_TOKEN` with its terms accepted. `--dataset oasst1` switches to `OpenAssistant/oasst1` (root prompt plus its top-ranked reply). Each row records its `source`. The prefill set is the first sentence of 20 sampled user turns.
-- **Conditions** (`config.CONDITIONS`). Each text is scored alone as the first turn, so the role header is the only difference between slot conditions:
+- **Data** (`prepare_data.py` → `data/texts.jsonl`, `data/prefill.jsonl`). We sample 300 English conversations and drop any flagged toxic or redacted. From each we keep the first user turn and the first assistant reply. Each text must be 20–300 tokens by the OLMo tokenizer and render cleanly (see below). The default dataset is `allenai/WildChat-1M`, which is gated and needs `HF_TOKEN` with its terms accepted; the committed `data/` was sampled from it (seed 0, reproducible). `--dataset oasst1` switches to `OpenAssistant/oasst1` (root prompt plus its top-ranked reply). Each row records its `source`. The prefill set is the first sentence of 20 sampled user turns (distinct sentences; different conversations can share an opening).
+- **Conditions** (`config.CONDITIONS`). Each text is scored alone as the first turn, so the role header is the only difference between slot conditions before the scored span (the Instruct template also prepends a fixed default system turn, identical in every slot condition). After the span the template closes a user turn with `<|im_end|>\n` and a final assistant turn with `<|endoftext|>`; this suffix follows the scored tokens, so under causal attention it cannot change their NLL (checked in the smoke test).
 
   | condition | text | slot |
   |---|---|---|
@@ -48,7 +44,7 @@ The code is in place, but `data/texts.jsonl`, `data/prefill.jsonl` and `docs/` a
 uv sync                                   # lockfile: uv.lock
 export HF_TOKEN=...                       # WildChat terms accepted on this account
 uv run python check_models.py             # IDs, licenses, shared chat template -> docs/models.md
-uv run python prepare_data.py             # only if data/texts.jsonl is not committed yet
+uv run python prepare_data.py             # optional: data/ is committed; rerun reproduces it
 uv run python render.py                   # -> docs/rendered_examples.md; eyeball it
 uv run pytest                             # span alignment (OLMo tokenizer) + CPU smoke test (SmolLM2-135M)
 bash run_gpu.sh                           # score + generate per checkpoint, one process each, then analyze
