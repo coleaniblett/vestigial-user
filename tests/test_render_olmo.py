@@ -100,3 +100,20 @@ def test_flags_use_user_portion_only(tok):
     unclosed = f"Sure! I'd be happy to help. {loop}"
     f = flags(unclosed, user_portion(unclosed, tok), False, end_marker, handoff)
     assert f == dict(ended_turn=False, handoff_to_assistant=False, assistant_register=True, repetition_loop=True)
+
+
+@pytest.mark.parametrize("text", EDGE_CASES)
+def test_role_swap_content_identical_across_labelings(tok, text):
+    from role_swap import LABELINGS, render_both
+
+    turns = [text, "A reply: " + text, text + " (follow-up)"]
+    out = render_both(tok, turns)
+    assert set(out) == set(LABELINGS)
+    for name, r in out.items():
+        assert [tok.decode(r.input_ids[a:b], clean_up_tokenization_spaces=False) for a, b in r.spans] == turns
+        roles = LABELINGS[name]
+        # each turn's header names its labeled role, and both labelings open with the same default system turn
+        for (a, _), role in zip(r.spans, roles):
+            assert tok.decode(r.input_ids[:a]).endswith(f"<|im_start|>{role}\n")
+    starts = [r.input_ids[: r.spans[0][0] - 3] for r in out.values()]
+    assert starts[0] == starts[1] and "system" in tok.decode(starts[0])

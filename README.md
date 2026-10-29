@@ -36,7 +36,7 @@ We look at one dimension, *vestigial regression* (Shiller 2026): the model losin
   `--preceding-turn` (off by default; `config.PRECEDING_TURN`) puts one fixed neutral turn of the opposite role before the scored turn, since a lone assistant turn is itself unusual input. This adds a second difference between slots (the preceding turn's text), so treat it as a robustness check.
 - **One template for every stage.** All stages, base included, are scored with the Instruct tokenizer and chat template, so token sequences are identical across stages. Base is the symmetric baseline. Caveat: the chat special tokens may be poorly trained in base.
 - **Rendering** (`render.py`). The content is tokenized on its own. The full rendered sequence must equal `tokens(prefix) + tokens(content) + tokens(suffix)`, which rules out merges at the header boundary. As a result, the content tokens are identical across all conditions, the control included. Decoding the span must reproduce the text exactly. Texts that fail these checks are filtered out at sampling time. `python render.py` dumps examples to `docs/rendered_examples.md`.
-- **Scoring** (`score.py`). Batched, right-padded per-token NLL over content tokens only. Runs in fp32 everywhere (a 7B model takes ~33 GB on GPU): in bf16, per-text NLL moves by up to 0.05 nats depending on batch composition, comparable to the effects of interest. Generation runs in bf16. Writes `results/scores/<stage>.csv` with columns `text_id, source, kind, condition, n_tokens, mean_nll`.
+- **Scoring** (`score.py`). Batched, right-padded per-token NLL over content tokens only. Runs in fp32 everywhere (a 7B model takes ~33 GB on GPU): in bf16, per-text NLL moves by up to 0.05 nats depending on batch composition, comparable to the effects of interest. Generation runs in bf16. Writes `results/scores/<stage>.csv` with columns `text_id, source, kind, condition, n_tokens, mean_nll`, and the per-token NLLs to `results/scores/<stage>_tokens.parquet` (`text_id, source, kind, condition, position, nll`; position 0 is the first content token).
 - **Generation** (`generate.py`). Opens a user turn with each prefill sentence, leaves it unterminated, and samples 3 × 120 tokens at T=0.7. It counts four flags per sample: `ended_turn` (closed the user turn), `handoff_to_assistant` (then wrote the assistant header; a subset of `ended_turn`), `assistant_register` (assistant phrases such as "I'd be happy to") and `repetition_loop` (any word 4-gram repeated 3 or more times). The last two are checked on the user portion only, the text before the turn closes: a post-trained model usually finishes the user's message, closes the turn and answers as the assistant, and that reply is not the user's voice.
 - **Analysis** (`analyze.py`). Per text set (source × kind) and stage, with 95% bootstrap CIs over texts (paired across slots):
   - raw mean NLL in each slot (user, assistant, plain);
@@ -44,6 +44,9 @@ We look at one dimension, *vestigial regression* (Shiller 2026): the model losin
   - role-specific = NLL(own slot) − NLL(plain): `user@user − user@plain` for user text, `asst@asst − asst@plain` for assistant text.
 
   Writes `results/results.md`, `results/summary.csv` and one figure per text set, `results/nll_<source>_<kind>.png` (stage on x, one line per slot).
+
+- **Position analysis** (`analyze.py`, from the per-token NLLs). Per text set and stage, over the texts with at least 40 content tokens (so every position averages over the same texts): mean NLL at each of the first 40 content-token positions in each slot, and the slot difference NLL(user slot) − NLL(assistant slot) by position with 95% bootstrap CIs. The slot difference counts as negligible from the first position p such that every per-position mean from p to 39 is within ±0.05 nats and their mean over positions p..39 has a 95% CI inside ±0.05 nats (`--positions`, `--margin`). Writes `results/position.md` and `results/position_<source>_<kind>.png`.
+- **Role-swapped conversations** (`role_swap.py` → `data/swap.jsonl`, `results/role_swap/<stage>.csv`, `results/role_swap.md`). 300 held-out English WildChat conversations with at least three turns: user P1, assistant R1, user P2, each 20–300 tokens, skipped if P1, P2 or the conversation hash is in the Dolci data. Each is rendered under two labelings that keep every content token identical (checked as for the slot conditions): normal (user P1, assistant R1, user P2) and flipped (assistant P1, user R1, assistant P2), both with the default system turn. Only R1 and P2 are scored. Label effect = NLL(flipped) − NLL(normal) per turn, 95% bootstrap CI over conversations; base measures what the flipped labeling's oddness costs on its own, so later stages are also reported relative to base, paired over conversations. The swap is its own context control, so `run_gpu.sh` skips it under `--preceding-turn`.
 
 ## Running on the GPU (single 48 GB+ card)
 
@@ -53,9 +56,10 @@ uv run python check_models.py             # IDs, licenses, shared chat template 
 uv run python prepare_data.py             # optional: data/ is committed; rerun reproduces it (streams WildChat, loads Dolci)
 uv run python add_replies.py              # optional: adds the olmo-instruct replies to data/texts.jsonl (GPU)
 uv run python check_contamination.py      # overlap of data/texts.jsonl with the Dolci SFT/DPO/RL data
+uv run python role_swap.py prepare        # optional: data/swap.jsonl is committed; rerun reproduces it
 uv run python render.py                   # -> docs/rendered_examples.md; eyeball it
 uv run pytest                             # span alignment (OLMo tokenizer) + CPU smoke test (SmolLM2-135M)
-bash run_gpu.sh                           # score + generate per checkpoint, one process each, then analyze
+bash run_gpu.sh                           # score + generate + role swap per checkpoint, one process each, then analyze
 OUT=results_preceding bash run_gpu.sh --preceding-turn   # optional robustness run
 ```
 

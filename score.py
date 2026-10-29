@@ -3,13 +3,16 @@
     python score.py --model sft                     # a stage name from config.MODELS, or any HF id
     python score.py --model HuggingFaceTB/SmolLM2-135M-Instruct --tokenizer HuggingFaceTB/SmolLM2-135M-Instruct
 
-Writes <out>/<stage>.csv with columns text_id, source, kind, condition, n_tokens, mean_nll.
+Writes <out>/<stage>.csv with columns text_id, source, kind, condition, n_tokens, mean_nll, and
+<out>/<stage>_tokens.parquet with the per-token NLLs (text_id, source, kind, condition, position, nll).
 """
 
 import argparse
 import csv
 import os
 
+import numpy as np
+import pandas as pd
 import torch
 import torch.nn.functional as F
 from transformers import AutoModelForCausalLM
@@ -36,25 +39,49 @@ def load_model(model_id, dtype=None):
 
 
 @torch.no_grad()
-def content_nll(model, device, items, pad_id, batch_size):
-    """items: list of (key, Rendered). Returns {key: per-token NLL tensor over content}."""
+def spans_nll(model, device, seqs, pad_id, batch_size):
+    """seqs: list of (input_ids, {key: (start, end)}). Returns {key: per-token NLL tensor over each span}."""
     out = {}
-    order = sorted(items, key=lambda kv: len(kv[1].input_ids))
+    order = sorted(seqs, key=lambda s: len(s[0]))
     for i in range(0, len(order), batch_size):
         batch = order[i : i + batch_size]
-        width = max(len(r.input_ids) for _, r in batch)
+        width = max(len(input_ids) for input_ids, _ in batch)
         ids = torch.full((len(batch), width), pad_id, dtype=torch.long)
         mask = torch.zeros((len(batch), width), dtype=torch.long)
-        for j, (_, r) in enumerate(batch):
-            ids[j, : len(r.input_ids)] = torch.tensor(r.input_ids)
-            mask[j, : len(r.input_ids)] = 1
+        for j, (input_ids, _) in enumerate(batch):
+            ids[j, : len(input_ids)] = torch.tensor(input_ids)
+            mask[j, : len(input_ids)] = 1
         logits = model(input_ids=ids.to(device), attention_mask=mask.to(device)).logits
-        for j, (key, r) in enumerate(batch):
-            # logits at position t predict token t+1
-            lp = F.log_softmax(logits[j, r.start - 1 : r.end - 1].float(), dim=-1)
-            target = ids[j, r.start : r.end].to(device)
-            out[key] = -lp.gather(-1, target[:, None])[:, 0].cpu()
+        for j, (_, spans) in enumerate(batch):
+            for key, (start, end) in spans.items():
+                # logits at position t predict token t+1
+                lp = F.log_softmax(logits[j, start - 1 : end - 1].float(), dim=-1)
+                target = ids[j, start:end].to(device)
+                out[key] = -lp.gather(-1, target[:, None])[:, 0].cpu()
     return out
+
+
+def content_nll(model, device, items, pad_id, batch_size):
+    """items: list of (key, Rendered). Returns {key: per-token NLL tensor over content}."""
+    return spans_nll(model, device, [(r.input_ids, {key: (r.start, r.end)}) for key, r in items], pad_id, batch_size)
+
+
+def save_token_nll(path, nll, meta):
+    """Per-token NLLs in long form: text_id, source, kind, condition, position (0 = first content token), nll."""
+    keys = list(nll)
+    lengths = [len(nll[k]) for k in keys]
+    cols = {
+        "text_id": [k[0] for k in keys for _ in range(len(nll[k]))],
+        "condition": [k[1] for k in keys for _ in range(len(nll[k]))],
+        "position": np.concatenate([np.arange(n, dtype=np.int16) for n in lengths]),
+        "nll": torch.cat([nll[k] for k in keys]).numpy().astype(np.float32),
+    }
+    df = pd.DataFrame(cols)
+    for field in ("kind", "source"):  # inserted at 1 in turn, so source comes first
+        df.insert(1, field, df.text_id.map({i: m[field] for i, m in meta.items()}))
+    for c in ("text_id", "source", "kind", "condition"):
+        df[c] = df[c].astype("category")
+    df.to_parquet(path, index=False)
 
 
 def main():
@@ -94,7 +121,8 @@ def main():
             v = nll[(text_id, cond)]
             row = by_id[text_id]
             w.writerow([text_id, row["source"], row["kind"], cond, len(v), f"{v.mean().item():.6f}"])
-    print(f"{model_id}: wrote {len(items)} rows to {path}")
+    save_token_nll(os.path.join(args.out, f"{stage}_tokens.parquet"), nll, by_id)
+    print(f"{model_id}: wrote {len(items)} rows to {path} (+ per-token NLLs)")
 
 
 if __name__ == "__main__":

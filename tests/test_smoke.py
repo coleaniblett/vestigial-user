@@ -4,6 +4,7 @@ Uses oasst1 pairs without the Dolci exclusion so it stays small and fast. The sa
 scored under two stage labels so analyze.py has more than one stage to plot.
 """
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -38,8 +39,20 @@ def pipeline(tmp_path_factory):
             "--batch-size", "4", "--out", str(d / "scores"))
         run("generate.py", "--model", MODEL, "--stage", stage, *common, "--prefill", str(d / "prefill.jsonl"),
             "--samples", "2", "--max-new-tokens", "16", "--out", str(d / "generations"))
+    # three-turn conversations stitched from the oasst1 pairs, for the role-swap path
+    rows = load_jsonl(d / "texts.jsonl")
+    users = [r["text"] for r in rows if r["source"] == "oasst1" and r["kind"] == "user"]
+    assts = [r["text"] for r in rows if r["source"] == "oasst1" and r["kind"] == "assistant"]
+    with open(d / "swap.jsonl", "w", encoding="utf-8") as f:
+        for i in range(4):
+            f.write(json.dumps(dict(id=f"swap-{i:04d}", p1=users[i], r1=assts[i], p2=users[i + 1])) + "\n")
+    for stage in STAGES:
+        run("role_swap.py", "score", "--model", MODEL, "--stage", stage, *common, "--dataset", str(d / "swap.jsonl"),
+            "--out", str(d / "role_swap"))
+    run("role_swap.py", "analyze", "--scores", str(d / "role_swap"), "--dataset", str(d / "swap.jsonl"),
+        "--out-dir", str(d), "--n-boot", "200")
     run("analyze.py", "--scores", str(d / "scores"), "--generations", str(d / "generations"),
-        "--out", str(d), "--n-boot", "200")
+        "--out", str(d), "--n-boot", "200", "--positions", "10")
     return d
 
 
@@ -108,3 +121,24 @@ def test_batching_matches_single(pipeline):
     single = content_nll(model, device, items, tok.pad_token_id, batch_size=1)
     for k in single:
         torch.testing.assert_close(batched[k], single[k], atol=1e-4, rtol=1e-4)
+
+
+def test_token_nll_matches_mean(pipeline):
+    for stage in STAGES:
+        means = pd.read_csv(pipeline / "scores" / f"{stage}.csv").set_index(["text_id", "condition"])
+        tok = pd.read_parquet(pipeline / "scores" / f"{stage}_tokens.parquet")
+        g = tok.groupby(["text_id", "condition"], observed=True).nll
+        assert len(g) == len(means)
+        assert (g.size() == means.n_tokens.reindex(g.size().index)).all()
+        assert (g.mean() - means.mean_nll.reindex(g.mean().index)).abs().max() < 1e-5
+    assert "negligible" in (pipeline / "position.md").read_text()
+
+
+def test_role_swap(pipeline):
+    for stage in STAGES:
+        df = pd.read_csv(pipeline / "role_swap" / f"{stage}.csv")
+        assert len(df) == 4 * 2 * 2 and set(df.labeling) == {"normal", "flipped"} and set(df.turn) == {"R1", "P2"}
+        n = df.pivot_table(index=["conv_id", "turn"], columns="labeling", values="n_tokens")
+        assert (n.normal == n.flipped).all()
+    md = (pipeline / "role_swap.md").read_text()
+    assert "label effect R1 (flipped - normal)" in md and "relative to base" in md

@@ -112,6 +112,47 @@ def render_all(tok, row, preceding=False):
     return out
 
 
+@dataclass
+class RenderedConversation:
+    input_ids: list[int]
+    spans: list[tuple[int, int]]  # content of turn i occupies input_ids[start:end]
+    text: str
+
+
+def render_conversation(tok, contents, roles):
+    """Several turns with the given roles (default system turn included). Each content is tokenized
+    on its own and the full sequence must equal the template pieces and contents tokenized
+    separately, so a content's tokens do not depend on the roles around it."""
+    marks = [f"<<<{SENTINEL}{i}>>>" for i in range(len(contents))]
+    msgs = lambda texts: [{"role": r, "content": t} for r, t in zip(roles, texts)]
+    s = tok.apply_chat_template(msgs(marks), tokenize=False)
+    pieces, rest = [], s
+    for m in marks:
+        if rest.count(m) != 1:
+            raise AlignmentError("template does not place each content verbatim exactly once")
+        before, rest = rest.split(m)
+        pieces.append(before)
+    pieces.append(rest)
+
+    ids, spans, full = [], [], ""
+    for i, text in enumerate(contents):
+        check_text(tok, text)
+        content = encode(tok, text)
+        if tok.decode(content, clean_up_tokenization_spaces=False) != text:
+            raise AlignmentError("decoding the content tokens does not reproduce the text")
+        ids += encode(tok, pieces[i])
+        spans.append((len(ids), len(ids) + len(content)))
+        ids += content
+        full += pieces[i] + text
+    ids += encode(tok, pieces[-1])
+    full += pieces[-1]
+    if tok.apply_chat_template(msgs(contents), tokenize=False) != full:
+        raise AlignmentError("template modifies the content")
+    if encode(tok, full) != ids:
+        raise AlignmentError("tokens merge across a content boundary")
+    return RenderedConversation(ids, spans, full)
+
+
 def render_prefill(tok, sentence, preceding=False):
     """User turn opened with `sentence` and left unterminated, for generation."""
     check_text(tok, sentence)
