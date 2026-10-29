@@ -1,0 +1,81 @@
+stage,source,kind,quantity,n,mean,lo,hi
+base,wildchat,user,NLL user slot (user@user),300,2.8601129333333333,2.7517612358333334,2.965761121833333
+base,wildchat,user,NLL assistant slot (user@asst),300,2.923276286666667,2.8123933905833334,3.0336579526666667
+base,wildchat,user,NLL plain (no slot) (user@plain),300,3.0515393966666666,2.94072682,3.162362944
+base,wildchat,user,slot effect (user - assistant slot),300,-0.06316335333333332,-0.07081346233333333,-0.05588229316666664
+base,wildchat,user,role-specific (user@user - user@plain),300,-0.19142646333333332,-0.21701166958333334,-0.16663776450000004
+base,oasst1,user,NLL user slot (user@user),300,2.712289613333333,2.6398670288333332,2.7862899624999997
+base,oasst1,user,NLL assistant slot (user@asst),300,2.8038531633333332,2.729590239333333,2.8799062666666666
+base,oasst1,user,NLL plain (no slot) (user@plain),300,2.9695346233333333,2.8897506398333332,3.0504302389166664
+base,oasst1,user,slot effect (user - assistant slot),300,-0.09156355000000001,-0.09905329316666665,-0.08419067183333337
+base,oasst1,user,role-specific (user@user - user@plain),300,-0.25724501000000005,-0.2796445655,-0.23516548225000003
+base,wildchat,assistant,NLL user slot (asst@user),300,2.052498356666667,1.97109852325,2.1351377617500003
+base,wildchat,assistant,NLL assistant slot (asst@asst),300,2.0463017233333334,1.9623866553333331,2.1333054870000003
+base,wildchat,assistant,NLL plain (no slot) (asst@plain),300,2.1788447000000004,2.08857469125,2.274135799166666
+base,wildchat,assistant,slot effect (user - assistant slot),300,0.006196633333333332,0.0017739258333333433,0.010543380166666675
+base,wildchat,assistant,role-specific (asst@asst - asst@plain),300,-0.13254297666666667,-0.15306361408333333,-0.11307136691666667
+base,olmo-instruct,assistant,NLL user slot (asst@user),290,1.7698516344827586,1.705774429913793,1.838876909137931
+base,olmo-instruct,assistant,NLL assistant slot (asst@asst),290,1.765998051724138,1.703802395,1.832542649224138
+base,olmo-instruct,assistant,NLL plain (no slot) (asst@plain),290,1.845862375862069,1.7768125642241381,1.9182352674999998
+base,olmo-instruct,assistant,slot effect (user - assistant slot),290,0.00385358275862068,0.0006627358620689555,0.007162229137931026
+base,olmo-instruct,assistant,role-specific (asst@asst - asst@plain),290,-0.07986432413793101,-0.09610757646551724,-0.06514040439655173
+sft,wildchat,user,NLL user slot (user@user),300,2.3946147333333334,2.2481195847500004,2.5383401482499997
+sft,wildchat,user,NLL assistant slot (user@asst),300,2.5419984966666664,2.4013627391666668,2.68329945325
+sft,wildchat,user,NLL plain (no slot) (user@plain),300,2.8476690933333333,2.701221359916667,2.9950564589166664
+sft,wildchat,user,slot effect (user - assistant slot),300,-0.1473837633333333,-0.16702572641666666,-0.12816402991666664
+sft,wildchat,user,role-specific (user@user - user@plain),300,-0.45305436000000004,-0.49093657308333327,-0.41605158733333336
+sft,oasst1,user,NLL user slot (user@user),300,2.8491015500000003,2.7689414785000004,2.9285811791666667
+sft,oasst1,user,NLL assistant slot (user@asst),300,3.0071367666666666,2.92636187,3.0881883974166664
+sft,oasst1,user,NLL plain (no slot) (user@plain),300,3.2451864133333332,3.159644778916667,3.332287164833333
+sft,oasst1,user,slot effect (user - assistant slot),300,-0.15803521666666667,-0.1754322,-0.14162243983333334
+sft,oasst1,user,role-specific (user@user - user@plain),300,-0.3960848633333333,-0.42457191283333334,-0.36876431558333334
+sft,wildchat,assistant,NLL user slot (asst@user),300,2.19992629,2.117125771333334,2.286068382416667
+sft,wildchat,assistant,NLL assistant slot (asst@asst),300,2.1821834266666666,2.0994139059999997,2.2678712094166666
+sft,wildchat,assistant,NLL plain (no slot) (asst@plain),300,2.419601596666667,2.329875197666667,2.5140896465
+sft,wildchat,assistant,slot effect (user - assistant slot),300,0.017742863333333338,0.007299651166666672,0.028137285416666658
+sft,wildchat,assistant,role-specific (asst@asst - asst@plain),300,-0.23741817,-0.26293804899999995,-0.21257052983333333
+sft,olmo-instruct,assistant,NLL user slot (asst@user),290,1.5857120517241379,1.5192285304310345,1.6577878945689655
+sft,olmo-instruct,assistant,NLL assistant slot (asst@asst),290,1.5558482689655173,1.4875851694827587,1.6304931970689658
+sft,olmo-instruct,assistant,NLL plain (no slot) (asst@plain),290,1.7497072137931033,1.6776569732758622,1.8270849642241378
+sft,olmo-instruct,assistant,slot effect (user - assistant slot),290,0.02986378275862069,0.019408620775862067,0.04006205224137931
+sft,olmo-instruct,assistant,role-specific (asst@asst - asst@plain),290,-0.1938589448275862,-0.2167107687931035,-0.1717353077586207
+dpo,wildchat,user,NLL user slot (user@user),300,2.5401361966666665,2.388476442,2.6896882381666667
+dpo,wildchat,user,NLL assistant slot (user@asst),300,2.8586267966666665,2.70596037,3.0083985658333336
+dpo,wildchat,user,NLL plain (no slot) (user@plain),300,2.9577480966666667,2.8088925990000004,3.1097977319166668
+dpo,wildchat,user,slot effect (user - assistant slot),300,-0.3184906,-0.3518309715833334,-0.28759377575
+dpo,wildchat,user,role-specific (user@user - user@plain),300,-0.41761190000000004,-0.4575314858333334,-0.37860881683333336
+dpo,oasst1,user,NLL user slot (user@user),300,2.947265703333333,2.864572552666667,3.0292058845000005
+dpo,oasst1,user,NLL assistant slot (user@asst),300,3.3535238566666665,3.266215486,3.4377569499166665
+dpo,oasst1,user,NLL plain (no slot) (user@plain),300,3.3693290633333337,3.2810463550833333,3.4559928520833334
+dpo,oasst1,user,slot effect (user - assistant slot),300,-0.4062581533333333,-0.4396563129999999,-0.3734930696666667
+dpo,oasst1,user,role-specific (user@user - user@plain),300,-0.42206336,-0.4531563676666667,-0.391335056
+dpo,wildchat,assistant,NLL user slot (asst@user),300,2.4761247166666664,2.393385177916666,2.5603277869166665
+dpo,wildchat,assistant,NLL assistant slot (asst@asst),300,2.6281379033333327,2.53785627425,2.722851569
+dpo,wildchat,assistant,NLL plain (no slot) (asst@plain),300,2.6233131966666665,2.533430587083333,2.713593979916667
+dpo,wildchat,assistant,slot effect (user - assistant slot),300,-0.15201318666666666,-0.17585371383333329,-0.12956190966666667
+dpo,wildchat,assistant,role-specific (asst@asst - asst@plain),300,0.004824706666666644,-0.02483424058333335,0.03416008908333331
+dpo,olmo-instruct,assistant,NLL user slot (asst@user),290,1.6127519689655174,1.5382538873275862,1.692821116724138
+dpo,olmo-instruct,assistant,NLL assistant slot (asst@asst),290,1.6980382517241381,1.6132664757758621,1.7864801781896549
+dpo,olmo-instruct,assistant,NLL plain (no slot) (asst@plain),290,1.7873696241379313,1.7115909203448276,1.8676429712931033
+dpo,olmo-instruct,assistant,slot effect (user - assistant slot),290,-0.08528628275862069,-0.10518061974137931,-0.06705889474137927
+dpo,olmo-instruct,assistant,role-specific (asst@asst - asst@plain),290,-0.0893313724137931,-0.11665474801724136,-0.06143299784482759
+instruct,wildchat,user,NLL user slot (user@user),300,2.5686975066666666,2.419352582,2.7191471501666666
+instruct,wildchat,user,NLL assistant slot (user@asst),300,2.94166506,2.78837523175,3.0940501457500003
+instruct,wildchat,user,NLL plain (no slot) (user@plain),300,3.011305146666667,2.8606178235000006,3.1629896401666664
+instruct,wildchat,user,slot effect (user - assistant slot),300,-0.3729675533333333,-0.41011226558333336,-0.3370983925833334
+instruct,wildchat,user,role-specific (user@user - user@plain),300,-0.44260763999999997,-0.48202587775000005,-0.40427356375
+instruct,oasst1,user,NLL user slot (user@user),300,2.968963416666667,2.8844922816666667,3.051864473333333
+instruct,oasst1,user,NLL assistant slot (user@asst),300,3.4443575300000004,3.357720138916667,3.53287816475
+instruct,oasst1,user,NLL plain (no slot) (user@plain),300,3.42278561,3.333411941333333,3.5157291717500003
+instruct,oasst1,user,slot effect (user - assistant slot),300,-0.4753941133333333,-0.5134749739166666,-0.4387943386666666
+instruct,oasst1,user,role-specific (user@user - user@plain),300,-0.45382219333333335,-0.4867491874166667,-0.42217040299999997
+instruct,wildchat,assistant,NLL user slot (asst@user),300,2.5150637833333334,2.433320959833333,2.5988810604999997
+instruct,wildchat,assistant,NLL assistant slot (asst@asst),300,2.7104136833333334,2.6149135483333334,2.80895497475
+instruct,wildchat,assistant,NLL plain (no slot) (asst@plain),300,2.675275226666667,2.5846676662499997,2.77150757125
+instruct,wildchat,assistant,slot effect (user - assistant slot),300,-0.1953499,-0.22338933,-0.16833783541666672
+instruct,wildchat,assistant,role-specific (asst@asst - asst@plain),300,0.03513845666666667,0.004399699750000007,0.06696611924999996
+instruct,olmo-instruct,assistant,NLL user slot (asst@user),290,1.607937651724138,1.5318732768103447,1.6866634219827585
+instruct,olmo-instruct,assistant,NLL assistant slot (asst@asst),290,1.7204918,1.6322071818965518,1.812671324224138
+instruct,olmo-instruct,assistant,NLL plain (no slot) (asst@plain),290,1.7944999862068964,1.7152420734482758,1.8770723809482759
+instruct,olmo-instruct,assistant,slot effect (user - assistant slot),290,-0.11255414827586208,-0.13458385353448277,-0.0919978025862069
+instruct,olmo-instruct,assistant,role-specific (asst@asst - asst@plain),290,-0.07400818620689655,-0.10358749948275862,-0.04351419379310347
