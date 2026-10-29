@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Score and generate with each checkpoint in turn, one process per model so GPU memory
 # is fully released between them. Extra args go to score.py and generate.py, e.g. --preceding-turn.
-# The role-swap scoring (data/swap.jsonl) runs only without --preceding-turn: the swap is its own context control.
+# The role-swap (data/swap.jsonl) and coin-toss (data/coin_toss.jsonl) scoring run only without --preceding-turn:
+# they set their own conversational context.
 #   bash run_gpu.sh
 #   OUT=results_preceding bash run_gpu.sh --preceding-turn
 set -euo pipefail
@@ -11,7 +12,7 @@ STAGES=${STAGES:-"base sft dpo instruct"}
 
 SWAP=1
 for a in "$@"; do [[ "$a" == --preceding-turn ]] && SWAP=0; done
-[[ -f data/swap.jsonl ]] || SWAP=0
+[[ -f data/swap.jsonl && -f data/coin_toss.jsonl ]] || SWAP=0
 
 for stage in $STAGES; do
   echo "=== $stage"
@@ -19,6 +20,7 @@ for stage in $STAGES; do
   uv run python generate.py --model "$stage" --out "$OUT/generations" "$@"
   if [[ $SWAP == 1 ]]; then
     uv run python role_swap.py score --model "$stage" --out "$OUT/role_swap"
+    uv run python coin_toss.py score --model "$stage" --out "$OUT/coin_toss"
   fi
   # weights are ~15 GB per checkpoint; set CLEAR_CACHE=1 to delete each after use
   if [[ "${CLEAR_CACHE:-0}" == 1 ]]; then
@@ -29,4 +31,5 @@ done
 uv run python analyze.py --scores "$OUT/scores" --generations "$OUT/generations" --out "$OUT"
 if [[ $SWAP == 1 ]]; then
   uv run python role_swap.py analyze --scores "$OUT/role_swap" --out-dir "$OUT"
+  uv run python coin_toss.py analyze --scores "$OUT/coin_toss" --out-dir "$OUT"
 fi

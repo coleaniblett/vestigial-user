@@ -5,9 +5,12 @@
 A text set is one (source, kind), e.g. wildchat user or olmo-instruct assistant. Sets are never
 pooled. Every text is scored in every slot; per set and stage we report
     raw NLL        mean content NLL in the user, assistant and plain-prose slot
-    slot effect    NLL(user slot) - NLL(assistant slot), paired over texts
+    slot effect    NLL(user slot) - NLL(assistant slot), paired over texts; by default without the first
+                   content token (a first-turn assistant header makes the post-trained models expect
+                   <|im_start|>, so that token costs 2-14 nats whatever the text), with it alongside
     role-specific  NLL(own slot) - NLL(plain): user@user - user@plain for user text,
                    asst@asst - asst@plain for assistant text
+    entropy        mean next-token entropy over content tokens per slot, without and with the first token
 95% bootstrap CIs are over texts. Writes results/summary.csv, results/results.md and one
 figure per text set, results/nll_<source>_<kind>.png (stage on x, one line per slot).
 
@@ -58,13 +61,22 @@ def bootstrap_ci(x, n_boot, rng):
     return x.mean(), lo, hi
 
 
+EXCL0, ALL = "excl. position 0", "all tokens"
+
+
 def quantities(kind):
-    """[(quantity label, function of the text x condition table)] for one text set."""
+    """[(quantity label, value column, function of the text x condition table)] for one text set. Slot effects
+    and entropies come without the first content token (default; after a first-turn assistant header the
+    post-trained models expect <|im_start|>, so that token costs 2-14 nats whatever the text) and with it."""
     k = config.KIND_ABBR[kind]
     own = "user" if kind == "user" else "asst"
-    qs = [(f"NLL {SLOT_NAMES[a]} ({k}@{a})", (lambda t, c=f"{k}@{a}": t[c])) for a, _ in config.SLOTS]
-    qs.append(("slot effect (user - assistant slot)", lambda t: t[f"{k}@user"] - t[f"{k}@asst"]))
-    qs.append((f"role-specific ({k}@{own} - {k}@plain)", lambda t: t[f"{k}@{own}"] - t[f"{k}@plain"]))
+    qs = [(f"NLL {SLOT_NAMES[a]} ({k}@{a})", "mean_nll", (lambda t, c=f"{k}@{a}": t[c])) for a, _ in config.SLOTS]
+    slot_effect = lambda t: t[f"{k}@user"] - t[f"{k}@asst"]
+    qs.append((f"slot effect, {EXCL0}", "mean_nll_from1", slot_effect))
+    qs.append((f"slot effect, {ALL}", "mean_nll", slot_effect))
+    qs.append((f"role-specific ({k}@{own} - {k}@plain)", "mean_nll", lambda t: t[f"{k}@{own}"] - t[f"{k}@plain"]))
+    for col, label in (("mean_entropy_from1", EXCL0), ("mean_entropy", ALL)):
+        qs += [(f"entropy {SLOT_NAMES[a]} ({k}@{a}), {label}", col, (lambda t, c=f"{k}@{a}": t[c])) for a, _ in config.SLOTS]
     return qs
 
 
@@ -76,8 +88,13 @@ def summarize(frames, n_boot, seed):
             d = df[(df.source == src) & (df.kind == kind)]
             if d.empty:
                 continue
-            t = d.pivot(index="text_id", columns="condition", values="mean_nll")
-            for q, f in quantities(kind):
+            tables = {}
+            for q, col, f in quantities(kind):
+                if col not in d:  # score CSVs from before a column was added
+                    continue
+                if col not in tables:
+                    tables[col] = d.pivot(index="text_id", columns="condition", values=col)
+                t = tables[col]
                 m, lo, hi = bootstrap_ci(f(t), n_boot, rng)
                 rows.append(dict(stage=stage, source=src, kind=kind, quantity=q, n=len(t), mean=m, lo=lo, hi=hi))
     return pd.DataFrame(rows)
@@ -127,11 +144,25 @@ def results_table(summary, gen_dir):
           "Texts per set: " + ", ".join(f"{set_name(s, k)} {n}" for s, k, n in zip(sets.source, sets.kind, sets.n)) + ".",
           "", "## Raw mean NLL by text set and slot", "",
           table(summary, lambda d: d.quantity.str.startswith("NLL "), ["text set", "quantity"]),
-          "", "## Slot effect: NLL(user slot) - NLL(assistant slot)", "",
-          table(summary, lambda d: d.quantity.str.startswith("slot effect"), ["text set"]),
+          "", "## Slot effect: NLL(user slot) - NLL(assistant slot)", ""]
+    if (summary.quantity == f"slot effect, {EXCL0}").any():
+        md += ["Default: without the first content token. When an assistant turn directly follows the system turn, "
+               "the post-trained checkpoints put nearly all next-token probability on `<|im_start|>`, so the first "
+               "content token in the assistant slot costs 2-14 nats whatever the text (see position.md). The "
+               "all-tokens version follows for reference.", "",
+               f"### Slot effect, {EXCL0} (default)", "",
+               table(summary, lambda d: d.quantity == f"slot effect, {EXCL0}", ["text set"]), "",
+               f"### Slot effect, {ALL}", ""]
+    md += [table(summary, lambda d: d.quantity == f"slot effect, {ALL}", ["text set"]),
           "", "## Role-specific: NLL(own slot) - NLL(plain)", "",
           "user@user - user@plain for user text; asst@asst - asst@plain for assistant text.", "",
           table(summary, lambda d: d.quantity.str.startswith("role-specific"), ["text set", "quantity"])]
+    for label, note in ((EXCL0, " (default)"), (ALL, "")):
+        sel = lambda d, label=label: d.quantity.str.startswith("entropy ") & d.quantity.str.endswith(label)
+        if sel(summary).any():
+            md += ["", f"## Mean next-token entropy by text set and slot, {label}{note}", "",
+                   "Entropy (nats) of the model's next-token distribution at each content token, averaged per text.", "",
+                   table(summary, sel, ["text set", "quantity"])]
     counts = sorted(glob.glob(os.path.join(gen_dir, "*_counts.csv")))
     if counts:
         g = pd.concat(pd.read_csv(p) for p in counts).set_index("stage")

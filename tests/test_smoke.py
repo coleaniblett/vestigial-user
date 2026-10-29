@@ -46,11 +46,17 @@ def pipeline(tmp_path_factory):
     with open(d / "swap.jsonl", "w", encoding="utf-8") as f:
         for i in range(4):
             f.write(json.dumps(dict(id=f"swap-{i:04d}", p1=users[i], r1=assts[i], p2=users[i + 1])) + "\n")
+    run("role_swap.py", "replies", "--model", MODEL, *common, "--dataset", str(d / "swap.jsonl"), "--max-new-tokens", "64")
+    run("coin_toss.py", "build", "--n-items", "4", "--out", str(d / "coin_toss.jsonl"))
     for stage in STAGES:
         run("role_swap.py", "score", "--model", MODEL, "--stage", stage, *common, "--dataset", str(d / "swap.jsonl"),
             "--out", str(d / "role_swap"))
+        run("coin_toss.py", "score", "--model", MODEL, "--stage", stage, *common, "--dataset", str(d / "coin_toss.jsonl"),
+            "--out", str(d / "coin_toss"))
     run("role_swap.py", "analyze", "--scores", str(d / "role_swap"), "--dataset", str(d / "swap.jsonl"),
         "--out-dir", str(d), "--n-boot", "200")
+    run("coin_toss.py", "analyze", "--scores", str(d / "coin_toss"), "--dataset", str(d / "coin_toss.jsonl"),
+        *common, "--out-dir", str(d), "--n-boot", "200")
     run("analyze.py", "--scores", str(d / "scores"), "--generations", str(d / "generations"),
         "--out", str(d), "--n-boot", "200", "--positions", "10")
     return d
@@ -79,7 +85,9 @@ def test_scores(pipeline):
     rows = load_jsonl(pipeline / "texts.jsonl")
     for stage in STAGES:
         df = pd.read_csv(pipeline / "scores" / f"{stage}.csv")
-        assert list(df.columns) == ["text_id", "source", "kind", "condition", "n_tokens", "mean_nll"]
+        assert list(df.columns) == ["text_id", "source", "kind", "condition", "n_tokens", "mean_nll", "mean_nll_from1",
+                                    "mean_entropy", "mean_entropy_from1"]
+        assert (df.mean_entropy > 0).all() and df.mean_entropy_from1.notna().all()
         assert len(df) == len(rows) * len(config.SLOTS)
         for kind, d in df.groupby("kind"):
             assert set(d.condition) == {c for c, _ in config.conditions(kind)}
@@ -131,14 +139,34 @@ def test_token_nll_matches_mean(pipeline):
         assert len(g) == len(means)
         assert (g.size() == means.n_tokens.reindex(g.size().index)).all()
         assert (g.mean() - means.mean_nll.reindex(g.mean().index)).abs().max() < 1e-5
+        e = tok.groupby(["text_id", "condition"], observed=True).entropy.mean()
+        assert (e - means.mean_entropy.reindex(e.index)).abs().max() < 1e-5
+        late = tok[tok.position >= 1].groupby(["text_id", "condition"], observed=True).nll.mean()
+        assert (late - means.mean_nll_from1.reindex(late.index)).abs().max() < 1e-5
     assert "negligible" in (pipeline / "position.md").read_text()
 
 
 def test_role_swap(pipeline):
+    swap = load_jsonl(pipeline / "swap.jsonl")
+    n_olmo = sum(r["r1_olmo"] is not None for r in swap)
+    assert n_olmo > 0
     for stage in STAGES:
         df = pd.read_csv(pipeline / "role_swap" / f"{stage}.csv")
-        assert len(df) == 4 * 2 * 2 and set(df.labeling) == {"normal", "flipped"} and set(df.turn) == {"R1", "P2"}
-        n = df.pivot_table(index=["conv_id", "turn"], columns="labeling", values="n_tokens")
+        three, two = df[df.format == "3turn"], df[df.format == "2turn"]
+        assert len(three) == 4 * 2 * 2 and set(three.turn) == {"R1", "P2"}
+        assert len(two) == (4 + n_olmo) * 2 and set(two.turn) == {"R1"}
+        assert set(two.r1_source) == {"chatgpt", "olmo-instruct"} and set(df.labeling) == {"normal", "flipped"}
+        n = df.pivot_table(index=["conv_id", "format", "r1_source", "turn"], columns="labeling", values="n_tokens")
         assert (n.normal == n.flipped).all()
+        assert (df.mean_entropy > 0).all()
     md = (pipeline / "role_swap.md").read_text()
     assert "label effect R1 (flipped - normal)" in md and "relative to base" in md
+    assert "interaction" in md and "Circularity" in md and "entropy" in md
+
+
+def test_coin_toss(pipeline):
+    for stage in STAGES:
+        df = pd.read_csv(pipeline / "coin_toss" / f"{stage}.csv")
+        assert len(df) == 8 * 3 * 2 * 6 and (df.logprob < 0).all()
+    md = (pipeline / "coin_toss.md").read_text()
+    assert "assistant tilt - user tilt" in md and "relative to base" in md

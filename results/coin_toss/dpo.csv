@@ -1,0 +1,1441 @@
+conv_id,condition,outcome,variant,n_tokens,logprob
+coin-00-heads,assistant,heads, heads,1,-3.844656
+coin-00-heads,assistant,heads,heads,1,-10.071840
+coin-00-heads,assistant,heads, Heads,1,-5.610180
+coin-00-heads,assistant,heads,Heads,2,-10.474551
+coin-00-heads,assistant,heads, HEADS,2,-8.290097
+coin-00-heads,assistant,heads,HEADS,2,-11.938004
+coin-00-heads,assistant,tails, tails,1,-0.801113
+coin-00-heads,assistant,tails,tails,1,-8.325716
+coin-00-heads,assistant,tails, Tails,2,-6.747658
+coin-00-heads,assistant,tails,Tails,2,-15.193231
+coin-00-heads,assistant,tails, TAILS,2,-11.163245
+coin-00-heads,assistant,tails,TAILS,2,-12.956084
+coin-00-heads,user,heads, heads,1,-3.014321
+coin-00-heads,user,heads,heads,1,-9.718006
+coin-00-heads,user,heads, Heads,1,-5.223485
+coin-00-heads,user,heads,Heads,2,-10.473999
+coin-00-heads,user,heads, HEADS,2,-8.287258
+coin-00-heads,user,heads,HEADS,2,-11.757287
+coin-00-heads,user,tails, tails,1,-0.703575
+coin-00-heads,user,tails,tails,1,-8.497372
+coin-00-heads,user,tails, Tails,2,-6.672167
+coin-00-heads,user,tails,Tails,2,-14.518610
+coin-00-heads,user,tails, TAILS,2,-11.787416
+coin-00-heads,user,tails,TAILS,2,-13.248898
+coin-00-heads,none,heads, heads,1,-1.971639
+coin-00-heads,none,heads,heads,1,-8.915876
+coin-00-heads,none,heads, Heads,1,-3.172401
+coin-00-heads,none,heads,Heads,2,-8.989578
+coin-00-heads,none,heads, HEADS,2,-7.420825
+coin-00-heads,none,heads,HEADS,2,-10.903845
+coin-00-heads,none,tails, tails,1,-1.923982
+coin-00-heads,none,tails,tails,1,-8.285624
+coin-00-heads,none,tails, Tails,2,-8.341676
+coin-00-heads,none,tails,Tails,2,-17.153225
+coin-00-heads,none,tails, TAILS,2,-15.535975
+coin-00-heads,none,tails,TAILS,2,-12.715904
+coin-00-tails,assistant,heads, heads,1,-2.186185
+coin-00-tails,assistant,heads,heads,1,-8.256895
+coin-00-tails,assistant,heads, Heads,1,-3.887655
+coin-00-tails,assistant,heads,Heads,2,-8.682122
+coin-00-tails,assistant,heads, HEADS,2,-5.394570
+coin-00-tails,assistant,heads,HEADS,2,-9.907928
+coin-00-tails,assistant,tails, tails,1,-2.787962
+coin-00-tails,assistant,tails,tails,1,-9.091843
+coin-00-tails,assistant,tails, Tails,2,-8.695203
+coin-00-tails,assistant,tails,Tails,2,-16.329460
+coin-00-tails,assistant,tails, TAILS,2,-14.126601
+coin-00-tails,assistant,tails,TAILS,2,-13.098490
+coin-00-tails,user,heads, heads,1,-2.188161
+coin-00-tails,user,heads,heads,1,-8.686564
+coin-00-tails,user,heads, Heads,1,-4.365886
+coin-00-tails,user,heads,Heads,2,-9.412742
+coin-00-tails,user,heads, HEADS,2,-6.645971
+coin-00-tails,user,heads,HEADS,2,-10.525377
+coin-00-tails,user,tails, tails,1,-2.257207
+coin-00-tails,user,tails,tails,1,-8.912690
+coin-00-tails,user,tails, Tails,2,-7.720825
+coin-00-tails,user,tails,Tails,2,-15.215266
+coin-00-tails,user,tails, TAILS,2,-14.469711
+coin-00-tails,user,tails,TAILS,2,-13.266175
+coin-00-tails,none,heads, heads,1,-1.971639
+coin-00-tails,none,heads,heads,1,-8.915876
+coin-00-tails,none,heads, Heads,1,-3.172401
+coin-00-tails,none,heads,Heads,2,-8.989578
+coin-00-tails,none,heads, HEADS,2,-7.420825
+coin-00-tails,none,heads,HEADS,2,-10.903844
+coin-00-tails,none,tails, tails,1,-1.923982
+coin-00-tails,none,tails,tails,1,-8.285624
+coin-00-tails,none,tails, Tails,2,-8.341676
+coin-00-tails,none,tails,Tails,2,-17.153225
+coin-00-tails,none,tails, TAILS,2,-15.535975
+coin-00-tails,none,tails,TAILS,2,-12.715904
+coin-01-heads,assistant,heads, heads,1,-1.571198
+coin-01-heads,assistant,heads,heads,1,-9.099258
+coin-01-heads,assistant,heads, Heads,1,-3.933835
+coin-01-heads,assistant,heads,Heads,2,-10.614984
+coin-01-heads,assistant,heads, HEADS,2,-8.570536
+coin-01-heads,assistant,heads,HEADS,2,-11.676193
+coin-01-heads,assistant,tails, tails,1,-0.421645
+coin-01-heads,assistant,tails,tails,1,-8.922289
+coin-01-heads,assistant,tails, Tails,2,-6.025162
+coin-01-heads,assistant,tails,Tails,2,-14.813945
+coin-01-heads,assistant,tails, TAILS,2,-12.435050
+coin-01-heads,assistant,tails,TAILS,2,-13.108541
+coin-01-heads,user,heads, heads,1,-1.281307
+coin-01-heads,user,heads,heads,1,-8.768799
+coin-01-heads,user,heads, Heads,1,-3.647424
+coin-01-heads,user,heads,Heads,2,-10.834300
+coin-01-heads,user,heads, HEADS,2,-8.039881
+coin-01-heads,user,heads,HEADS,2,-11.401868
+coin-01-heads,user,tails, tails,1,-0.527918
+coin-01-heads,user,tails,tails,1,-8.813826
+coin-01-heads,user,tails, Tails,2,-5.836530
+coin-01-heads,user,tails,Tails,2,-14.736141
+coin-01-heads,user,tails, TAILS,2,-12.427207
+coin-01-heads,user,tails,TAILS,2,-13.396103
+coin-01-heads,none,heads, heads,1,-0.798695
+coin-01-heads,none,heads,heads,1,-8.805582
+coin-01-heads,none,heads, Heads,1,-2.392348
+coin-01-heads,none,heads,Heads,2,-9.715393
+coin-01-heads,none,heads, HEADS,2,-7.735278
+coin-01-heads,none,heads,HEADS,2,-11.177228
+coin-01-heads,none,tails, tails,1,-0.996724
+coin-01-heads,none,tails,tails,1,-9.079125
+coin-01-heads,none,tails, Tails,2,-5.538707
+coin-01-heads,none,tails,Tails,2,-14.944779
+coin-01-heads,none,tails, TAILS,2,-15.268463
+coin-01-heads,none,tails,TAILS,2,-13.317873
+coin-01-tails,assistant,heads, heads,1,-1.143450
+coin-01-tails,assistant,heads,heads,1,-8.662130
+coin-01-tails,assistant,heads, Heads,1,-3.580595
+coin-01-tails,assistant,heads,Heads,2,-10.506912
+coin-01-tails,assistant,heads, HEADS,2,-7.828262
+coin-01-tails,assistant,heads,HEADS,2,-11.136266
+coin-01-tails,assistant,tails, tails,1,-0.575132
+coin-01-tails,assistant,tails,tails,1,-9.055946
+coin-01-tails,assistant,tails, Tails,2,-5.359691
+coin-01-tails,assistant,tails,Tails,2,-14.391223
+coin-01-tails,assistant,tails, TAILS,2,-12.661263
+coin-01-tails,assistant,tails,TAILS,2,-13.222758
+coin-01-tails,user,heads, heads,1,-1.500078
+coin-01-tails,user,heads,heads,1,-8.979183
+coin-01-tails,user,heads, Heads,1,-3.698158
+coin-01-tails,user,heads,Heads,2,-10.750743
+coin-01-tails,user,heads, HEADS,2,-7.776099
+coin-01-tails,user,heads,HEADS,2,-11.373545
+coin-01-tails,user,tails, tails,1,-0.439777
+coin-01-tails,user,tails,tails,1,-8.582914
+coin-01-tails,user,tails, Tails,2,-3.988562
+coin-01-tails,user,tails,Tails,2,-13.604018
+coin-01-tails,user,tails, TAILS,2,-11.064804
+coin-01-tails,user,tails,TAILS,2,-13.099719
+coin-01-tails,none,heads, heads,1,-0.798696
+coin-01-tails,none,heads,heads,1,-8.805582
+coin-01-tails,none,heads, Heads,1,-2.392348
+coin-01-tails,none,heads,Heads,2,-9.715393
+coin-01-tails,none,heads, HEADS,2,-7.735278
+coin-01-tails,none,heads,HEADS,2,-11.177228
+coin-01-tails,none,tails, tails,1,-0.996724
+coin-01-tails,none,tails,tails,1,-9.079125
+coin-01-tails,none,tails, Tails,2,-5.538707
+coin-01-tails,none,tails,Tails,2,-14.944779
+coin-01-tails,none,tails, TAILS,2,-15.268463
+coin-01-tails,none,tails,TAILS,2,-13.317873
+coin-02-heads,assistant,heads, heads,1,-2.525729
+coin-02-heads,assistant,heads,heads,1,-9.723961
+coin-02-heads,assistant,heads, Heads,1,-5.652942
+coin-02-heads,assistant,heads,Heads,2,-11.553960
+coin-02-heads,assistant,heads, HEADS,2,-9.378201
+coin-02-heads,assistant,heads,HEADS,2,-13.292209
+coin-02-heads,assistant,tails, tails,1,-0.169040
+coin-02-heads,assistant,tails,tails,1,-9.106595
+coin-02-heads,assistant,tails, Tails,2,-8.232817
+coin-02-heads,assistant,tails,Tails,2,-17.272392
+coin-02-heads,assistant,tails, TAILS,2,-14.976311
+coin-02-heads,assistant,tails,TAILS,2,-13.822035
+coin-02-heads,user,heads, heads,1,-1.705975
+coin-02-heads,user,heads,heads,1,-9.096333
+coin-02-heads,user,heads, Heads,1,-5.191912
+coin-02-heads,user,heads,Heads,2,-12.205392
+coin-02-heads,user,heads, HEADS,2,-8.872403
+coin-02-heads,user,heads,HEADS,2,-12.454852
+coin-02-heads,user,tails, tails,1,-0.298131
+coin-02-heads,user,tails,tails,1,-9.257383
+coin-02-heads,user,tails, Tails,2,-8.161351
+coin-02-heads,user,tails,Tails,2,-16.860014
+coin-02-heads,user,tails, TAILS,2,-15.117195
+coin-02-heads,user,tails,TAILS,2,-13.874507
+coin-02-heads,none,heads, heads,1,-1.727609
+coin-02-heads,none,heads,heads,1,-9.080260
+coin-02-heads,none,heads, Heads,1,-4.697810
+coin-02-heads,none,heads,Heads,2,-10.864289
+coin-02-heads,none,heads, HEADS,2,-8.150590
+coin-02-heads,none,heads,HEADS,2,-12.538294
+coin-02-heads,none,tails, tails,1,-0.591479
+coin-02-heads,none,tails,tails,1,-9.087358
+coin-02-heads,none,tails, Tails,2,-8.363482
+coin-02-heads,none,tails,Tails,2,-17.299795
+coin-02-heads,none,tails, TAILS,2,-15.891537
+coin-02-heads,none,tails,TAILS,2,-12.773025
+coin-02-tails,assistant,heads, heads,1,-1.082240
+coin-02-tails,assistant,heads,heads,1,-8.620685
+coin-02-tails,assistant,heads, Heads,1,-4.196888
+coin-02-tails,assistant,heads,Heads,2,-10.066636
+coin-02-tails,assistant,heads, HEADS,2,-8.094748
+coin-02-tails,assistant,heads,HEADS,2,-12.284726
+coin-02-tails,assistant,tails, tails,1,-0.589724
+coin-02-tails,assistant,tails,tails,1,-9.098537
+coin-02-tails,assistant,tails, Tails,2,-6.708245
+coin-02-tails,assistant,tails,Tails,2,-15.707365
+coin-02-tails,assistant,tails, TAILS,2,-14.249119
+coin-02-tails,assistant,tails,TAILS,2,-13.757398
+coin-02-tails,user,heads, heads,1,-1.784324
+coin-02-tails,user,heads,heads,1,-9.425373
+coin-02-tails,user,heads, Heads,1,-4.918218
+coin-02-tails,user,heads,Heads,2,-12.282728
+coin-02-tails,user,heads, HEADS,2,-9.127719
+coin-02-tails,user,heads,HEADS,2,-12.559050
+coin-02-tails,user,tails, tails,1,-0.253038
+coin-02-tails,user,tails,tails,1,-9.253675
+coin-02-tails,user,tails, Tails,2,-5.448915
+coin-02-tails,user,tails,Tails,2,-14.780944
+coin-02-tails,user,tails, TAILS,2,-12.421199
+coin-02-tails,user,tails,TAILS,2,-14.002909
+coin-02-tails,none,heads, heads,1,-1.727609
+coin-02-tails,none,heads,heads,1,-9.080260
+coin-02-tails,none,heads, Heads,1,-4.697810
+coin-02-tails,none,heads,Heads,2,-10.864290
+coin-02-tails,none,heads, HEADS,2,-8.150589
+coin-02-tails,none,heads,HEADS,2,-12.538295
+coin-02-tails,none,tails, tails,1,-0.591479
+coin-02-tails,none,tails,tails,1,-9.087358
+coin-02-tails,none,tails, Tails,2,-8.363481
+coin-02-tails,none,tails,Tails,2,-17.299795
+coin-02-tails,none,tails, TAILS,2,-15.891535
+coin-02-tails,none,tails,TAILS,2,-12.773026
+coin-03-heads,assistant,heads, heads,1,-1.038001
+coin-03-heads,assistant,heads,heads,1,-8.810259
+coin-03-heads,assistant,heads, Heads,1,-4.089037
+coin-03-heads,assistant,heads,Heads,2,-9.752159
+coin-03-heads,assistant,heads, HEADS,2,-8.345106
+coin-03-heads,assistant,heads,HEADS,2,-12.282959
+coin-03-heads,assistant,tails, tails,1,-0.584529
+coin-03-heads,assistant,tails,tails,1,-9.352626
+coin-03-heads,assistant,tails, Tails,2,-7.475274
+coin-03-heads,assistant,tails,Tails,2,-16.152580
+coin-03-heads,assistant,tails, TAILS,2,-13.519333
+coin-03-heads,assistant,tails,TAILS,2,-13.835402
+coin-03-heads,user,heads, heads,1,-1.758487
+coin-03-heads,user,heads,heads,1,-9.510654
+coin-03-heads,user,heads, Heads,1,-4.575364
+coin-03-heads,user,heads,Heads,2,-11.166020
+coin-03-heads,user,heads, HEADS,2,-8.433641
+coin-03-heads,user,heads,HEADS,2,-12.509251
+coin-03-heads,user,tails, tails,1,-0.300710
+coin-03-heads,user,tails,tails,1,-8.859258
+coin-03-heads,user,tails, Tails,2,-6.176956
+coin-03-heads,user,tails,Tails,2,-15.144135
+coin-03-heads,user,tails, TAILS,2,-12.385748
+coin-03-heads,user,tails,TAILS,2,-13.064747
+coin-03-heads,none,heads, heads,1,-0.966016
+coin-03-heads,none,heads,heads,1,-8.674885
+coin-03-heads,none,heads, Heads,1,-3.604906
+coin-03-heads,none,heads,Heads,2,-9.856025
+coin-03-heads,none,heads, HEADS,2,-7.864662
+coin-03-heads,none,heads,HEADS,2,-11.728291
+coin-03-heads,none,tails, tails,1,-0.630454
+coin-03-heads,none,tails,tails,1,-9.203485
+coin-03-heads,none,tails, Tails,2,-8.239177
+coin-03-heads,none,tails,Tails,2,-17.387135
+coin-03-heads,none,tails, TAILS,2,-15.192349
+coin-03-heads,none,tails,TAILS,2,-12.864347
+coin-03-tails,assistant,heads, heads,1,-1.664428
+coin-03-tails,assistant,heads,heads,1,-9.198068
+coin-03-tails,assistant,heads, Heads,1,-4.638742
+coin-03-tails,assistant,heads,Heads,2,-10.375521
+coin-03-tails,assistant,heads, HEADS,2,-8.448254
+coin-03-tails,assistant,heads,HEADS,2,-12.690427
+coin-03-tails,assistant,tails, tails,1,-0.281488
+coin-03-tails,assistant,tails,tails,1,-9.420644
+coin-03-tails,assistant,tails, Tails,2,-5.038037
+coin-03-tails,assistant,tails,Tails,2,-14.126561
+coin-03-tails,assistant,tails, TAILS,2,-10.845148
+coin-03-tails,assistant,tails,TAILS,2,-13.576697
+coin-03-tails,user,heads, heads,1,-1.439505
+coin-03-tails,user,heads,heads,1,-9.278172
+coin-03-tails,user,heads, Heads,1,-4.096638
+coin-03-tails,user,heads,Heads,2,-10.836431
+coin-03-tails,user,heads, HEADS,2,-8.402442
+coin-03-tails,user,heads,HEADS,2,-12.248111
+coin-03-tails,user,tails, tails,1,-0.397654
+coin-03-tails,user,tails,tails,1,-8.993159
+coin-03-tails,user,tails, Tails,2,-4.195657
+coin-03-tails,user,tails,Tails,2,-13.796387
+coin-03-tails,user,tails, TAILS,2,-10.482420
+coin-03-tails,user,tails,TAILS,2,-13.006021
+coin-03-tails,none,heads, heads,1,-0.966016
+coin-03-tails,none,heads,heads,1,-8.674885
+coin-03-tails,none,heads, Heads,1,-3.604906
+coin-03-tails,none,heads,Heads,2,-9.856025
+coin-03-tails,none,heads, HEADS,2,-7.864662
+coin-03-tails,none,heads,HEADS,2,-11.728291
+coin-03-tails,none,tails, tails,1,-0.630454
+coin-03-tails,none,tails,tails,1,-9.203485
+coin-03-tails,none,tails, Tails,2,-8.239177
+coin-03-tails,none,tails,Tails,2,-17.387135
+coin-03-tails,none,tails, TAILS,2,-15.192349
+coin-03-tails,none,tails,TAILS,2,-12.864347
+coin-04-heads,assistant,heads, heads,1,-3.870157
+coin-04-heads,assistant,heads,heads,1,-10.218947
+coin-04-heads,assistant,heads, Heads,1,-5.765797
+coin-04-heads,assistant,heads,Heads,2,-11.865832
+coin-04-heads,assistant,heads, HEADS,2,-8.647882
+coin-04-heads,assistant,heads,HEADS,2,-12.276367
+coin-04-heads,assistant,tails, tails,1,-0.194475
+coin-04-heads,assistant,tails,tails,1,-8.532146
+coin-04-heads,assistant,tails, Tails,2,-3.939498
+coin-04-heads,assistant,tails,Tails,2,-13.474424
+coin-04-heads,assistant,tails, TAILS,2,-7.550926
+coin-04-heads,assistant,tails,TAILS,2,-12.071076
+coin-04-heads,user,heads, heads,1,-3.864233
+coin-04-heads,user,heads,heads,1,-10.817172
+coin-04-heads,user,heads, Heads,1,-6.602467
+coin-04-heads,user,heads,Heads,2,-13.215343
+coin-04-heads,user,heads, HEADS,2,-9.580409
+coin-04-heads,user,heads,HEADS,2,-13.299865
+coin-04-heads,user,tails, tails,1,-0.126091
+coin-04-heads,user,tails,tails,1,-8.834428
+coin-04-heads,user,tails, Tails,2,-4.166163
+coin-04-heads,user,tails,Tails,2,-13.828346
+coin-04-heads,user,tails, TAILS,2,-7.176386
+coin-04-heads,user,tails,TAILS,2,-12.413041
+coin-04-heads,none,heads, heads,1,-1.037727
+coin-04-heads,none,heads,heads,1,-8.281772
+coin-04-heads,none,heads, Heads,1,-2.347378
+coin-04-heads,none,heads,Heads,2,-9.792899
+coin-04-heads,none,heads, HEADS,2,-7.617302
+coin-04-heads,none,heads,HEADS,2,-10.398394
+coin-04-heads,none,tails, tails,1,-1.177061
+coin-04-heads,none,tails,tails,1,-8.595159
+coin-04-heads,none,tails, Tails,2,-4.839810
+coin-04-heads,none,tails,Tails,2,-14.738249
+coin-04-heads,none,tails, TAILS,2,-11.474865
+coin-04-heads,none,tails,TAILS,2,-13.181455
+coin-04-tails,assistant,heads, heads,1,-1.497205
+coin-04-tails,assistant,heads,heads,1,-7.642931
+coin-04-tails,assistant,heads, Heads,1,-3.027152
+coin-04-tails,assistant,heads,Heads,2,-8.600930
+coin-04-tails,assistant,heads, HEADS,2,-4.611256
+coin-04-tails,assistant,heads,HEADS,2,-9.122324
+coin-04-tails,assistant,tails, tails,1,-1.516603
+coin-04-tails,assistant,tails,tails,1,-8.560579
+coin-04-tails,assistant,tails, Tails,2,-4.894616
+coin-04-tails,assistant,tails,Tails,2,-13.906577
+coin-04-tails,assistant,tails, TAILS,2,-9.648514
+coin-04-tails,assistant,tails,TAILS,2,-11.611075
+coin-04-tails,user,heads, heads,1,-1.645144
+coin-04-tails,user,heads,heads,1,-8.348106
+coin-04-tails,user,heads, Heads,1,-3.865771
+coin-04-tails,user,heads,Heads,2,-8.834195
+coin-04-tails,user,heads, HEADS,2,-4.714209
+coin-04-tails,user,heads,HEADS,2,-9.435935
+coin-04-tails,user,tails, tails,1,-1.441809
+coin-04-tails,user,tails,tails,1,-8.637925
+coin-04-tails,user,tails, Tails,2,-4.468839
+coin-04-tails,user,tails,Tails,2,-13.755618
+coin-04-tails,user,tails, TAILS,2,-9.528517
+coin-04-tails,user,tails,TAILS,2,-10.968857
+coin-04-tails,none,heads, heads,1,-1.037727
+coin-04-tails,none,heads,heads,1,-8.281772
+coin-04-tails,none,heads, Heads,1,-2.347378
+coin-04-tails,none,heads,Heads,2,-9.792900
+coin-04-tails,none,heads, HEADS,2,-7.617302
+coin-04-tails,none,heads,HEADS,2,-10.398394
+coin-04-tails,none,tails, tails,1,-1.177061
+coin-04-tails,none,tails,tails,1,-8.595159
+coin-04-tails,none,tails, Tails,2,-4.839810
+coin-04-tails,none,tails,Tails,2,-14.738249
+coin-04-tails,none,tails, TAILS,2,-11.474865
+coin-04-tails,none,tails,TAILS,2,-13.181455
+coin-05-heads,assistant,heads, heads,1,-2.206117
+coin-05-heads,assistant,heads,heads,1,-8.847795
+coin-05-heads,assistant,heads, Heads,1,-2.960161
+coin-05-heads,assistant,heads,Heads,2,-8.967899
+coin-05-heads,assistant,heads, HEADS,2,-5.952241
+coin-05-heads,assistant,heads,HEADS,2,-9.969781
+coin-05-heads,assistant,tails, tails,1,-0.992868
+coin-05-heads,assistant,tails,tails,1,-7.798869
+coin-05-heads,assistant,tails, Tails,2,-5.255144
+coin-05-heads,assistant,tails,Tails,2,-13.477653
+coin-05-heads,assistant,tails, TAILS,2,-10.306486
+coin-05-heads,assistant,tails,TAILS,2,-11.822970
+coin-05-heads,user,heads, heads,1,-2.176048
+coin-05-heads,user,heads,heads,1,-8.788671
+coin-05-heads,user,heads, Heads,1,-3.386293
+coin-05-heads,user,heads,Heads,2,-9.307034
+coin-05-heads,user,heads, HEADS,2,-6.098998
+coin-05-heads,user,heads,HEADS,2,-9.810902
+coin-05-heads,user,tails, tails,1,-1.163805
+coin-05-heads,user,tails,tails,1,-8.302240
+coin-05-heads,user,tails, Tails,2,-5.697792
+coin-05-heads,user,tails,Tails,2,-13.592637
+coin-05-heads,user,tails, TAILS,2,-9.701736
+coin-05-heads,user,tails,TAILS,2,-12.010033
+coin-05-heads,none,heads, heads,1,-1.756677
+coin-05-heads,none,heads,heads,1,-8.292322
+coin-05-heads,none,heads, Heads,1,-2.193340
+coin-05-heads,none,heads,Heads,2,-8.297872
+coin-05-heads,none,heads, HEADS,2,-5.897738
+coin-05-heads,none,heads,HEADS,2,-9.648618
+coin-05-heads,none,tails, tails,1,-2.405862
+coin-05-heads,none,tails,tails,1,-8.382111
+coin-05-heads,none,tails, Tails,2,-6.902056
+coin-05-heads,none,tails,Tails,2,-15.357781
+coin-05-heads,none,tails, TAILS,2,-14.694168
+coin-05-heads,none,tails,TAILS,2,-12.105891
+coin-05-tails,assistant,heads, heads,1,-1.890365
+coin-05-tails,assistant,heads,heads,1,-8.306986
+coin-05-tails,assistant,heads, Heads,1,-2.704448
+coin-05-tails,assistant,heads,Heads,2,-8.580598
+coin-05-tails,assistant,heads, HEADS,2,-5.221364
+coin-05-tails,assistant,heads,HEADS,2,-9.537482
+coin-05-tails,assistant,tails, tails,1,-1.535965
+coin-05-tails,assistant,tails,tails,1,-8.002499
+coin-05-tails,assistant,tails, Tails,2,-6.325603
+coin-05-tails,assistant,tails,Tails,2,-14.186641
+coin-05-tails,assistant,tails, TAILS,2,-12.531553
+coin-05-tails,assistant,tails,TAILS,2,-11.896332
+coin-05-tails,user,heads, heads,1,-2.217597
+coin-05-tails,user,heads,heads,1,-8.721111
+coin-05-tails,user,heads, Heads,1,-3.212409
+coin-05-tails,user,heads,Heads,2,-8.954166
+coin-05-tails,user,heads, HEADS,2,-5.535335
+coin-05-tails,user,heads,HEADS,2,-9.603526
+coin-05-tails,user,tails, tails,1,-1.984505
+coin-05-tails,user,tails,tails,1,-8.463820
+coin-05-tails,user,tails, Tails,2,-6.476227
+coin-05-tails,user,tails,Tails,2,-14.255372
+coin-05-tails,user,tails, TAILS,2,-12.133240
+coin-05-tails,user,tails,TAILS,2,-12.226525
+coin-05-tails,none,heads, heads,1,-1.756677
+coin-05-tails,none,heads,heads,1,-8.292322
+coin-05-tails,none,heads, Heads,1,-2.193340
+coin-05-tails,none,heads,Heads,2,-8.297872
+coin-05-tails,none,heads, HEADS,2,-5.897738
+coin-05-tails,none,heads,HEADS,2,-9.648618
+coin-05-tails,none,tails, tails,1,-2.405862
+coin-05-tails,none,tails,tails,1,-8.382111
+coin-05-tails,none,tails, Tails,2,-6.902056
+coin-05-tails,none,tails,Tails,2,-15.357781
+coin-05-tails,none,tails, TAILS,2,-14.694180
+coin-05-tails,none,tails,TAILS,2,-12.105911
+coin-06-heads,assistant,heads, heads,1,-1.264933
+coin-06-heads,assistant,heads,heads,1,-9.597175
+coin-06-heads,assistant,heads, Heads,1,-4.198018
+coin-06-heads,assistant,heads,Heads,2,-10.850367
+coin-06-heads,assistant,heads, HEADS,2,-9.845759
+coin-06-heads,assistant,heads,HEADS,2,-12.927019
+coin-06-heads,assistant,tails, tails,1,-0.401126
+coin-06-heads,assistant,tails,tails,1,-9.025504
+coin-06-heads,assistant,tails, Tails,2,-5.784998
+coin-06-heads,assistant,tails,Tails,2,-15.444505
+coin-06-heads,assistant,tails, TAILS,2,-14.522992
+coin-06-heads,assistant,tails,TAILS,2,-13.920563
+coin-06-heads,user,heads, heads,1,-2.611653
+coin-06-heads,user,heads,heads,1,-10.513849
+coin-06-heads,user,heads, Heads,1,-5.607759
+coin-06-heads,user,heads,Heads,2,-11.721427
+coin-06-heads,user,heads, HEADS,2,-10.711380
+coin-06-heads,user,heads,HEADS,2,-13.263786
+coin-06-heads,user,tails, tails,1,-0.103167
+coin-06-heads,user,tails,tails,1,-9.215623
+coin-06-heads,user,tails, Tails,2,-5.601181
+coin-06-heads,user,tails,Tails,2,-14.875296
+coin-06-heads,user,tails, TAILS,2,-13.443785
+coin-06-heads,user,tails,TAILS,2,-14.477212
+coin-06-heads,none,heads, heads,1,-0.687439
+coin-06-heads,none,heads,heads,1,-9.142215
+coin-06-heads,none,heads, Heads,1,-2.803248
+coin-06-heads,none,heads,Heads,2,-9.721262
+coin-06-heads,none,heads, HEADS,2,-9.346421
+coin-06-heads,none,heads,HEADS,2,-12.421953
+coin-06-heads,none,tails, tails,1,-0.975199
+coin-06-heads,none,tails,tails,1,-9.622124
+coin-06-heads,none,tails, Tails,2,-6.387186
+coin-06-heads,none,tails,Tails,2,-16.146143
+coin-06-heads,none,tails, TAILS,2,-16.361431
+coin-06-heads,none,tails,TAILS,2,-13.842571
+coin-06-tails,assistant,heads, heads,1,-0.742401
+coin-06-tails,assistant,heads,heads,1,-9.034428
+coin-06-tails,assistant,heads, Heads,1,-3.457632
+coin-06-tails,assistant,heads,Heads,2,-9.604159
+coin-06-tails,assistant,heads, HEADS,2,-8.424807
+coin-06-tails,assistant,heads,HEADS,2,-11.792789
+coin-06-tails,assistant,tails, tails,1,-0.819759
+coin-06-tails,assistant,tails,tails,1,-9.092859
+coin-06-tails,assistant,tails, Tails,2,-5.762062
+coin-06-tails,assistant,tails,Tails,2,-14.840070
+coin-06-tails,assistant,tails, TAILS,2,-15.769947
+coin-06-tails,assistant,tails,TAILS,2,-13.577518
+coin-06-tails,user,heads, heads,1,-0.639090
+coin-06-tails,user,heads,heads,1,-8.795704
+coin-06-tails,user,heads, Heads,1,-3.371031
+coin-06-tails,user,heads,Heads,2,-9.353026
+coin-06-tails,user,heads, HEADS,2,-8.041264
+coin-06-tails,user,heads,HEADS,2,-11.399993
+coin-06-tails,user,tails, tails,1,-0.979681
+coin-06-tails,user,tails,tails,1,-9.298409
+coin-06-tails,user,tails, Tails,2,-4.941613
+coin-06-tails,user,tails,Tails,2,-13.944800
+coin-06-tails,user,tails, TAILS,2,-14.292702
+coin-06-tails,user,tails,TAILS,2,-14.093499
+coin-06-tails,none,heads, heads,1,-0.687439
+coin-06-tails,none,heads,heads,1,-9.142215
+coin-06-tails,none,heads, Heads,1,-2.803248
+coin-06-tails,none,heads,Heads,2,-9.721262
+coin-06-tails,none,heads, HEADS,2,-9.346421
+coin-06-tails,none,heads,HEADS,2,-12.421953
+coin-06-tails,none,tails, tails,1,-0.975199
+coin-06-tails,none,tails,tails,1,-9.622124
+coin-06-tails,none,tails, Tails,2,-6.387186
+coin-06-tails,none,tails,Tails,2,-16.146143
+coin-06-tails,none,tails, TAILS,2,-16.361431
+coin-06-tails,none,tails,TAILS,2,-13.842571
+coin-07-heads,assistant,heads, heads,1,-3.563927
+coin-07-heads,assistant,heads,heads,1,-11.227104
+coin-07-heads,assistant,heads, Heads,1,-6.012632
+coin-07-heads,assistant,heads,Heads,2,-12.507790
+coin-07-heads,assistant,heads, HEADS,2,-9.410044
+coin-07-heads,assistant,heads,HEADS,2,-13.243395
+coin-07-heads,assistant,tails, tails,1,-0.069338
+coin-07-heads,assistant,tails,tails,1,-8.947510
+coin-07-heads,assistant,tails, Tails,2,-6.330742
+coin-07-heads,assistant,tails,Tails,2,-15.187854
+coin-07-heads,assistant,tails, TAILS,2,-11.819744
+coin-07-heads,assistant,tails,TAILS,2,-13.532091
+coin-07-heads,user,heads, heads,1,-4.337247
+coin-07-heads,user,heads,heads,1,-11.423762
+coin-07-heads,user,heads, Heads,1,-6.675775
+coin-07-heads,user,heads,Heads,2,-14.402723
+coin-07-heads,user,heads, HEADS,2,-9.971925
+coin-07-heads,user,heads,HEADS,2,-13.412323
+coin-07-heads,user,tails, tails,1,-0.076203
+coin-07-heads,user,tails,tails,1,-9.001473
+coin-07-heads,user,tails, Tails,2,-6.561553
+coin-07-heads,user,tails,Tails,2,-15.031162
+coin-07-heads,user,tails, TAILS,2,-10.571539
+coin-07-heads,user,tails,TAILS,2,-13.438034
+coin-07-heads,none,heads, heads,1,-1.084697
+coin-07-heads,none,heads,heads,1,-9.211344
+coin-07-heads,none,heads, Heads,1,-2.519580
+coin-07-heads,none,heads,Heads,2,-9.232855
+coin-07-heads,none,heads, HEADS,2,-7.629723
+coin-07-heads,none,heads,HEADS,2,-10.910296
+coin-07-heads,none,tails, tails,1,-1.186342
+coin-07-heads,none,tails,tails,1,-9.025978
+coin-07-heads,none,tails, Tails,2,-8.033256
+coin-07-heads,none,tails,Tails,2,-16.602028
+coin-07-heads,none,tails, TAILS,2,-16.760086
+coin-07-heads,none,tails,TAILS,2,-13.495467
+coin-07-tails,assistant,heads, heads,1,-1.242671
+coin-07-tails,assistant,heads,heads,1,-8.927249
+coin-07-tails,assistant,heads, Heads,1,-3.503627
+coin-07-tails,assistant,heads,Heads,2,-9.749194
+coin-07-tails,assistant,heads, HEADS,2,-6.611535
+coin-07-tails,assistant,heads,HEADS,2,-10.948007
+coin-07-tails,assistant,tails, tails,1,-0.584006
+coin-07-tails,assistant,tails,tails,1,-8.768395
+coin-07-tails,assistant,tails, Tails,2,-5.781741
+coin-07-tails,assistant,tails,Tails,2,-14.473920
+coin-07-tails,assistant,tails, TAILS,2,-11.677355
+coin-07-tails,assistant,tails,TAILS,2,-12.925651
+coin-07-tails,user,heads, heads,1,-1.432726
+coin-07-tails,user,heads,heads,1,-8.740021
+coin-07-tails,user,heads, Heads,1,-3.224974
+coin-07-tails,user,heads,Heads,2,-9.588240
+coin-07-tails,user,heads, HEADS,2,-5.798227
+coin-07-tails,user,heads,HEADS,2,-10.041492
+coin-07-tails,user,tails, tails,1,-1.167269
+coin-07-tails,user,tails,tails,1,-8.795841
+coin-07-tails,user,tails, Tails,2,-7.159504
+coin-07-tails,user,tails,Tails,2,-15.146485
+coin-07-tails,user,tails, TAILS,2,-13.713560
+coin-07-tails,user,tails,TAILS,2,-12.323092
+coin-07-tails,none,heads, heads,1,-1.084697
+coin-07-tails,none,heads,heads,1,-9.211344
+coin-07-tails,none,heads, Heads,1,-2.519580
+coin-07-tails,none,heads,Heads,2,-9.232855
+coin-07-tails,none,heads, HEADS,2,-7.629723
+coin-07-tails,none,heads,HEADS,2,-10.910296
+coin-07-tails,none,tails, tails,1,-1.186342
+coin-07-tails,none,tails,tails,1,-9.025978
+coin-07-tails,none,tails, Tails,2,-8.033256
+coin-07-tails,none,tails,Tails,2,-16.602028
+coin-07-tails,none,tails, TAILS,2,-16.760086
+coin-07-tails,none,tails,TAILS,2,-13.495467
+coin-08-heads,assistant,heads, heads,1,-1.142887
+coin-08-heads,assistant,heads,heads,1,-9.095472
+coin-08-heads,assistant,heads, Heads,1,-3.531445
+coin-08-heads,assistant,heads,Heads,2,-10.568350
+coin-08-heads,assistant,heads, HEADS,2,-8.728601
+coin-08-heads,assistant,heads,HEADS,2,-11.669971
+coin-08-heads,assistant,tails, tails,1,-0.662432
+coin-08-heads,assistant,tails,tails,1,-9.066133
+coin-08-heads,assistant,tails, Tails,2,-5.930922
+coin-08-heads,assistant,tails,Tails,2,-15.361940
+coin-08-heads,assistant,tails, TAILS,2,-12.764988
+coin-08-heads,assistant,tails,TAILS,2,-13.735037
+coin-08-heads,user,heads, heads,1,-1.789356
+coin-08-heads,user,heads,heads,1,-9.632055
+coin-08-heads,user,heads, Heads,1,-3.922543
+coin-08-heads,user,heads,Heads,2,-11.276591
+coin-08-heads,user,heads, HEADS,2,-8.973816
+coin-08-heads,user,heads,HEADS,2,-11.836506
+coin-08-heads,user,tails, tails,1,-0.354346
+coin-08-heads,user,tails,tails,1,-9.058786
+coin-08-heads,user,tails, Tails,2,-5.836248
+coin-08-heads,user,tails,Tails,2,-15.129417
+coin-08-heads,user,tails, TAILS,2,-12.738148
+coin-08-heads,user,tails,TAILS,2,-13.418288
+coin-08-heads,none,heads, heads,1,-0.575153
+coin-08-heads,none,heads,heads,1,-8.934102
+coin-08-heads,none,heads, Heads,1,-2.208211
+coin-08-heads,none,heads,Heads,2,-10.300570
+coin-08-heads,none,heads, HEADS,2,-9.033040
+coin-08-heads,none,heads,HEADS,2,-11.160567
+coin-08-heads,none,tails, tails,1,-1.614307
+coin-08-heads,none,tails,tails,1,-9.771438
+coin-08-heads,none,tails, Tails,2,-6.580080
+coin-08-heads,none,tails,Tails,2,-16.566166
+coin-08-heads,none,tails, TAILS,2,-15.763367
+coin-08-heads,none,tails,TAILS,2,-14.029412
+coin-08-tails,assistant,heads, heads,1,-1.636332
+coin-08-tails,assistant,heads,heads,1,-9.458776
+coin-08-tails,assistant,heads, Heads,1,-4.030112
+coin-08-tails,assistant,heads,Heads,2,-10.620872
+coin-08-tails,assistant,heads, HEADS,2,-8.146845
+coin-08-tails,assistant,heads,HEADS,2,-11.451871
+coin-08-tails,assistant,tails, tails,1,-0.402871
+coin-08-tails,assistant,tails,tails,1,-8.903050
+coin-08-tails,assistant,tails, Tails,2,-4.372769
+coin-08-tails,assistant,tails,Tails,2,-13.692504
+coin-08-tails,assistant,tails, TAILS,2,-11.222269
+coin-08-tails,assistant,tails,TAILS,2,-12.902637
+coin-08-tails,user,heads, heads,1,-2.755059
+coin-08-tails,user,heads,heads,1,-10.293582
+coin-08-tails,user,heads, Heads,1,-4.793450
+coin-08-tails,user,heads,Heads,2,-11.712160
+coin-08-tails,user,heads, HEADS,2,-9.227475
+coin-08-tails,user,heads,HEADS,2,-12.249117
+coin-08-tails,user,tails, tails,1,-0.180958
+coin-08-tails,user,tails,tails,1,-8.786554
+coin-08-tails,user,tails, Tails,2,-4.113201
+coin-08-tails,user,tails,Tails,2,-13.696838
+coin-08-tails,user,tails, TAILS,2,-12.120440
+coin-08-tails,user,tails,TAILS,2,-12.607593
+coin-08-tails,none,heads, heads,1,-0.575153
+coin-08-tails,none,heads,heads,1,-8.934102
+coin-08-tails,none,heads, Heads,1,-2.208211
+coin-08-tails,none,heads,Heads,2,-10.300570
+coin-08-tails,none,heads, HEADS,2,-9.033040
+coin-08-tails,none,heads,HEADS,2,-11.160566
+coin-08-tails,none,tails, tails,1,-1.614307
+coin-08-tails,none,tails,tails,1,-9.771438
+coin-08-tails,none,tails, Tails,2,-6.580079
+coin-08-tails,none,tails,Tails,2,-16.566166
+coin-08-tails,none,tails, TAILS,2,-15.763318
+coin-08-tails,none,tails,TAILS,2,-14.029416
+coin-09-heads,assistant,heads, heads,1,-2.062977
+coin-09-heads,assistant,heads,heads,1,-9.853999
+coin-09-heads,assistant,heads, Heads,1,-3.939900
+coin-09-heads,assistant,heads,Heads,2,-10.891802
+coin-09-heads,assistant,heads, HEADS,2,-8.136894
+coin-09-heads,assistant,heads,HEADS,2,-11.750975
+coin-09-heads,assistant,tails, tails,1,-0.275988
+coin-09-heads,assistant,tails,tails,1,-8.974689
+coin-09-heads,assistant,tails, Tails,2,-5.343141
+coin-09-heads,assistant,tails,Tails,2,-15.074225
+coin-09-heads,assistant,tails, TAILS,2,-9.863441
+coin-09-heads,assistant,tails,TAILS,2,-13.179750
+coin-09-heads,user,heads, heads,1,-2.331695
+coin-09-heads,user,heads,heads,1,-9.784636
+coin-09-heads,user,heads, Heads,1,-4.718486
+coin-09-heads,user,heads,Heads,2,-11.223916
+coin-09-heads,user,heads, HEADS,2,-8.779413
+coin-09-heads,user,heads,HEADS,2,-11.707333
+coin-09-heads,user,tails, tails,1,-0.201934
+coin-09-heads,user,tails,tails,1,-9.129603
+coin-09-heads,user,tails, Tails,2,-5.451623
+coin-09-heads,user,tails,Tails,2,-14.567027
+coin-09-heads,user,tails, TAILS,2,-9.223133
+coin-09-heads,user,tails,TAILS,2,-13.864327
+coin-09-heads,none,heads, heads,1,-0.797179
+coin-09-heads,none,heads,heads,1,-8.725546
+coin-09-heads,none,heads, Heads,1,-2.121275
+coin-09-heads,none,heads,Heads,2,-9.417559
+coin-09-heads,none,heads, HEADS,2,-7.766739
+coin-09-heads,none,heads,HEADS,2,-11.129158
+coin-09-heads,none,tails, tails,1,-1.259999
+coin-09-heads,none,tails,tails,1,-9.188235
+coin-09-heads,none,tails, Tails,2,-7.083059
+coin-09-heads,none,tails,Tails,2,-16.554449
+coin-09-heads,none,tails, TAILS,2,-14.130619
+coin-09-heads,none,tails,TAILS,2,-13.695484
+coin-09-tails,assistant,heads, heads,1,-1.044715
+coin-09-tails,assistant,heads,heads,1,-8.822735
+coin-09-tails,assistant,heads, Heads,1,-2.710866
+coin-09-tails,assistant,heads,Heads,2,-9.720160
+coin-09-tails,assistant,heads, HEADS,2,-6.491105
+coin-09-tails,assistant,heads,HEADS,2,-10.435644
+coin-09-tails,assistant,tails, tails,1,-1.047796
+coin-09-tails,assistant,tails,tails,1,-9.110629
+coin-09-tails,assistant,tails, Tails,2,-5.559515
+coin-09-tails,assistant,tails,Tails,2,-14.831212
+coin-09-tails,assistant,tails, TAILS,2,-11.492809
+coin-09-tails,assistant,tails,TAILS,2,-13.017744
+coin-09-tails,user,heads, heads,1,-1.111022
+coin-09-tails,user,heads,heads,1,-8.264015
+coin-09-tails,user,heads, Heads,1,-2.999738
+coin-09-tails,user,heads,Heads,2,-8.907923
+coin-09-tails,user,heads, HEADS,2,-5.869975
+coin-09-tails,user,heads,HEADS,2,-9.541042
+coin-09-tails,user,tails, tails,1,-1.221688
+coin-09-tails,user,tails,tails,1,-8.843638
+coin-09-tails,user,tails, Tails,2,-5.553791
+coin-09-tails,user,tails,Tails,2,-14.250165
+coin-09-tails,user,tails, TAILS,2,-11.180443
+coin-09-tails,user,tails,TAILS,2,-13.110987
+coin-09-tails,none,heads, heads,1,-0.797179
+coin-09-tails,none,heads,heads,1,-8.725547
+coin-09-tails,none,heads, Heads,1,-2.121275
+coin-09-tails,none,heads,Heads,2,-9.417559
+coin-09-tails,none,heads, HEADS,2,-7.766739
+coin-09-tails,none,heads,HEADS,2,-11.129158
+coin-09-tails,none,tails, tails,1,-1.259999
+coin-09-tails,none,tails,tails,1,-9.188234
+coin-09-tails,none,tails, Tails,2,-7.083059
+coin-09-tails,none,tails,Tails,2,-16.554449
+coin-09-tails,none,tails, TAILS,2,-14.130619
+coin-09-tails,none,tails,TAILS,2,-13.695484
+coin-10-heads,assistant,heads, heads,1,-3.188439
+coin-10-heads,assistant,heads,heads,1,-9.660907
+coin-10-heads,assistant,heads, Heads,1,-4.919936
+coin-10-heads,assistant,heads,Heads,2,-10.559118
+coin-10-heads,assistant,heads, HEADS,2,-7.850655
+coin-10-heads,assistant,heads,HEADS,2,-11.597955
+coin-10-heads,assistant,tails, tails,1,-0.536494
+coin-10-heads,assistant,tails,tails,1,-8.294268
+coin-10-heads,assistant,tails, Tails,2,-6.365042
+coin-10-heads,assistant,tails,Tails,2,-14.992186
+coin-10-heads,assistant,tails, TAILS,2,-11.674596
+coin-10-heads,assistant,tails,TAILS,2,-12.797249
+coin-10-heads,user,heads, heads,1,-2.803578
+coin-10-heads,user,heads,heads,1,-9.585423
+coin-10-heads,user,heads, Heads,1,-4.769824
+coin-10-heads,user,heads,Heads,2,-10.641734
+coin-10-heads,user,heads, HEADS,2,-7.752645
+coin-10-heads,user,heads,HEADS,2,-11.749662
+coin-10-heads,user,tails, tails,1,-0.665059
+coin-10-heads,user,tails,tails,1,-8.423719
+coin-10-heads,user,tails, Tails,2,-6.302644
+coin-10-heads,user,tails,Tails,2,-14.581945
+coin-10-heads,user,tails, TAILS,2,-11.381788
+coin-10-heads,user,tails,TAILS,2,-12.967546
+coin-10-heads,none,heads, heads,1,-1.971639
+coin-10-heads,none,heads,heads,1,-8.915876
+coin-10-heads,none,heads, Heads,1,-3.172401
+coin-10-heads,none,heads,Heads,2,-8.989578
+coin-10-heads,none,heads, HEADS,2,-7.420825
+coin-10-heads,none,heads,HEADS,2,-10.903845
+coin-10-heads,none,tails, tails,1,-1.923982
+coin-10-heads,none,tails,tails,1,-8.285624
+coin-10-heads,none,tails, Tails,2,-8.341676
+coin-10-heads,none,tails,Tails,2,-17.153225
+coin-10-heads,none,tails, TAILS,2,-15.535975
+coin-10-heads,none,tails,TAILS,2,-12.715904
+coin-10-tails,assistant,heads, heads,1,-1.913354
+coin-10-tails,assistant,heads,heads,1,-8.113355
+coin-10-tails,assistant,heads, Heads,1,-3.447452
+coin-10-tails,assistant,heads,Heads,2,-8.875933
+coin-10-tails,assistant,heads, HEADS,2,-5.589068
+coin-10-tails,assistant,heads,HEADS,2,-9.806144
+coin-10-tails,assistant,tails, tails,1,-2.600385
+coin-10-tails,assistant,tails,tails,1,-9.004689
+coin-10-tails,assistant,tails, Tails,2,-8.621887
+coin-10-tails,assistant,tails,Tails,2,-16.331612
+coin-10-tails,assistant,tails, TAILS,2,-15.435299
+coin-10-tails,assistant,tails,TAILS,2,-12.807510
+coin-10-tails,user,heads, heads,1,-2.231741
+coin-10-tails,user,heads,heads,1,-8.631749
+coin-10-tails,user,heads, Heads,1,-3.986287
+coin-10-tails,user,heads,Heads,2,-9.428219
+coin-10-tails,user,heads, HEADS,2,-6.526668
+coin-10-tails,user,heads,HEADS,2,-10.292384
+coin-10-tails,user,tails, tails,1,-1.758256
+coin-10-tails,user,tails,tails,1,-8.604837
+coin-10-tails,user,tails, Tails,2,-7.046639
+coin-10-tails,user,tails,Tails,2,-14.857564
+coin-10-tails,user,tails, TAILS,2,-14.219046
+coin-10-tails,user,tails,TAILS,2,-12.609852
+coin-10-tails,none,heads, heads,1,-1.971639
+coin-10-tails,none,heads,heads,1,-8.915876
+coin-10-tails,none,heads, Heads,1,-3.172401
+coin-10-tails,none,heads,Heads,2,-8.989578
+coin-10-tails,none,heads, HEADS,2,-7.420825
+coin-10-tails,none,heads,HEADS,2,-10.903844
+coin-10-tails,none,tails, tails,1,-1.923982
+coin-10-tails,none,tails,tails,1,-8.285624
+coin-10-tails,none,tails, Tails,2,-8.341676
+coin-10-tails,none,tails,Tails,2,-17.153225
+coin-10-tails,none,tails, TAILS,2,-15.535975
+coin-10-tails,none,tails,TAILS,2,-12.715904
+coin-11-heads,assistant,heads, heads,1,-1.102893
+coin-11-heads,assistant,heads,heads,1,-8.692234
+coin-11-heads,assistant,heads, Heads,1,-3.482104
+coin-11-heads,assistant,heads,Heads,2,-10.534088
+coin-11-heads,assistant,heads, HEADS,2,-8.117227
+coin-11-heads,assistant,heads,HEADS,2,-11.313532
+coin-11-heads,assistant,tails, tails,1,-0.620978
+coin-11-heads,assistant,tails,tails,1,-8.995955
+coin-11-heads,assistant,tails, Tails,2,-6.197541
+coin-11-heads,assistant,tails,Tails,2,-15.110645
+coin-11-heads,assistant,tails, TAILS,2,-14.573878
+coin-11-heads,assistant,tails,TAILS,2,-13.470144
+coin-11-heads,user,heads, heads,1,-0.894661
+coin-11-heads,user,heads,heads,1,-8.370420
+coin-11-heads,user,heads, Heads,1,-2.783687
+coin-11-heads,user,heads,Heads,2,-10.133332
+coin-11-heads,user,heads, HEADS,2,-7.325099
+coin-11-heads,user,heads,HEADS,2,-10.600433
+coin-11-heads,user,tails, tails,1,-0.861534
+coin-11-heads,user,tails,tails,1,-9.099076
+coin-11-heads,user,tails, Tails,2,-6.100237
+coin-11-heads,user,tails,Tails,2,-15.224285
+coin-11-heads,user,tails, TAILS,2,-14.463238
+coin-11-heads,user,tails,TAILS,2,-13.517330
+coin-11-heads,none,heads, heads,1,-0.798695
+coin-11-heads,none,heads,heads,1,-8.805582
+coin-11-heads,none,heads, Heads,1,-2.392348
+coin-11-heads,none,heads,Heads,2,-9.715393
+coin-11-heads,none,heads, HEADS,2,-7.735278
+coin-11-heads,none,heads,HEADS,2,-11.177228
+coin-11-heads,none,tails, tails,1,-0.996724
+coin-11-heads,none,tails,tails,1,-9.079125
+coin-11-heads,none,tails, Tails,2,-5.538707
+coin-11-heads,none,tails,Tails,2,-14.944779
+coin-11-heads,none,tails, TAILS,2,-15.268463
+coin-11-heads,none,tails,TAILS,2,-13.317873
+coin-11-tails,assistant,heads, heads,1,-1.089119
+coin-11-tails,assistant,heads,heads,1,-8.841187
+coin-11-tails,assistant,heads, Heads,1,-3.461976
+coin-11-tails,assistant,heads,Heads,2,-10.925562
+coin-11-tails,assistant,heads, HEADS,2,-7.794675
+coin-11-tails,assistant,heads,HEADS,2,-11.064167
+coin-11-tails,assistant,tails, tails,1,-0.637835
+coin-11-tails,assistant,tails,tails,1,-9.250369
+coin-11-tails,assistant,tails, Tails,2,-4.879508
+coin-11-tails,assistant,tails,Tails,2,-13.940140
+coin-11-tails,assistant,tails, TAILS,2,-12.877796
+coin-11-tails,assistant,tails,TAILS,2,-13.311685
+coin-11-tails,user,heads, heads,1,-1.427979
+coin-11-tails,user,heads,heads,1,-8.726017
+coin-11-tails,user,heads, Heads,1,-3.025396
+coin-11-tails,user,heads,Heads,2,-10.741757
+coin-11-tails,user,heads, HEADS,2,-7.232146
+coin-11-tails,user,heads,HEADS,2,-10.528500
+coin-11-tails,user,tails, tails,1,-0.518866
+coin-11-tails,user,tails,tails,1,-8.819046
+coin-11-tails,user,tails, Tails,2,-4.080453
+coin-11-tails,user,tails,Tails,2,-13.633379
+coin-11-tails,user,tails, TAILS,2,-12.168251
+coin-11-tails,user,tails,TAILS,2,-13.158173
+coin-11-tails,none,heads, heads,1,-0.798696
+coin-11-tails,none,heads,heads,1,-8.805582
+coin-11-tails,none,heads, Heads,1,-2.392348
+coin-11-tails,none,heads,Heads,2,-9.715393
+coin-11-tails,none,heads, HEADS,2,-7.735278
+coin-11-tails,none,heads,HEADS,2,-11.177228
+coin-11-tails,none,tails, tails,1,-0.996724
+coin-11-tails,none,tails,tails,1,-9.079125
+coin-11-tails,none,tails, Tails,2,-5.538707
+coin-11-tails,none,tails,Tails,2,-14.944779
+coin-11-tails,none,tails, TAILS,2,-15.268463
+coin-11-tails,none,tails,TAILS,2,-13.317873
+coin-12-heads,assistant,heads, heads,1,-1.910045
+coin-12-heads,assistant,heads,heads,1,-9.736446
+coin-12-heads,assistant,heads, Heads,1,-4.693983
+coin-12-heads,assistant,heads,Heads,2,-11.110021
+coin-12-heads,assistant,heads, HEADS,2,-9.018913
+coin-12-heads,assistant,heads,HEADS,2,-13.146751
+coin-12-heads,assistant,tails, tails,1,-0.256927
+coin-12-heads,assistant,tails,tails,1,-9.233328
+coin-12-heads,assistant,tails, Tails,2,-7.186583
+coin-12-heads,assistant,tails,Tails,2,-16.383499
+coin-12-heads,assistant,tails, TAILS,2,-14.373730
+coin-12-heads,assistant,tails,TAILS,2,-13.679994
+coin-12-heads,user,heads, heads,1,-1.835510
+coin-12-heads,user,heads,heads,1,-9.673141
+coin-12-heads,user,heads, Heads,1,-4.654614
+coin-12-heads,user,heads,Heads,2,-11.474134
+coin-12-heads,user,heads, HEADS,2,-8.412286
+coin-12-heads,user,heads,HEADS,2,-12.331416
+coin-12-heads,user,tails, tails,1,-0.300573
+coin-12-heads,user,tails,tails,1,-9.461135
+coin-12-heads,user,tails, Tails,2,-8.063842
+coin-12-heads,user,tails,Tails,2,-16.808128
+coin-12-heads,user,tails, TAILS,2,-14.770150
+coin-12-heads,user,tails,TAILS,2,-13.796582
+coin-12-heads,none,heads, heads,1,-1.727609
+coin-12-heads,none,heads,heads,1,-9.080260
+coin-12-heads,none,heads, Heads,1,-4.697810
+coin-12-heads,none,heads,Heads,2,-10.864289
+coin-12-heads,none,heads, HEADS,2,-8.150590
+coin-12-heads,none,heads,HEADS,2,-12.538294
+coin-12-heads,none,tails, tails,1,-0.591479
+coin-12-heads,none,tails,tails,1,-9.087358
+coin-12-heads,none,tails, Tails,2,-8.363482
+coin-12-heads,none,tails,Tails,2,-17.299795
+coin-12-heads,none,tails, TAILS,2,-15.891537
+coin-12-heads,none,tails,TAILS,2,-12.773025
+coin-12-tails,assistant,heads, heads,1,-0.916971
+coin-12-tails,assistant,heads,heads,1,-8.845728
+coin-12-tails,assistant,heads, Heads,1,-3.569489
+coin-12-tails,assistant,heads,Heads,2,-9.897279
+coin-12-tails,assistant,heads, HEADS,2,-7.751809
+coin-12-tails,assistant,heads,HEADS,2,-12.172210
+coin-12-tails,assistant,tails, tails,1,-0.775896
+coin-12-tails,assistant,tails,tails,1,-9.363276
+coin-12-tails,assistant,tails, Tails,2,-5.791089
+coin-12-tails,assistant,tails,Tails,2,-15.056756
+coin-12-tails,assistant,tails, TAILS,2,-13.630032
+coin-12-tails,assistant,tails,TAILS,2,-13.564315
+coin-12-tails,user,heads, heads,1,-1.190869
+coin-12-tails,user,heads,heads,1,-9.223052
+coin-12-tails,user,heads, Heads,1,-3.932681
+coin-12-tails,user,heads,Heads,2,-10.805132
+coin-12-tails,user,heads, HEADS,2,-7.758060
+coin-12-tails,user,heads,HEADS,2,-11.646151
+coin-12-tails,user,tails, tails,1,-0.536078
+coin-12-tails,user,tails,tails,1,-9.457047
+coin-12-tails,user,tails, Tails,2,-4.945690
+coin-12-tails,user,tails,Tails,2,-14.300668
+coin-12-tails,user,tails, TAILS,2,-12.845040
+coin-12-tails,user,tails,TAILS,2,-13.646840
+coin-12-tails,none,heads, heads,1,-1.727609
+coin-12-tails,none,heads,heads,1,-9.080260
+coin-12-tails,none,heads, Heads,1,-4.697810
+coin-12-tails,none,heads,Heads,2,-10.864290
+coin-12-tails,none,heads, HEADS,2,-8.150589
+coin-12-tails,none,heads,HEADS,2,-12.538295
+coin-12-tails,none,tails, tails,1,-0.591479
+coin-12-tails,none,tails,tails,1,-9.087358
+coin-12-tails,none,tails, Tails,2,-8.363481
+coin-12-tails,none,tails,Tails,2,-17.299795
+coin-12-tails,none,tails, TAILS,2,-15.891535
+coin-12-tails,none,tails,TAILS,2,-12.773026
+coin-13-heads,assistant,heads, heads,1,-2.026161
+coin-13-heads,assistant,heads,heads,1,-9.552209
+coin-13-heads,assistant,heads, Heads,1,-5.046697
+coin-13-heads,assistant,heads,Heads,2,-10.762733
+coin-13-heads,assistant,heads, HEADS,2,-9.084629
+coin-13-heads,assistant,heads,HEADS,2,-12.696329
+coin-13-heads,assistant,tails, tails,1,-0.193827
+coin-13-heads,assistant,tails,tails,1,-8.992859
+coin-13-heads,assistant,tails, Tails,2,-6.548285
+coin-13-heads,assistant,tails,Tails,2,-16.060719
+coin-13-heads,assistant,tails, TAILS,2,-11.567039
+coin-13-heads,assistant,tails,TAILS,2,-13.792542
+coin-13-heads,user,heads, heads,1,-1.414202
+coin-13-heads,user,heads,heads,1,-9.268849
+coin-13-heads,user,heads, Heads,1,-4.618266
+coin-13-heads,user,heads,Heads,2,-10.436231
+coin-13-heads,user,heads, HEADS,2,-8.605577
+coin-13-heads,user,heads,HEADS,2,-12.382690
+coin-13-heads,user,tails, tails,1,-0.354569
+coin-13-heads,user,tails,tails,1,-9.081288
+coin-13-heads,user,tails, Tails,2,-6.560709
+coin-13-heads,user,tails,Tails,2,-15.281724
+coin-13-heads,user,tails, TAILS,2,-11.314407
+coin-13-heads,user,tails,TAILS,2,-13.817767
+coin-13-heads,none,heads, heads,1,-0.966016
+coin-13-heads,none,heads,heads,1,-8.674885
+coin-13-heads,none,heads, Heads,1,-3.604906
+coin-13-heads,none,heads,Heads,2,-9.856025
+coin-13-heads,none,heads, HEADS,2,-7.864662
+coin-13-heads,none,heads,HEADS,2,-11.728291
+coin-13-heads,none,tails, tails,1,-0.630454
+coin-13-heads,none,tails,tails,1,-9.203485
+coin-13-heads,none,tails, Tails,2,-8.239177
+coin-13-heads,none,tails,Tails,2,-17.387140
+coin-13-heads,none,tails, TAILS,2,-15.192379
+coin-13-heads,none,tails,TAILS,2,-12.864343
+coin-13-tails,assistant,heads, heads,1,-1.411793
+coin-13-tails,assistant,heads,heads,1,-8.986568
+coin-13-tails,assistant,heads, Heads,1,-4.232875
+coin-13-tails,assistant,heads,Heads,2,-10.001424
+coin-13-tails,assistant,heads, HEADS,2,-8.164348
+coin-13-tails,assistant,heads,HEADS,2,-12.145461
+coin-13-tails,assistant,tails, tails,1,-0.368775
+coin-13-tails,assistant,tails,tails,1,-9.147733
+coin-13-tails,assistant,tails, Tails,2,-5.843956
+coin-13-tails,assistant,tails,Tails,2,-15.097757
+coin-13-tails,assistant,tails, TAILS,2,-11.800440
+coin-13-tails,assistant,tails,TAILS,2,-13.951689
+coin-13-tails,user,heads, heads,1,-1.295910
+coin-13-tails,user,heads,heads,1,-9.283219
+coin-13-tails,user,heads, Heads,1,-4.149441
+coin-13-tails,user,heads,Heads,2,-10.364598
+coin-13-tails,user,heads, HEADS,2,-8.323930
+coin-13-tails,user,heads,HEADS,2,-12.035844
+coin-13-tails,user,tails, tails,1,-0.413779
+coin-13-tails,user,tails,tails,1,-9.126460
+coin-13-tails,user,tails, Tails,2,-4.952853
+coin-13-tails,user,tails,Tails,2,-14.336000
+coin-13-tails,user,tails, TAILS,2,-10.472734
+coin-13-tails,user,tails,TAILS,2,-13.656913
+coin-13-tails,none,heads, heads,1,-0.966016
+coin-13-tails,none,heads,heads,1,-8.674885
+coin-13-tails,none,heads, Heads,1,-3.604906
+coin-13-tails,none,heads,Heads,2,-9.856036
+coin-13-tails,none,heads, HEADS,2,-7.864661
+coin-13-tails,none,heads,HEADS,2,-11.728303
+coin-13-tails,none,tails, tails,1,-0.630454
+coin-13-tails,none,tails,tails,1,-9.203485
+coin-13-tails,none,tails, Tails,2,-8.239168
+coin-13-tails,none,tails,Tails,2,-17.387142
+coin-13-tails,none,tails, TAILS,2,-15.192379
+coin-13-tails,none,tails,TAILS,2,-12.864343
+coin-14-heads,assistant,heads, heads,1,-2.558036
+coin-14-heads,assistant,heads,heads,1,-9.008681
+coin-14-heads,assistant,heads, Heads,1,-4.230421
+coin-14-heads,assistant,heads,Heads,2,-9.997829
+coin-14-heads,assistant,heads, HEADS,2,-6.675070
+coin-14-heads,assistant,heads,HEADS,2,-10.531368
+coin-14-heads,assistant,tails, tails,1,-0.649451
+coin-14-heads,assistant,tails,tails,1,-8.206070
+coin-14-heads,assistant,tails, Tails,2,-3.510646
+coin-14-heads,assistant,tails,Tails,2,-12.847882
+coin-14-heads,assistant,tails, TAILS,2,-7.178651
+coin-14-heads,assistant,tails,TAILS,2,-11.487479
+coin-14-heads,user,heads, heads,1,-2.352203
+coin-14-heads,user,heads,heads,1,-9.363976
+coin-14-heads,user,heads, Heads,1,-4.624435
+coin-14-heads,user,heads,Heads,2,-11.595192
+coin-14-heads,user,heads, HEADS,2,-8.017892
+coin-14-heads,user,heads,HEADS,2,-11.621487
+coin-14-heads,user,tails, tails,1,-0.304226
+coin-14-heads,user,tails,tails,1,-8.300441
+coin-14-heads,user,tails, Tails,2,-3.814611
+coin-14-heads,user,tails,Tails,2,-13.231868
+coin-14-heads,user,tails, TAILS,2,-5.936938
+coin-14-heads,user,tails,TAILS,2,-12.123330
+coin-14-heads,none,heads, heads,1,-1.037739
+coin-14-heads,none,heads,heads,1,-8.281737
+coin-14-heads,none,heads, Heads,1,-2.347372
+coin-14-heads,none,heads,Heads,2,-9.792899
+coin-14-heads,none,heads, HEADS,2,-7.617302
+coin-14-heads,none,heads,HEADS,2,-10.398394
+coin-14-heads,none,tails, tails,1,-1.177065
+coin-14-heads,none,tails,tails,1,-8.595122
+coin-14-heads,none,tails, Tails,2,-4.839810
+coin-14-heads,none,tails,Tails,2,-14.738249
+coin-14-heads,none,tails, TAILS,2,-11.474865
+coin-14-heads,none,tails,TAILS,2,-13.181455
+coin-14-tails,assistant,heads, heads,1,-1.722090
+coin-14-tails,assistant,heads,heads,1,-7.964192
+coin-14-tails,assistant,heads, Heads,1,-3.415045
+coin-14-tails,assistant,heads,Heads,2,-8.629734
+coin-14-tails,assistant,heads, HEADS,2,-4.571490
+coin-14-tails,assistant,heads,HEADS,2,-9.165046
+coin-14-tails,assistant,tails, tails,1,-1.047835
+coin-14-tails,assistant,tails,tails,1,-8.251849
+coin-14-tails,assistant,tails, Tails,2,-3.792495
+coin-14-tails,assistant,tails,Tails,2,-13.119768
+coin-14-tails,assistant,tails, TAILS,2,-8.262796
+coin-14-tails,assistant,tails,TAILS,2,-10.793494
+coin-14-tails,user,heads, heads,1,-2.408912
+coin-14-tails,user,heads,heads,1,-8.848184
+coin-14-tails,user,heads, Heads,1,-4.315075
+coin-14-tails,user,heads,Heads,2,-9.699284
+coin-14-tails,user,heads, HEADS,2,-5.733548
+coin-14-tails,user,heads,HEADS,2,-9.851189
+coin-14-tails,user,tails, tails,1,-0.732210
+coin-14-tails,user,tails,tails,1,-7.682548
+coin-14-tails,user,tails, Tails,2,-3.178312
+coin-14-tails,user,tails,Tails,2,-13.127563
+coin-14-tails,user,tails, TAILS,2,-7.617935
+coin-14-tails,user,tails,TAILS,2,-10.529945
+coin-14-tails,none,heads, heads,1,-1.037739
+coin-14-tails,none,heads,heads,1,-8.281737
+coin-14-tails,none,heads, Heads,1,-2.347372
+coin-14-tails,none,heads,Heads,2,-9.792900
+coin-14-tails,none,heads, HEADS,2,-7.617302
+coin-14-tails,none,heads,HEADS,2,-10.398394
+coin-14-tails,none,tails, tails,1,-1.177065
+coin-14-tails,none,tails,tails,1,-8.595122
+coin-14-tails,none,tails, Tails,2,-4.839810
+coin-14-tails,none,tails,Tails,2,-14.738249
+coin-14-tails,none,tails, TAILS,2,-11.474865
+coin-14-tails,none,tails,TAILS,2,-13.181455
+coin-15-heads,assistant,heads, heads,1,-2.299001
+coin-15-heads,assistant,heads,heads,1,-8.668665
+coin-15-heads,assistant,heads, Heads,1,-3.447490
+coin-15-heads,assistant,heads,Heads,2,-9.071612
+coin-15-heads,assistant,heads, HEADS,2,-6.213912
+coin-15-heads,assistant,heads,HEADS,2,-10.106712
+coin-15-heads,assistant,tails, tails,1,-1.015229
+coin-15-heads,assistant,tails,tails,1,-8.042103
+coin-15-heads,assistant,tails, Tails,2,-5.587957
+coin-15-heads,assistant,tails,Tails,2,-14.048558
+coin-15-heads,assistant,tails, TAILS,2,-10.443642
+coin-15-heads,assistant,tails,TAILS,2,-11.971353
+coin-15-heads,user,heads, heads,1,-3.280247
+coin-15-heads,user,heads,heads,1,-9.491529
+coin-15-heads,user,heads, Heads,1,-5.152546
+coin-15-heads,user,heads,Heads,2,-11.309905
+coin-15-heads,user,heads, HEADS,2,-7.575439
+coin-15-heads,user,heads,HEADS,2,-10.846941
+coin-15-heads,user,tails, tails,1,-0.548420
+coin-15-heads,user,tails,tails,1,-8.206009
+coin-15-heads,user,tails, Tails,2,-4.621025
+coin-15-heads,user,tails,Tails,2,-12.826534
+coin-15-heads,user,tails, TAILS,2,-7.761622
+coin-15-heads,user,tails,TAILS,2,-12.069366
+coin-15-heads,none,heads, heads,1,-1.756677
+coin-15-heads,none,heads,heads,1,-8.292322
+coin-15-heads,none,heads, Heads,1,-2.193340
+coin-15-heads,none,heads,Heads,2,-8.297881
+coin-15-heads,none,heads, HEADS,2,-5.897743
+coin-15-heads,none,heads,HEADS,2,-9.648619
+coin-15-heads,none,tails, tails,1,-2.405862
+coin-15-heads,none,tails,tails,1,-8.382111
+coin-15-heads,none,tails, Tails,2,-6.902069
+coin-15-heads,none,tails,Tails,2,-15.357801
+coin-15-heads,none,tails, TAILS,2,-14.694180
+coin-15-heads,none,tails,TAILS,2,-12.105911
+coin-15-tails,assistant,heads, heads,1,-1.713845
+coin-15-tails,assistant,heads,heads,1,-7.979248
+coin-15-tails,assistant,heads, Heads,1,-2.912962
+coin-15-tails,assistant,heads,Heads,2,-8.150480
+coin-15-tails,assistant,heads, HEADS,2,-4.927346
+coin-15-tails,assistant,heads,HEADS,2,-9.294155
+coin-15-tails,assistant,tails, tails,1,-2.229722
+coin-15-tails,assistant,tails,tails,1,-8.583507
+coin-15-tails,assistant,tails, Tails,2,-6.482694
+coin-15-tails,assistant,tails,Tails,2,-14.588776
+coin-15-tails,assistant,tails, TAILS,2,-12.327248
+coin-15-tails,assistant,tails,TAILS,2,-12.179291
+coin-15-tails,user,heads, heads,1,-2.045041
+coin-15-tails,user,heads,heads,1,-8.305131
+coin-15-tails,user,heads, Heads,1,-3.742459
+coin-15-tails,user,heads,Heads,2,-8.888089
+coin-15-tails,user,heads, HEADS,2,-5.304373
+coin-15-tails,user,heads,HEADS,2,-9.314680
+coin-15-tails,user,tails, tails,1,-2.551894
+coin-15-tails,user,tails,tails,1,-9.035360
+coin-15-tails,user,tails, Tails,2,-7.226537
+coin-15-tails,user,tails,Tails,2,-14.816592
+coin-15-tails,user,tails, TAILS,2,-12.561641
+coin-15-tails,user,tails,TAILS,2,-12.911184
+coin-15-tails,none,heads, heads,1,-1.756677
+coin-15-tails,none,heads,heads,1,-8.292322
+coin-15-tails,none,heads, Heads,1,-2.193340
+coin-15-tails,none,heads,Heads,2,-8.297881
+coin-15-tails,none,heads, HEADS,2,-5.897744
+coin-15-tails,none,heads,HEADS,2,-9.648619
+coin-15-tails,none,tails, tails,1,-2.405862
+coin-15-tails,none,tails,tails,1,-8.382111
+coin-15-tails,none,tails, Tails,2,-6.902069
+coin-15-tails,none,tails,Tails,2,-15.357801
+coin-15-tails,none,tails, TAILS,2,-14.694180
+coin-15-tails,none,tails,TAILS,2,-12.105911
+coin-16-heads,assistant,heads, heads,1,-2.215459
+coin-16-heads,assistant,heads,heads,1,-9.799816
+coin-16-heads,assistant,heads, Heads,1,-4.744319
+coin-16-heads,assistant,heads,Heads,2,-11.010090
+coin-16-heads,assistant,heads, HEADS,2,-9.944686
+coin-16-heads,assistant,heads,HEADS,2,-13.050797
+coin-16-heads,assistant,tails, tails,1,-0.207748
+coin-16-heads,assistant,tails,tails,1,-8.861329
+coin-16-heads,assistant,tails, Tails,2,-5.547536
+coin-16-heads,assistant,tails,Tails,2,-14.889896
+coin-16-heads,assistant,tails, TAILS,2,-13.345906
+coin-16-heads,assistant,tails,TAILS,2,-13.197116
+coin-16-heads,user,heads, heads,1,-2.827409
+coin-16-heads,user,heads,heads,1,-10.587094
+coin-16-heads,user,heads, Heads,1,-5.958851
+coin-16-heads,user,heads,Heads,2,-11.958375
+coin-16-heads,user,heads, HEADS,2,-10.521570
+coin-16-heads,user,heads,HEADS,2,-13.430982
+coin-16-heads,user,tails, tails,1,-0.102140
+coin-16-heads,user,tails,tails,1,-9.257197
+coin-16-heads,user,tails, Tails,2,-5.820512
+coin-16-heads,user,tails,Tails,2,-14.921054
+coin-16-heads,user,tails, TAILS,2,-13.308535
+coin-16-heads,user,tails,TAILS,2,-13.952638
+coin-16-heads,none,heads, heads,1,-0.687439
+coin-16-heads,none,heads,heads,1,-9.142215
+coin-16-heads,none,heads, Heads,1,-2.803248
+coin-16-heads,none,heads,Heads,2,-9.721262
+coin-16-heads,none,heads, HEADS,2,-9.346421
+coin-16-heads,none,heads,HEADS,2,-12.421953
+coin-16-heads,none,tails, tails,1,-0.975199
+coin-16-heads,none,tails,tails,1,-9.622124
+coin-16-heads,none,tails, Tails,2,-6.387186
+coin-16-heads,none,tails,Tails,2,-16.146143
+coin-16-heads,none,tails, TAILS,2,-16.361431
+coin-16-heads,none,tails,TAILS,2,-13.842571
+coin-16-tails,assistant,heads, heads,1,-1.281181
+coin-16-tails,assistant,heads,heads,1,-9.221939
+coin-16-tails,assistant,heads, Heads,1,-4.154637
+coin-16-tails,assistant,heads,Heads,2,-10.284560
+coin-16-tails,assistant,heads, HEADS,2,-9.062785
+coin-16-tails,assistant,heads,HEADS,2,-12.287171
+coin-16-tails,assistant,tails, tails,1,-0.460972
+coin-16-tails,assistant,tails,tails,1,-8.932070
+coin-16-tails,assistant,tails, Tails,2,-5.217466
+coin-16-tails,assistant,tails,Tails,2,-14.472733
+coin-16-tails,assistant,tails, TAILS,2,-13.995831
+coin-16-tails,assistant,tails,TAILS,2,-13.017275
+coin-16-tails,user,heads, heads,1,-1.235542
+coin-16-tails,user,heads,heads,1,-9.380999
+coin-16-tails,user,heads, Heads,1,-4.223201
+coin-16-tails,user,heads,Heads,2,-10.539134
+coin-16-tails,user,heads, HEADS,2,-9.103387
+coin-16-tails,user,heads,HEADS,2,-12.041068
+coin-16-tails,user,tails, tails,1,-0.460447
+coin-16-tails,user,tails,tails,1,-9.007072
+coin-16-tails,user,tails, Tails,2,-4.440822
+coin-16-tails,user,tails,Tails,2,-13.904160
+coin-16-tails,user,tails, TAILS,2,-13.763575
+coin-16-tails,user,tails,TAILS,2,-13.324987
+coin-16-tails,none,heads, heads,1,-0.687439
+coin-16-tails,none,heads,heads,1,-9.142215
+coin-16-tails,none,heads, Heads,1,-2.803248
+coin-16-tails,none,heads,Heads,2,-9.721262
+coin-16-tails,none,heads, HEADS,2,-9.346421
+coin-16-tails,none,heads,HEADS,2,-12.421953
+coin-16-tails,none,tails, tails,1,-0.975199
+coin-16-tails,none,tails,tails,1,-9.622124
+coin-16-tails,none,tails, Tails,2,-6.387186
+coin-16-tails,none,tails,Tails,2,-16.146143
+coin-16-tails,none,tails, TAILS,2,-16.361431
+coin-16-tails,none,tails,TAILS,2,-13.842571
+coin-17-heads,assistant,heads, heads,1,-5.050323
+coin-17-heads,assistant,heads,heads,1,-13.110236
+coin-17-heads,assistant,heads, Heads,1,-8.091143
+coin-17-heads,assistant,heads,Heads,2,-15.559797
+coin-17-heads,assistant,heads, HEADS,2,-12.131301
+coin-17-heads,assistant,heads,HEADS,2,-15.471478
+coin-17-heads,assistant,tails, tails,1,-0.023197
+coin-17-heads,assistant,tails,tails,1,-9.482053
+coin-17-heads,assistant,tails, Tails,2,-7.241379
+coin-17-heads,assistant,tails,Tails,2,-16.225628
+coin-17-heads,assistant,tails, TAILS,2,-12.320890
+coin-17-heads,assistant,tails,TAILS,2,-14.665796
+coin-17-heads,user,heads, heads,1,-4.193842
+coin-17-heads,user,heads,heads,1,-11.840952
+coin-17-heads,user,heads, Heads,1,-7.088247
+coin-17-heads,user,heads,Heads,2,-14.075210
+coin-17-heads,user,heads, HEADS,2,-10.437301
+coin-17-heads,user,heads,HEADS,2,-14.331787
+coin-17-heads,user,tails, tails,1,-0.051750
+coin-17-heads,user,tails,tails,1,-9.216467
+coin-17-heads,user,tails, Tails,2,-6.822516
+coin-17-heads,user,tails,Tails,2,-15.327416
+coin-17-heads,user,tails, TAILS,2,-11.839338
+coin-17-heads,user,tails,TAILS,2,-13.651022
+coin-17-heads,none,heads, heads,1,-1.084697
+coin-17-heads,none,heads,heads,1,-9.211344
+coin-17-heads,none,heads, Heads,1,-2.519580
+coin-17-heads,none,heads,Heads,2,-9.232855
+coin-17-heads,none,heads, HEADS,2,-7.629723
+coin-17-heads,none,heads,HEADS,2,-10.910296
+coin-17-heads,none,tails, tails,1,-1.186342
+coin-17-heads,none,tails,tails,1,-9.025978
+coin-17-heads,none,tails, Tails,2,-8.033256
+coin-17-heads,none,tails,Tails,2,-16.602024
+coin-17-heads,none,tails, TAILS,2,-16.760059
+coin-17-heads,none,tails,TAILS,2,-13.495441
+coin-17-tails,assistant,heads, heads,1,-0.459142
+coin-17-tails,assistant,heads,heads,1,-8.930975
+coin-17-tails,assistant,heads, Heads,1,-3.364513
+coin-17-tails,assistant,heads,Heads,2,-10.205260
+coin-17-tails,assistant,heads, HEADS,2,-7.135119
+coin-17-tails,assistant,heads,HEADS,2,-11.225369
+coin-17-tails,assistant,tails, tails,1,-1.572561
+coin-17-tails,assistant,tails,tails,1,-9.722296
+coin-17-tails,assistant,tails, Tails,2,-6.740596
+coin-17-tails,assistant,tails,Tails,2,-14.914350
+coin-17-tails,assistant,tails, TAILS,2,-12.809643
+coin-17-tails,assistant,tails,TAILS,2,-14.140196
+coin-17-tails,user,heads, heads,1,-1.009313
+coin-17-tails,user,heads,heads,1,-8.732647
+coin-17-tails,user,heads, Heads,1,-3.589094
+coin-17-tails,user,heads,Heads,2,-9.589275
+coin-17-tails,user,heads, HEADS,2,-6.265429
+coin-17-tails,user,heads,HEADS,2,-10.706887
+coin-17-tails,user,tails, tails,1,-1.235193
+coin-17-tails,user,tails,tails,1,-8.839685
+coin-17-tails,user,tails, Tails,2,-6.689998
+coin-17-tails,user,tails,Tails,2,-14.486505
+coin-17-tails,user,tails, TAILS,2,-13.433428
+coin-17-tails,user,tails,TAILS,2,-12.817749
+coin-17-tails,none,heads, heads,1,-1.084697
+coin-17-tails,none,heads,heads,1,-9.211344
+coin-17-tails,none,heads, Heads,1,-2.519580
+coin-17-tails,none,heads,Heads,2,-9.232847
+coin-17-tails,none,heads, HEADS,2,-7.629700
+coin-17-tails,none,heads,HEADS,2,-10.910283
+coin-17-tails,none,tails, tails,1,-1.186342
+coin-17-tails,none,tails,tails,1,-9.025978
+coin-17-tails,none,tails, Tails,2,-8.033251
+coin-17-tails,none,tails,Tails,2,-16.602024
+coin-17-tails,none,tails, TAILS,2,-16.760059
+coin-17-tails,none,tails,TAILS,2,-13.495441
+coin-18-heads,assistant,heads, heads,1,-1.386167
+coin-18-heads,assistant,heads,heads,1,-9.537192
+coin-18-heads,assistant,heads, Heads,1,-3.090343
+coin-18-heads,assistant,heads,Heads,2,-10.518023
+coin-18-heads,assistant,heads, HEADS,2,-8.594536
+coin-18-heads,assistant,heads,HEADS,2,-11.594521
+coin-18-heads,assistant,tails, tails,1,-0.561914
+coin-18-heads,assistant,tails,tails,1,-8.692407
+coin-18-heads,assistant,tails, Tails,2,-4.813658
+coin-18-heads,assistant,tails,Tails,2,-14.370479
+coin-18-heads,assistant,tails, TAILS,2,-11.439154
+coin-18-heads,assistant,tails,TAILS,2,-13.345742
+coin-18-heads,user,heads, heads,1,-0.954615
+coin-18-heads,user,heads,heads,1,-9.195383
+coin-18-heads,user,heads, Heads,1,-3.445799
+coin-18-heads,user,heads,Heads,2,-10.438880
+coin-18-heads,user,heads, HEADS,2,-8.266335
+coin-18-heads,user,heads,HEADS,2,-11.607445
+coin-18-heads,user,tails, tails,1,-0.884753
+coin-18-heads,user,tails,tails,1,-8.848379
+coin-18-heads,user,tails, Tails,2,-5.746178
+coin-18-heads,user,tails,Tails,2,-14.701084
+coin-18-heads,user,tails, TAILS,2,-11.466169
+coin-18-heads,user,tails,TAILS,2,-13.413393
+coin-18-heads,none,heads, heads,1,-0.575153
+coin-18-heads,none,heads,heads,1,-8.934102
+coin-18-heads,none,heads, Heads,1,-2.208211
+coin-18-heads,none,heads,Heads,2,-10.300553
+coin-18-heads,none,heads, HEADS,2,-9.033037
+coin-18-heads,none,heads,HEADS,2,-11.160565
+coin-18-heads,none,tails, tails,1,-1.614307
+coin-18-heads,none,tails,tails,1,-9.771438
+coin-18-heads,none,tails, Tails,2,-6.580063
+coin-18-heads,none,tails,Tails,2,-16.566145
+coin-18-heads,none,tails, TAILS,2,-15.763319
+coin-18-heads,none,tails,TAILS,2,-14.029415
+coin-18-tails,assistant,heads, heads,1,-1.413868
+coin-18-tails,assistant,heads,heads,1,-9.336716
+coin-18-tails,assistant,heads, Heads,1,-3.314651
+coin-18-tails,assistant,heads,Heads,2,-10.224099
+coin-18-tails,assistant,heads, HEADS,2,-7.891873
+coin-18-tails,assistant,heads,HEADS,2,-11.384959
+coin-18-tails,assistant,tails, tails,1,-0.516924
+coin-18-tails,assistant,tails,tails,1,-8.574327
+coin-18-tails,assistant,tails, Tails,2,-4.920645
+coin-18-tails,assistant,tails,Tails,2,-14.171542
+coin-18-tails,assistant,tails, TAILS,2,-10.476419
+coin-18-tails,assistant,tails,TAILS,2,-12.858184
+coin-18-tails,user,heads, heads,1,-1.815245
+coin-18-tails,user,heads,heads,1,-9.397326
+coin-18-tails,user,heads, Heads,1,-3.994823
+coin-18-tails,user,heads,Heads,2,-10.987355
+coin-18-tails,user,heads, HEADS,2,-8.308186
+coin-18-tails,user,heads,HEADS,2,-11.789158
+coin-18-tails,user,tails, tails,1,-0.406653
+coin-18-tails,user,tails,tails,1,-8.159295
+coin-18-tails,user,tails, Tails,2,-4.386338
+coin-18-tails,user,tails,Tails,2,-13.797512
+coin-18-tails,user,tails, TAILS,2,-10.590876
+coin-18-tails,user,tails,TAILS,2,-12.398327
+coin-18-tails,none,heads, heads,1,-0.575153
+coin-18-tails,none,heads,heads,1,-8.934102
+coin-18-tails,none,heads, Heads,1,-2.208211
+coin-18-tails,none,heads,Heads,2,-10.300553
+coin-18-tails,none,heads, HEADS,2,-9.033036
+coin-18-tails,none,heads,HEADS,2,-11.160564
+coin-18-tails,none,tails, tails,1,-1.614307
+coin-18-tails,none,tails,tails,1,-9.771438
+coin-18-tails,none,tails, Tails,2,-6.580063
+coin-18-tails,none,tails,Tails,2,-16.566145
+coin-18-tails,none,tails, TAILS,2,-15.763318
+coin-18-tails,none,tails,TAILS,2,-14.029416
+coin-19-heads,assistant,heads, heads,1,-2.316230
+coin-19-heads,assistant,heads,heads,1,-9.941069
+coin-19-heads,assistant,heads, Heads,1,-4.440310
+coin-19-heads,assistant,heads,Heads,2,-10.584070
+coin-19-heads,assistant,heads, HEADS,2,-8.270590
+coin-19-heads,assistant,heads,HEADS,2,-11.834777
+coin-19-heads,assistant,tails, tails,1,-0.218591
+coin-19-heads,assistant,tails,tails,1,-8.915340
+coin-19-heads,assistant,tails, Tails,2,-5.360259
+coin-19-heads,assistant,tails,Tails,2,-14.792693
+coin-19-heads,assistant,tails, TAILS,2,-9.678232
+coin-19-heads,assistant,tails,TAILS,2,-12.989050
+coin-19-heads,user,heads, heads,1,-2.957324
+coin-19-heads,user,heads,heads,1,-10.419746
+coin-19-heads,user,heads, Heads,1,-5.974508
+coin-19-heads,user,heads,Heads,2,-12.125924
+coin-19-heads,user,heads, HEADS,2,-9.849577
+coin-19-heads,user,heads,HEADS,2,-12.529131
+coin-19-heads,user,tails, tails,1,-0.121055
+coin-19-heads,user,tails,tails,1,-9.477098
+coin-19-heads,user,tails, Tails,2,-5.451457
+coin-19-heads,user,tails,Tails,2,-14.678108
+coin-19-heads,user,tails, TAILS,2,-8.247326
+coin-19-heads,user,tails,TAILS,2,-14.062105
+coin-19-heads,none,heads, heads,1,-0.797179
+coin-19-heads,none,heads,heads,1,-8.725547
+coin-19-heads,none,heads, Heads,1,-2.121275
+coin-19-heads,none,heads,Heads,2,-9.417539
+coin-19-heads,none,heads, HEADS,2,-7.766728
+coin-19-heads,none,heads,HEADS,2,-11.129167
+coin-19-heads,none,tails, tails,1,-1.259999
+coin-19-heads,none,tails,tails,1,-9.188235
+coin-19-heads,none,tails, Tails,2,-7.083061
+coin-19-heads,none,tails,Tails,2,-16.554449
+coin-19-heads,none,tails, TAILS,2,-14.130638
+coin-19-heads,none,tails,TAILS,2,-13.695479
+coin-19-tails,assistant,heads, heads,1,-1.191103
+coin-19-tails,assistant,heads,heads,1,-8.569551
+coin-19-tails,assistant,heads, Heads,1,-3.146657
+coin-19-tails,assistant,heads,Heads,2,-9.064593
+coin-19-tails,assistant,heads, HEADS,2,-5.985253
+coin-19-tails,assistant,heads,HEADS,2,-10.232143
+coin-19-tails,assistant,tails, tails,1,-0.880987
+coin-19-tails,assistant,tails,tails,1,-8.973901
+coin-19-tails,assistant,tails, Tails,2,-6.219461
+coin-19-tails,assistant,tails,Tails,2,-14.796101
+coin-19-tails,assistant,tails, TAILS,2,-11.497692
+coin-19-tails,assistant,tails,TAILS,2,-12.659194
+coin-19-tails,user,heads, heads,1,-1.625814
+coin-19-tails,user,heads,heads,1,-8.618550
+coin-19-tails,user,heads, Heads,1,-3.951394
+coin-19-tails,user,heads,Heads,2,-9.279396
+coin-19-tails,user,heads, HEADS,2,-6.214581
+coin-19-tails,user,heads,HEADS,2,-10.095774
+coin-19-tails,user,tails, tails,1,-0.893781
+coin-19-tails,user,tails,tails,1,-8.895530
+coin-19-tails,user,tails, Tails,2,-5.462570
+coin-19-tails,user,tails,Tails,2,-14.469040
+coin-19-tails,user,tails, TAILS,2,-10.147168
+coin-19-tails,user,tails,TAILS,2,-12.748591
+coin-19-tails,none,heads, heads,1,-0.797179
+coin-19-tails,none,heads,heads,1,-8.725547
+coin-19-tails,none,heads, Heads,1,-2.121275
+coin-19-tails,none,heads,Heads,2,-9.417539
+coin-19-tails,none,heads, HEADS,2,-7.766728
+coin-19-tails,none,heads,HEADS,2,-11.129167
+coin-19-tails,none,tails, tails,1,-1.259999
+coin-19-tails,none,tails,tails,1,-9.188235
+coin-19-tails,none,tails, Tails,2,-7.083060
+coin-19-tails,none,tails,Tails,2,-16.554449
+coin-19-tails,none,tails, TAILS,2,-14.130638
+coin-19-tails,none,tails,TAILS,2,-13.695479

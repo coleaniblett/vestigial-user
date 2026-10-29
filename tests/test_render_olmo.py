@@ -117,3 +117,24 @@ def test_role_swap_content_identical_across_labelings(tok, text):
             assert tok.decode(r.input_ids[:a]).endswith(f"<|im_start|>{role}\n")
     starts = [r.input_ids[: r.spans[0][0] - 3] for r in out.values()]
     assert starts[0] == starts[1] and "system" in tok.decode(starts[0])
+
+
+def test_coin_toss_prompts(tok, tmp_path):
+    import subprocess
+    import sys
+
+    from coin_toss import CONDITIONS, OUTCOMES, prompt_ids, variants
+
+    out = tmp_path / "coin.jsonl"
+    subprocess.run([sys.executable, "coin_toss.py", "build", "--out", str(out)], check=True)
+    rows = load_jsonl(out)
+    assert len(rows) == 40 and {r["preferred"] for r in rows} == set(OUTCOMES)
+    for r in rows:
+        prompts = {c: tok.decode(prompt_ids(tok, r["turns"][c])) for c in CONDITIONS}
+        assert all(p.endswith("I flipped the coin and it landed on") for p in prompts.values())
+        # the preference sentence is said by exactly the named party, and nobody in "none"
+        assert r["preferred"] in r["turns"]["user"][0] and r["preferred"] not in r["turns"]["user"][1]
+        assert r["preferred"] in r["turns"]["assistant"][1] and r["preferred"] not in r["turns"]["assistant"][0]
+        assert not any(o in t for o in OUTCOMES for t in r["turns"]["none"])
+    heads, tails = ({tuple(tok(v, add_special_tokens=False)["input_ids"]) for v in variants(o)} for o in OUTCOMES)
+    assert len(heads) == len(tails) == 6 and not heads & tails
