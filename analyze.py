@@ -5,12 +5,13 @@
 A text set is one (source, kind), e.g. wildchat user or olmo-instruct assistant. Sets are never
 pooled. Every text is scored in every slot; per set and stage we report
     raw NLL        mean content NLL in the user, assistant and plain-prose slot
-    slot effect    NLL(user slot) - NLL(assistant slot), paired over texts; by default without the first
-                   content token (a first-turn assistant header makes the post-trained models expect
-                   <|im_start|>, so that token costs 2-14 nats whatever the text), with it alongside
+    slot effect    NLL(user slot) - NLL(assistant slot), paired over texts
     role-specific  NLL(own slot) - NLL(plain): user@user - user@plain for user text,
                    asst@asst - asst@plain for assistant text
-    entropy        mean next-token entropy over content tokens per slot, without and with the first token
+    entropy        mean next-token entropy over content tokens per slot
+Each is reported without the first content token (default: a first-turn assistant header makes the
+post-trained models expect <|im_start|>, so that token costs 2-14 nats whatever the text) and over
+all tokens; the figures use the default.
 95% bootstrap CIs are over texts. Writes results/summary.csv, results/results.md and one
 figure per text set, results/nll_<source>_<kind>.png (stage on x, one line per slot).
 
@@ -65,16 +66,19 @@ EXCL0, ALL = "excl. position 0", "all tokens"
 
 
 def quantities(kind):
-    """[(quantity label, value column, function of the text x condition table)] for one text set. Slot effects
-    and entropies come without the first content token (default; after a first-turn assistant header the
-    post-trained models expect <|im_start|>, so that token costs 2-14 nats whatever the text) and with it."""
+    """[(quantity label, value column, function of the text x condition table)] for one text set. Every quantity
+    comes without the first content token (default; after a first-turn assistant header the post-trained
+    models expect <|im_start|>, so that token costs 2-14 nats whatever the text) and with it."""
     k = config.KIND_ABBR[kind]
     own = "user" if kind == "user" else "asst"
-    qs = [(f"NLL {SLOT_NAMES[a]} ({k}@{a})", "mean_nll", (lambda t, c=f"{k}@{a}": t[c])) for a, _ in config.SLOTS]
+    qs = []
+    for col, label in (("mean_nll_from1", EXCL0), ("mean_nll", ALL)):
+        qs += [(f"NLL {SLOT_NAMES[a]} ({k}@{a}), {label}", col, (lambda t, c=f"{k}@{a}": t[c])) for a, _ in config.SLOTS]
     slot_effect = lambda t: t[f"{k}@user"] - t[f"{k}@asst"]
     qs.append((f"slot effect, {EXCL0}", "mean_nll_from1", slot_effect))
     qs.append((f"slot effect, {ALL}", "mean_nll", slot_effect))
-    qs.append((f"role-specific ({k}@{own} - {k}@plain)", "mean_nll", lambda t: t[f"{k}@{own}"] - t[f"{k}@plain"]))
+    for col, label in (("mean_nll_from1", EXCL0), ("mean_nll", ALL)):
+        qs.append((f"role-specific ({k}@{own} - {k}@plain), {label}", col, lambda t: t[f"{k}@{own}"] - t[f"{k}@plain"]))
     for col, label in (("mean_entropy_from1", EXCL0), ("mean_entropy", ALL)):
         qs += [(f"entropy {SLOT_NAMES[a]} ({k}@{a}), {label}", col, (lambda t, c=f"{k}@{a}": t[c])) for a, _ in config.SLOTS]
     return qs
@@ -104,15 +108,17 @@ def plot(summary, out_dir):
     stages = list(dict.fromkeys(summary["stage"]))
     x = np.arange(len(stages))
     paths = []
+    label = EXCL0 if (summary.quantity.str.startswith("NLL ") & summary.quantity.str.endswith(EXCL0)).any() else ALL
     for (src, kind), g in summary.groupby(["source", "kind"], sort=False):
         fig, ax = plt.subplots(figsize=(6, 4.2))
         for a, slot in config.SLOTS:
-            d = g[g.quantity.str.startswith(f"NLL {SLOT_NAMES[a]} (")].set_index("stage").reindex(stages)
+            d = g[g.quantity.str.startswith(f"NLL {SLOT_NAMES[a]} (") & g.quantity.str.endswith(label)]
+            d = d.set_index("stage").reindex(stages)
             ax.errorbar(x, d["mean"], yerr=[d["mean"] - d["lo"], d["hi"] - d["mean"]], capsize=3, marker="o",
                         linestyle=":" if slot is None else "-", label=SLOT_NAMES[a])
         ax.set_xticks(x, stages)
         ax.set_xlabel("post-training stage")
-        ax.set_ylabel("mean per-token NLL of content (nats)")
+        ax.set_ylabel(f"mean per-token NLL of content, {label} (nats)")
         ax.set_title(f"{set_name(src, kind)} text (n={g.n.iloc[0]}), 95% bootstrap CI")
         ax.legend(fontsize=8)
         fig.tight_layout()
@@ -137,26 +143,37 @@ def table(summary, select, index):
     return wide.reset_index().to_markdown(index=False)
 
 
+def section(summary, heading, note, select, index):
+    """Markdown lines: the position-0-excluded table (default), then the all-tokens table."""
+    md = ["", heading, ""] + ([note, ""] if note else [])
+    for label, suffix in ((EXCL0, " (default)"), (ALL, "")):
+        sel = lambda d, label=label: select(d.quantity) & d.quantity.str.endswith(label)
+        if sel(summary).any():
+            md += [f"### {label}{suffix}", "", table(summary, sel, index), ""]
+    return md
+
+
 def results_table(summary, gen_dir):
     sets = summary.drop_duplicates(["source", "kind"])
     md = ["# Results", "",
           "Mean over texts, 95% bootstrap CI over texts. Text sources are analyzed separately and never pooled.", "",
           "Texts per set: " + ", ".join(f"{set_name(s, k)} {n}" for s, k, n in zip(sets.source, sets.kind, sets.n)) + ".",
-          "", "## Raw mean NLL by text set and slot", "",
-          table(summary, lambda d: d.quantity.str.startswith("NLL "), ["text set", "quantity"]),
-          "", "## Slot effect: NLL(user slot) - NLL(assistant slot)", ""]
+          "", "Every quantity is reported without the first content token (default) and over all tokens. When an "
+          "assistant turn directly follows the system turn, the post-trained checkpoints put nearly all next-token "
+          "probability on `<|im_start|>`, so the first content token in the assistant slot costs 2-14 nats whatever "
+          "the text (see position.md)."]
+    md += section(summary, "## Raw mean NLL by text set and slot", "", lambda q: q.str.startswith("NLL "),
+                  ["text set", "quantity"])
+    md += ["", "## Slot effect: NLL(user slot) - NLL(assistant slot)", ""]
     if (summary.quantity == f"slot effect, {EXCL0}").any():
-        md += ["Default: without the first content token. When an assistant turn directly follows the system turn, "
-               "the post-trained checkpoints put nearly all next-token probability on `<|im_start|>`, so the first "
-               "content token in the assistant slot costs 2-14 nats whatever the text (see position.md). The "
-               "all-tokens version follows for reference.", "",
-               f"### Slot effect, {EXCL0} (default)", "",
+        md += [f"### Slot effect, {EXCL0} (default)", "",
                table(summary, lambda d: d.quantity == f"slot effect, {EXCL0}", ["text set"]), "",
                f"### Slot effect, {ALL}", ""]
     md += [table(summary, lambda d: d.quantity == f"slot effect, {ALL}", ["text set"]),
-          "", "## Role-specific: NLL(own slot) - NLL(plain)", "",
-          "user@user - user@plain for user text; asst@asst - asst@plain for assistant text.", "",
-          table(summary, lambda d: d.quantity.str.startswith("role-specific"), ["text set", "quantity"])]
+          ""]
+    md += section(summary, "## Role-specific: NLL(own slot) - NLL(plain)",
+                  "user@user - user@plain for user text; asst@asst - asst@plain for assistant text.",
+                  lambda q: q.str.startswith("role-specific"), ["text set", "quantity"])
     for label, note in ((EXCL0, " (default)"), (ALL, "")):
         sel = lambda d, label=label: d.quantity.str.startswith("entropy ") & d.quantity.str.endswith(label)
         if sel(summary).any():

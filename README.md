@@ -40,9 +40,11 @@ We look at one dimension, *vestigial regression* (Shiller 2026): the model losin
 - **Generation** (`generate.py`). Opens a user turn with each prefill sentence, leaves it unterminated, and samples 3 × 120 tokens at T=0.7. It counts four flags per sample: `ended_turn` (closed the user turn), `handoff_to_assistant` (then wrote the assistant header; a subset of `ended_turn`), `assistant_register` (assistant phrases such as "I'd be happy to") and `repetition_loop` (any word 4-gram repeated 3 or more times). The last two are checked on the user portion only, the text before the turn closes: a post-trained model usually finishes the user's message, closes the turn and answers as the assistant, and that reply is not the user's voice.
 - **Analysis** (`analyze.py`). Per text set (source × kind) and stage, with 95% bootstrap CIs over texts (paired across slots):
   - raw mean NLL in each slot (user, assistant, plain);
-  - slot effect = NLL(user slot) − NLL(assistant slot): `user@user − user@asst` for user text, `asst@user − asst@asst` for assistant text. By default over content positions 1+, with the all-tokens version alongside: when an assistant turn directly follows the system turn, the post-trained checkpoints put nearly all next-token probability on `<|im_start|>` (1.000 SFT, 0.960 DPO, 0.881 Instruct), so the first content token in the assistant slot costs 2–14 nats whatever the text;
-  - role-specific = NLL(own slot) − NLL(plain): `user@user − user@plain` for user text, `asst@asst − asst@plain` for assistant text (all tokens);
-  - mean next-token entropy per slot, over positions 1+ (default) and over all tokens.
+  - slot effect = NLL(user slot) − NLL(assistant slot): `user@user − user@asst` for user text, `asst@user − asst@asst` for assistant text;
+  - role-specific = NLL(own slot) − NLL(plain): `user@user − user@plain` for user text, `asst@asst − asst@plain` for assistant text;
+  - mean next-token entropy per slot.
+
+  Each is reported over content positions 1+ (the default, also used by the figures) and over all tokens. When an assistant turn directly follows the system turn, the post-trained checkpoints put nearly all next-token probability on `<|im_start|>` (1.000 SFT, 0.960 DPO, 0.881 Instruct), so the first content token in the assistant slot costs 2–14 nats whatever the text.
 
   Writes `results/results.md`, `results/summary.csv` and one figure per text set, `results/nll_<source>_<kind>.png` (stage on x, one line per slot).
 

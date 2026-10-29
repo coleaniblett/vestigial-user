@@ -1,193 +1,257 @@
 stage,source,kind,quantity,n,mean,lo,hi
-base,wildchat,user,NLL user slot (user@user),300,2.886832843333333,2.778008835166666,2.9929080464999993
-base,wildchat,user,NLL assistant slot (user@asst),300,2.89289488,2.7823686109166665,3.0027663364999992
-base,wildchat,user,NLL plain (no slot) (user@plain),300,3.0515394066666666,2.94072682025,3.1623629571666667
-base,wildchat,user,"slot effect, excl. position 0",300,-0.0014254666666666661,-0.005842926083333345,0.002878965583333318
-base,wildchat,user,"slot effect, all tokens",300,-0.006062036666666641,-0.009831958499999974,-0.002414045416666625
-base,wildchat,user,role-specific (user@user - user@plain),300,-0.16470656333333333,-0.18964510958333333,-0.14025809091666666
-base,wildchat,user,"entropy user slot (user@user), excl. position 0",300,2.6535419866666667,2.5666071674166666,2.741699120666667
-base,wildchat,user,"entropy assistant slot (user@asst), excl. position 0",300,2.6385221700000003,2.5494507737500003,2.726188096833333
-base,wildchat,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.655558393333333,2.5739545735000005,2.739817261833333
-base,wildchat,user,"entropy user slot (user@user), all tokens",300,2.712959463333333,2.626668426,2.800510339416667
-base,wildchat,user,"entropy assistant slot (user@asst), all tokens",300,2.67295449,2.5868341183333334,2.7635330250833334
-base,wildchat,user,"entropy plain (no slot) (user@plain), all tokens",300,2.739864396666667,2.654170061,2.8270585273333335
-base,oasst1,user,NLL user slot (user@user),300,2.7649648233333335,2.690475651083333,2.8396535341666667
-base,oasst1,user,NLL assistant slot (user@asst),300,2.78681354,2.7123597595,2.8617955420000007
-base,oasst1,user,NLL plain (no slot) (user@plain),300,2.9695346166666665,2.889361933583334,3.0524392245
-base,oasst1,user,"slot effect, excl. position 0",300,-0.023415833333333334,-0.028680969833333347,-0.018401209583333328
-base,oasst1,user,"slot effect, all tokens",300,-0.02184871666666667,-0.02617814516666667,-0.017719048500000008
-base,oasst1,user,role-specific (user@user - user@plain),300,-0.20456979333333333,-0.22505903424999998,-0.18464933908333328
-base,oasst1,user,"entropy user slot (user@user), excl. position 0",300,2.6364697033333333,2.5749397880833333,2.698736202583333
-base,oasst1,user,"entropy assistant slot (user@asst), excl. position 0",300,2.6171994799999996,2.5541715160000007,2.680134753666667
-base,oasst1,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.6881804899999997,2.62623743325,2.7517518733333333
-base,oasst1,user,"entropy user slot (user@user), all tokens",300,2.726961063333333,2.6651398580000003,2.788322267
-base,oasst1,user,"entropy assistant slot (user@asst), all tokens",300,2.671949023333333,2.6097852411666667,2.7319796459166663
-base,oasst1,user,"entropy plain (no slot) (user@plain), all tokens",300,2.81370744,2.752412413416667,2.875238488
-base,wildchat,assistant,NLL user slot (asst@user),300,2.0410315399999996,1.9586268335833334,2.127351320583333
-base,wildchat,assistant,NLL assistant slot (asst@asst),300,2.0356538166666667,1.95081498025,2.1217875394166663
-base,wildchat,assistant,NLL plain (no slot) (asst@plain),300,2.1788447000000004,2.0911383252499998,2.27351617825
-base,wildchat,assistant,"slot effect, excl. position 0",300,0.00371044333333333,0.0009188185833333356,0.0063827947499999925
-base,wildchat,assistant,"slot effect, all tokens",300,0.0053777233333333315,0.0028643425,0.007842417916666655
-base,wildchat,assistant,role-specific (asst@asst - asst@plain),300,-0.1431908833333333,-0.16427768924999997,-0.12431791958333333
-base,wildchat,assistant,"entropy user slot (asst@user), excl. position 0",300,1.9115365133333333,1.8407862799166668,1.988568547833333
-base,wildchat,assistant,"entropy assistant slot (asst@asst), excl. position 0",300,1.8840862033333334,1.8135691578333335,1.9585424268333336
-base,wildchat,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",300,2.0200682199999997,1.9443831790833335,2.097287427583333
-base,wildchat,assistant,"entropy user slot (asst@user), all tokens",300,1.9610695766666666,1.8888787889166665,2.0381309463333332
-base,wildchat,assistant,"entropy assistant slot (asst@asst), all tokens",300,1.9169434933333331,1.8470905424166668,1.9926045471666667
-base,wildchat,assistant,"entropy plain (no slot) (asst@plain), all tokens",300,2.0847254833333335,2.0079477715,2.1651766280833336
-base,olmo-instruct,assistant,NLL user slot (asst@user),290,1.7575766827586208,1.6968607993965517,1.8251214277586207
-base,olmo-instruct,assistant,NLL assistant slot (asst@asst),290,1.754773248275862,1.6932325296551722,1.8223259806034484
-base,olmo-instruct,assistant,NLL plain (no slot) (asst@plain),290,1.8458623689655171,1.7769762700862068,1.9161624329310347
-base,olmo-instruct,assistant,"slot effect, excl. position 0",290,0.0023908517241379296,0.0005848383620689699,0.004358965948275856
-base,olmo-instruct,assistant,"slot effect, all tokens",290,0.002803434482758632,0.0009589546551724255,0.004834508017241389
-base,olmo-instruct,assistant,role-specific (asst@asst - asst@plain),290,-0.09108912068965518,-0.10747461620689656,-0.07628478681034484
-base,olmo-instruct,assistant,"entropy user slot (asst@user), excl. position 0",290,1.7864422137931033,1.7305466636206897,1.8457014070689655
-base,olmo-instruct,assistant,"entropy assistant slot (asst@asst), excl. position 0",290,1.7701397310344826,1.7144943147413794,1.8280261012931034
-base,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",290,1.7926418448275865,1.729253874224138,1.8581258857758618
-base,olmo-instruct,assistant,"entropy user slot (asst@user), all tokens",290,1.8131532000000001,1.7555167442241382,1.872021193448276
-base,olmo-instruct,assistant,"entropy assistant slot (asst@asst), all tokens",290,1.7880848896551724,1.733551888189655,1.8464079431896554
-base,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), all tokens",290,1.827698031034483,1.7657383894827587,1.8924785403448279
-sft,wildchat,user,NLL user slot (user@user),300,2.4106560333333333,2.2657814676666668,2.557430515583333
-sft,wildchat,user,NLL assistant slot (user@asst),300,2.66943247,2.5152063241666665,2.8227147434999997
-sft,wildchat,user,NLL plain (no slot) (user@plain),300,2.8476690833333334,2.702367124916667,2.9938595873333336
-sft,wildchat,user,"slot effect, excl. position 0",300,-0.00415478666666666,-0.01455746191666667,0.006734884833333343
-sft,wildchat,user,"slot effect, all tokens",300,-0.2587764366666667,-0.28262525525,-0.23534813525
-sft,wildchat,user,role-specific (user@user - user@plain),300,-0.43701305000000007,-0.4775768648333334,-0.39939436966666664
-sft,wildchat,user,"entropy user slot (user@user), excl. position 0",300,1.8579461333333331,1.7397010881666664,1.9755931289999997
-sft,wildchat,user,"entropy assistant slot (user@asst), excl. position 0",300,1.8960036266666664,1.7814073315833334,2.009636398583334
-sft,wildchat,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.1544217733333335,2.0579528210833335,2.2484121233333334
-sft,wildchat,user,"entropy user slot (user@user), all tokens",300,1.9077623333333331,1.7923836423333335,2.0233814196666664
-sft,wildchat,user,"entropy assistant slot (user@asst), all tokens",300,1.8533606666666667,1.7411855934166667,1.9619901027499997
-sft,wildchat,user,"entropy plain (no slot) (user@plain), all tokens",300,2.2389304733333333,2.14413449875,2.3379374641666666
-sft,oasst1,user,NLL user slot (user@user),300,2.915632186666667,2.8390063446666667,2.993460844416666
-sft,oasst1,user,NLL assistant slot (user@asst),300,3.304198786666667,3.217093542583333,3.3891420510833337
-sft,oasst1,user,NLL plain (no slot) (user@plain),300,3.2451863899999998,3.1591713737499996,3.3337965642499996
-sft,oasst1,user,"slot effect, excl. position 0",300,-0.00044134333333333535,-0.009903836833333337,0.008666351916666667
-sft,oasst1,user,"slot effect, all tokens",300,-0.3885666,-0.41096137066666666,-0.36588059
-sft,oasst1,user,role-specific (user@user - user@plain),300,-0.3295542033333333,-0.3571260338333333,-0.30327036408333335
-sft,oasst1,user,"entropy user slot (user@user), excl. position 0",300,2.38008304,2.319042199083333,2.4410077816666664
-sft,oasst1,user,"entropy assistant slot (user@asst), excl. position 0",300,2.385966633333333,2.32349982475,2.447055460583333
-sft,oasst1,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.280090943333333,2.22038293475,2.339453031
-sft,oasst1,user,"entropy user slot (user@user), all tokens",300,2.4444150966666665,2.3854805635,2.5025817481666666
-sft,oasst1,user,"entropy assistant slot (user@asst), all tokens",300,2.31838651,2.260254708,2.3768247748333335
-sft,oasst1,user,"entropy plain (no slot) (user@plain), all tokens",300,2.4045077066666667,2.3471679860833334,2.4613159833333333
-sft,wildchat,assistant,NLL user slot (asst@user),300,2.2286739800000004,2.1461783598333337,2.3145876755833337
-sft,wildchat,assistant,NLL assistant slot (asst@asst),300,2.305943006666667,2.21389723275,2.397815451833334
-sft,wildchat,assistant,NLL plain (no slot) (asst@plain),300,2.4196016033333336,2.3290009475,2.5136958112500003
-sft,wildchat,assistant,"slot effect, excl. position 0",300,0.08707017,0.07637047641666667,0.09774235008333332
-sft,wildchat,assistant,"slot effect, all tokens",300,-0.07726902666666667,-0.09295556016666669,-0.06262620508333334
-sft,wildchat,assistant,role-specific (asst@asst - asst@plain),300,-0.11365859666666665,-0.13634369774999996,-0.0912460105
-sft,wildchat,assistant,"entropy user slot (asst@user), excl. position 0",300,1.7548087533333334,1.6898871610833335,1.8231881537500003
-sft,wildchat,assistant,"entropy assistant slot (asst@asst), excl. position 0",300,1.6501676266666667,1.5852018516666668,1.7149125164166665
-sft,wildchat,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",300,1.7207233233333332,1.65132067775,1.7938469889166668
-sft,wildchat,assistant,"entropy user slot (asst@user), all tokens",300,1.7906928766666665,1.722595494,1.8602481085
-sft,wildchat,assistant,"entropy assistant slot (asst@asst), all tokens",300,1.6253654199999998,1.5628026740833334,1.6891713624999998
-sft,wildchat,assistant,"entropy plain (no slot) (asst@plain), all tokens",300,1.783765423333333,1.71231320125,1.8592810294166664
-sft,olmo-instruct,assistant,NLL user slot (asst@user),290,1.6157169896551724,1.549154710689655,1.6881898520689655
-sft,olmo-instruct,assistant,NLL assistant slot (asst@asst),290,1.5766613896551724,1.5030509237931036,1.6549738741379312
-sft,olmo-instruct,assistant,NLL plain (no slot) (asst@plain),290,1.7497072172413795,1.6773310410344828,1.8278815331034484
-sft,olmo-instruct,assistant,"slot effect, excl. position 0",290,0.11660263103448276,0.10496931,0.1290558250862069
-sft,olmo-instruct,assistant,"slot effect, all tokens",290,0.0390556,0.02563285094827587,0.05149434172413793
-sft,olmo-instruct,assistant,role-specific (asst@asst - asst@plain),290,-0.1730458275862069,-0.1938031766379311,-0.1524840802586207
-sft,olmo-instruct,assistant,"entropy user slot (asst@user), excl. position 0",290,1.5513467172413793,1.5003643023275863,1.6037773601724137
-sft,olmo-instruct,assistant,"entropy assistant slot (asst@asst), excl. position 0",290,1.4949948413793104,1.4454940069827587,1.5472420497413795
-sft,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",290,1.565512748275862,1.5116855706034484,1.6217694904310345
-sft,olmo-instruct,assistant,"entropy user slot (asst@user), all tokens",290,1.5714811103448276,1.5201002172413793,1.6252608396551722
-sft,olmo-instruct,assistant,"entropy assistant slot (asst@asst), all tokens",290,1.4834589137931034,1.4343413694827585,1.5342413138793103
-sft,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), all tokens",290,1.5995061103448276,1.5442117317241377,1.6570018579310344
-dpo,wildchat,user,NLL user slot (user@user),300,2.551848816666667,2.4002238225,2.703040673333333
-dpo,wildchat,user,NLL assistant slot (user@asst),300,2.678757576666667,2.5235895009166667,2.82522550875
-dpo,wildchat,user,NLL plain (no slot) (user@plain),300,2.9577481,2.8069287284166666,3.1102353285
-dpo,wildchat,user,"slot effect, excl. position 0",300,-0.040689889999999986,-0.05877539924999999,-0.023287546916666665
-dpo,wildchat,user,"slot effect, all tokens",300,-0.12690875999999998,-0.1452511293333333,-0.10891157224999998
-dpo,wildchat,user,role-specific (user@user - user@plain),300,-0.40589928333333336,-0.44824781224999993,-0.36466903641666665
-dpo,wildchat,user,"entropy user slot (user@user), excl. position 0",300,1.7492749366666664,1.637646954083333,1.8617390770000002
-dpo,wildchat,user,"entropy assistant slot (user@asst), excl. position 0",300,1.7932172233333334,1.6840371897500002,1.9022504383333332
-dpo,wildchat,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.0762592966666666,1.9790573156666664,2.1714205132499997
-dpo,wildchat,user,"entropy user slot (user@user), all tokens",300,1.79998576,1.6874705763333333,1.9103367400000002
-dpo,wildchat,user,"entropy assistant slot (user@asst), all tokens",300,1.7598118,1.6535601896666667,1.868370410416667
-dpo,wildchat,user,"entropy plain (no slot) (user@plain), all tokens",300,2.1577231866666664,2.05939259275,2.2562413591666672
-dpo,oasst1,user,NLL user slot (user@user),300,3.0219911533333335,2.938364554,3.1067354735
-dpo,oasst1,user,NLL assistant slot (user@asst),300,3.17686436,3.0927520277500005,3.2604793570833337
-dpo,oasst1,user,NLL plain (no slot) (user@plain),300,3.369329046666667,3.278893881083333,3.4579347996666665
-dpo,oasst1,user,"slot effect, excl. position 0",300,-0.036862250000000006,-0.05250607016666666,-0.021400383583333325
-dpo,oasst1,user,"slot effect, all tokens",300,-0.15487320666666668,-0.17217134683333338,-0.13791126066666667
-dpo,oasst1,user,role-specific (user@user - user@plain),300,-0.3473378933333333,-0.37669020724999996,-0.3173908390833334
-dpo,oasst1,user,"entropy user slot (user@user), excl. position 0",300,2.2526587566666665,2.192983807916667,2.312028480583333
-dpo,oasst1,user,"entropy assistant slot (user@asst), excl. position 0",300,2.2194751866666667,2.1587636366666665,2.2801864652499995
-dpo,oasst1,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.1776990766666664,2.1193176745833333,2.23659767375
-dpo,oasst1,user,"entropy user slot (user@user), all tokens",300,2.3185174666666666,2.2592873377500005,2.378619324333333
-dpo,oasst1,user,"entropy assistant slot (user@asst), all tokens",300,2.1665127533333335,2.1091886115833334,2.2269889119166666
-dpo,oasst1,user,"entropy plain (no slot) (user@plain), all tokens",300,2.298257323333333,2.2410192820833332,2.3568806585
-dpo,wildchat,assistant,NLL user slot (asst@user),300,2.46295002,2.3800570099166665,2.546889384833333
-dpo,wildchat,assistant,NLL assistant slot (asst@asst),300,2.56805253,2.4791886804166667,2.659459205
-dpo,wildchat,assistant,NLL plain (no slot) (asst@plain),300,2.6233131766666666,2.5337743175833336,2.716201344
-dpo,wildchat,assistant,"slot effect, excl. position 0",300,-0.06531247666666667,-0.08836071825000004,-0.04304035558333336
-dpo,wildchat,assistant,"slot effect, all tokens",300,-0.10510251000000001,-0.12704688,-0.08415401733333334
-dpo,wildchat,assistant,role-specific (asst@asst - asst@plain),300,-0.05526064666666666,-0.08543187725,-0.026079177500000012
-dpo,wildchat,assistant,"entropy user slot (asst@user), excl. position 0",300,1.5898494300000003,1.5233222998333333,1.6588052695
-dpo,wildchat,assistant,"entropy assistant slot (asst@asst), excl. position 0",300,1.4823579066666666,1.4215031969166667,1.543813495083333
-dpo,wildchat,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",300,1.6839735366666666,1.6157727176666667,1.7564439664999998
-dpo,wildchat,assistant,"entropy user slot (asst@user), all tokens",300,1.6270303199999998,1.55934077925,1.6932916438333332
-dpo,wildchat,assistant,"entropy assistant slot (asst@asst), all tokens",300,1.4650817166666665,1.4040035690833332,1.5258340200833334
-dpo,wildchat,assistant,"entropy plain (no slot) (asst@plain), all tokens",300,1.7445586399999997,1.6731689905833333,1.8181539735833332
-dpo,olmo-instruct,assistant,NLL user slot (asst@user),290,1.6369760551724135,1.5631487693103447,1.7169768043965516
-dpo,olmo-instruct,assistant,NLL assistant slot (asst@asst),290,1.5792323034482758,1.5010726872413793,1.6612924703448273
-dpo,olmo-instruct,assistant,NLL plain (no slot) (asst@plain),290,1.7873696241379313,1.7112790563793105,1.865899907241379
-dpo,olmo-instruct,assistant,"slot effect, excl. position 0",290,0.06892476206896553,0.05180740801724138,0.08589450413793102
-dpo,olmo-instruct,assistant,"slot effect, all tokens",290,0.057743751724137926,0.04177309431034482,0.07404567163793103
-dpo,olmo-instruct,assistant,role-specific (asst@asst - asst@plain),290,-0.20813732068965518,-0.23174129948275857,-0.18522612155172413
-dpo,olmo-instruct,assistant,"entropy user slot (asst@user), excl. position 0",290,1.4238413896551723,1.371694138362069,1.4788181610344828
-dpo,olmo-instruct,assistant,"entropy assistant slot (asst@asst), excl. position 0",290,1.3685325137931033,1.3189940917241378,1.4205972968103446
-dpo,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",290,1.5213605413793105,1.4666051270689657,1.5779440011206896
-dpo,olmo-instruct,assistant,"entropy user slot (asst@user), all tokens",290,1.444511644827586,1.3924435644827586,1.499714177413793
-dpo,olmo-instruct,assistant,"entropy assistant slot (asst@asst), all tokens",290,1.3606139379310345,1.3123118838793104,1.4114383497413794
-dpo,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), all tokens",290,1.5542085344827588,1.4994020702586206,1.611375660689655
-instruct,wildchat,user,NLL user slot (user@user),300,2.58175167,2.428417857916667,2.7340176855833334
-instruct,wildchat,user,NLL assistant slot (user@asst),300,2.694349026666667,2.546288620083333,2.8473176314999997
-instruct,wildchat,user,NLL plain (no slot) (user@plain),300,3.011305126666667,2.857404973333333,3.1635490391666665
-instruct,wildchat,user,"slot effect, excl. position 0",300,-0.04891640666666664,-0.06959248874999997,-0.029371247083333323
-instruct,wildchat,user,"slot effect, all tokens",300,-0.11259735666666666,-0.132646258,-0.09304781683333335
-instruct,wildchat,user,role-specific (user@user - user@plain),300,-0.42955345666666667,-0.47162971816666666,-0.38891789925000003
-instruct,wildchat,user,"entropy user slot (user@user), excl. position 0",300,1.5910777600000001,1.487119997833333,1.69961761825
-instruct,wildchat,user,"entropy assistant slot (user@asst), excl. position 0",300,1.64527262,1.54364202325,1.7485935230833334
-instruct,wildchat,user,"entropy plain (no slot) (user@plain), excl. position 0",300,1.856569476666667,1.7679513765,1.946890341666667
-instruct,wildchat,user,"entropy user slot (user@user), all tokens",300,1.64422393,1.5399472868333333,1.7474317580833334
-instruct,wildchat,user,"entropy assistant slot (user@asst), all tokens",300,1.62586637,1.5276263505833334,1.7254574896666668
-instruct,wildchat,user,"entropy plain (no slot) (user@plain), all tokens",300,1.9363819066666668,1.8461436935833333,2.0273619896666664
-instruct,oasst1,user,NLL user slot (user@user),300,3.0486947333333334,2.9643158789166666,3.1314544208333333
-instruct,oasst1,user,NLL assistant slot (user@asst),300,3.175776406666667,3.0912233853333335,3.2600291098333334
-instruct,oasst1,user,NLL plain (no slot) (user@plain),300,3.4227856199999995,3.3327097786666666,3.5147442124166663
-instruct,oasst1,user,"slot effect, excl. position 0",300,-0.045340316666666665,-0.0635101098333333,-0.028031480249999994
-instruct,oasst1,user,"slot effect, all tokens",300,-0.12708167333333334,-0.14509726933333333,-0.10890259933333334
-instruct,oasst1,user,role-specific (user@user - user@plain),300,-0.37409088666666673,-0.40616643275000003,-0.3432182593333334
-instruct,oasst1,user,"entropy user slot (user@user), excl. position 0",300,2.0998172299999998,2.0418881811666663,2.1578069041666668
-instruct,oasst1,user,"entropy assistant slot (user@asst), excl. position 0",300,2.0695452133333334,2.0111058783333333,2.1280217412499995
-instruct,oasst1,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.00136909,1.9446055419166666,2.058616187416667
-instruct,oasst1,user,"entropy user slot (user@user), all tokens",300,2.168660576666667,2.111294155,2.226477042
-instruct,oasst1,user,"entropy assistant slot (user@asst), all tokens",300,2.0364192566666666,1.9783824211666665,2.0939190733333333
-instruct,oasst1,user,"entropy plain (no slot) (user@plain), all tokens",300,2.1179842566666665,2.0624029365833327,2.1744300205
-instruct,wildchat,assistant,NLL user slot (asst@user),300,2.502648876666666,2.420383567166667,2.5901175199166664
-instruct,wildchat,assistant,NLL assistant slot (asst@asst),300,2.602328206666667,2.514788858666667,2.6924658163333333
-instruct,wildchat,assistant,NLL plain (no slot) (asst@plain),300,2.6752752533333335,2.5874016085833333,2.7658507525833333
-instruct,wildchat,assistant,"slot effect, excl. position 0",300,-0.07722086666666667,-0.10129099791666664,-0.053307876333333344
-instruct,wildchat,assistant,"slot effect, all tokens",300,-0.09967933000000001,-0.123637135,-0.07637694433333336
-instruct,wildchat,assistant,role-specific (asst@asst - asst@plain),300,-0.07294704666666668,-0.10458174833333334,-0.041911330916666684
-instruct,wildchat,assistant,"entropy user slot (asst@user), excl. position 0",300,1.4541985866666667,1.3928871285000002,1.5163134875
-instruct,wildchat,assistant,"entropy assistant slot (asst@asst), excl. position 0",300,1.3620960833333333,1.3077339774166665,1.4183755695833333
-instruct,wildchat,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",300,1.5232778933333333,1.462610400916667,1.5862861174166667
-instruct,wildchat,assistant,"entropy user slot (asst@user), all tokens",300,1.4928587533333333,1.4306124290000002,1.5555707190833334
-instruct,wildchat,assistant,"entropy assistant slot (asst@asst), all tokens",300,1.35408966,1.3013448233333331,1.4086368220833332
-instruct,wildchat,assistant,"entropy plain (no slot) (asst@plain), all tokens",300,1.5822194733333332,1.5197387814166665,1.6461526732500003
-instruct,olmo-instruct,assistant,NLL user slot (asst@user),290,1.630760951724138,1.554086087586207,1.7117008148275863
-instruct,olmo-instruct,assistant,NLL assistant slot (asst@asst),290,1.5662695827586206,1.4877292327586207,1.6501545919827587
-instruct,olmo-instruct,assistant,NLL plain (no slot) (asst@plain),290,1.7944999862068964,1.7156358216379313,1.8780392609482754
-instruct,olmo-instruct,assistant,"slot effect, excl. position 0",290,0.06648707586206898,0.048111754999999985,0.0845451499137931
-instruct,olmo-instruct,assistant,"slot effect, all tokens",290,0.06449136896551723,0.04743448456896551,0.08151295362068965
-instruct,olmo-instruct,assistant,role-specific (asst@asst - asst@plain),290,-0.22823040344827583,-0.25242404655172407,-0.20395765422413795
-instruct,olmo-instruct,assistant,"entropy user slot (asst@user), excl. position 0",290,1.295987827586207,1.2490863513793105,1.345781392327586
-instruct,olmo-instruct,assistant,"entropy assistant slot (asst@asst), excl. position 0",290,1.2580774758620688,1.213891852586207,1.3059828029310343
-instruct,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",290,1.3816497931034484,1.3322970610344829,1.433345434827586
-instruct,olmo-instruct,assistant,"entropy user slot (asst@user), all tokens",290,1.3172795000000002,1.2693199943965516,1.3675228150862069
-instruct,olmo-instruct,assistant,"entropy assistant slot (asst@asst), all tokens",290,1.2548248068965515,1.211586973103448,1.3004153685344828
-instruct,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), all tokens",290,1.413407924137931,1.3630082931896552,1.467648791810345
+base,wildchat,user,"NLL user slot (user@user), excl. position 0",300,2.792995956666667,2.6862059885000003,2.8975708607499997
+base,wildchat,user,"NLL assistant slot (user@asst), excl. position 0",300,2.7944214233333335,2.6860625555833337,2.9017805264166667
+base,wildchat,user,"NLL plain (no slot) (user@plain), excl. position 0",300,2.9621965733333333,2.8538763485000005,3.0711895058333334
+base,wildchat,user,"NLL user slot (user@user), all tokens",300,2.886832843333333,2.7772234591666667,2.999705704166667
+base,wildchat,user,"NLL assistant slot (user@asst), all tokens",300,2.89289488,2.784401732583333,3.003247448083333
+base,wildchat,user,"NLL plain (no slot) (user@plain), all tokens",300,3.0515394066666666,2.9429734101666667,3.1660540210833332
+base,wildchat,user,"slot effect, excl. position 0",300,-0.0014254666666666661,-0.005854447333333329,0.002791609583333322
+base,wildchat,user,"slot effect, all tokens",300,-0.006062036666666641,-0.009794405916666636,-0.0024494512499999652
+base,wildchat,user,"role-specific (user@user - user@plain), excl. position 0",300,-0.1692006166666667,-0.19553465933333336,-0.14417942800000005
+base,wildchat,user,"role-specific (user@user - user@plain), all tokens",300,-0.16470656333333333,-0.18944020658333335,-0.14055986125000003
+base,wildchat,user,"entropy user slot (user@user), excl. position 0",300,2.6535419866666667,2.566844472166667,2.744212017666667
+base,wildchat,user,"entropy assistant slot (user@asst), excl. position 0",300,2.6385221700000003,2.5500001712500002,2.7260480129999998
+base,wildchat,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.655558393333333,2.57281905425,2.7401458122499998
+base,wildchat,user,"entropy user slot (user@user), all tokens",300,2.712959463333333,2.6234974568333334,2.8001334669166664
+base,wildchat,user,"entropy assistant slot (user@asst), all tokens",300,2.67295449,2.58664365375,2.7604582465833336
+base,wildchat,user,"entropy plain (no slot) (user@plain), all tokens",300,2.739864396666667,2.6545562730000003,2.82617443025
+base,oasst1,user,"NLL user slot (user@user), excl. position 0",300,2.670651416666667,2.595614937,2.7464769180000004
+base,oasst1,user,"NLL assistant slot (user@asst), excl. position 0",300,2.69406725,2.621501597666667,2.7682986251666666
+base,oasst1,user,"NLL plain (no slot) (user@plain), excl. position 0",300,2.8726052733333334,2.7936739585000003,2.9550631705833332
+base,oasst1,user,"NLL user slot (user@user), all tokens",300,2.7649648233333335,2.6905321605833334,2.84002822725
+base,oasst1,user,"NLL assistant slot (user@asst), all tokens",300,2.78681354,2.713530239833333,2.860442293666667
+base,oasst1,user,"NLL plain (no slot) (user@plain), all tokens",300,2.9695346166666665,2.8899516139166663,3.0498466097500003
+base,oasst1,user,"slot effect, excl. position 0",300,-0.023415833333333334,-0.02868959549999999,-0.01846229166666666
+base,oasst1,user,"slot effect, all tokens",300,-0.02184871666666667,-0.026157794999999998,-0.01771648675
+base,oasst1,user,"role-specific (user@user - user@plain), excl. position 0",300,-0.20195385666666668,-0.22343638466666674,-0.18077511525000003
+base,oasst1,user,"role-specific (user@user - user@plain), all tokens",300,-0.20456979333333333,-0.22467177116666667,-0.18428494374999999
+base,oasst1,user,"entropy user slot (user@user), excl. position 0",300,2.6364697033333333,2.57310949875,2.6987794575833335
+base,oasst1,user,"entropy assistant slot (user@asst), excl. position 0",300,2.6171994799999996,2.5532567528333336,2.680936502166667
+base,oasst1,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.6881804899999997,2.6245952245833335,2.751084752
+base,oasst1,user,"entropy user slot (user@user), all tokens",300,2.726961063333333,2.664868976,2.7889299775
+base,oasst1,user,"entropy assistant slot (user@asst), all tokens",300,2.671949023333333,2.609106631666667,2.7329894715
+base,oasst1,user,"entropy plain (no slot) (user@plain), all tokens",300,2.81370744,2.7514824834166665,2.8752100787500003
+base,wildchat,assistant,"NLL user slot (asst@user), excl. position 0",300,1.9840462200000002,1.90416699625,2.0702975670833332
+base,wildchat,assistant,"NLL assistant slot (asst@asst), excl. position 0",300,1.9803357766666667,1.9003683149166668,2.0647122247499996
+base,wildchat,assistant,"NLL plain (no slot) (asst@plain), excl. position 0",300,2.11512236,2.027815857083333,2.2089228464999997
+base,wildchat,assistant,"NLL user slot (asst@user), all tokens",300,2.0410315399999996,1.959692484166667,2.1251285836666667
+base,wildchat,assistant,"NLL assistant slot (asst@asst), all tokens",300,2.0356538166666667,1.9545872143333332,2.1185693463333335
+base,wildchat,assistant,"NLL plain (no slot) (asst@plain), all tokens",300,2.1788447000000004,2.0919683395833335,2.27115309275
+base,wildchat,assistant,"slot effect, excl. position 0",300,0.00371044333333333,0.0010343520000000062,0.006365619749999991
+base,wildchat,assistant,"slot effect, all tokens",300,0.0053777233333333315,0.0028782243333333388,0.0077885793333333266
+base,wildchat,assistant,"role-specific (asst@asst - asst@plain), excl. position 0",300,-0.13478658333333332,-0.15601886716666663,-0.11561664650000002
+base,wildchat,assistant,"role-specific (asst@asst - asst@plain), all tokens",300,-0.1431908833333333,-0.16339985291666667,-0.12405468366666661
+base,wildchat,assistant,"entropy user slot (asst@user), excl. position 0",300,1.9115365133333333,1.8392443605000002,1.9864732023333331
+base,wildchat,assistant,"entropy assistant slot (asst@asst), excl. position 0",300,1.8840862033333334,1.8119548205833333,1.956644447
+base,wildchat,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",300,2.0200682199999997,1.94494302075,2.097063818916667
+base,wildchat,assistant,"entropy user slot (asst@user), all tokens",300,1.9610695766666666,1.888561559416667,2.039113851083333
+base,wildchat,assistant,"entropy assistant slot (asst@asst), all tokens",300,1.9169434933333331,1.8442647456666668,1.9914433395833335
+base,wildchat,assistant,"entropy plain (no slot) (asst@plain), all tokens",300,2.0847254833333335,2.0046564825,2.16528530825
+base,olmo-instruct,assistant,"NLL user slot (asst@user), excl. position 0",290,1.720794079310345,1.6607439336206897,1.785497220172414
+base,olmo-instruct,assistant,"NLL assistant slot (asst@asst), excl. position 0",290,1.718403227586207,1.6574633133620689,1.781883925948276
+base,olmo-instruct,assistant,"NLL plain (no slot) (asst@plain), excl. position 0",290,1.8062306034482758,1.7401060310344827,1.8765180855172414
+base,olmo-instruct,assistant,"NLL user slot (asst@user), all tokens",290,1.7575766827586208,1.6955562623275862,1.8226219034482758
+base,olmo-instruct,assistant,"NLL assistant slot (asst@asst), all tokens",290,1.754773248275862,1.6931566987931033,1.8239161281896552
+base,olmo-instruct,assistant,"NLL plain (no slot) (asst@plain), all tokens",290,1.8458623689655171,1.7768149202586205,1.9196373551724137
+base,olmo-instruct,assistant,"slot effect, excl. position 0",290,0.0023908517241379296,0.000564530172413793,0.004404717758620686
+base,olmo-instruct,assistant,"slot effect, all tokens",290,0.002803434482758632,0.0009417451724138049,0.004765157241379324
+base,olmo-instruct,assistant,"role-specific (asst@asst - asst@plain), excl. position 0",290,-0.08782737586206898,-0.1049892423275862,-0.07229906801724137
+base,olmo-instruct,assistant,"role-specific (asst@asst - asst@plain), all tokens",290,-0.09108912068965518,-0.10741560241379312,-0.07601421086206898
+base,olmo-instruct,assistant,"entropy user slot (asst@user), excl. position 0",290,1.7864422137931033,1.7307634275,1.8469558475862067
+base,olmo-instruct,assistant,"entropy assistant slot (asst@asst), excl. position 0",290,1.7701397310344826,1.714924235,1.8268420174137932
+base,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",290,1.7926418448275865,1.7306785043965516,1.8563818837931036
+base,olmo-instruct,assistant,"entropy user slot (asst@user), all tokens",290,1.8131532000000001,1.756822548362069,1.8721653843965516
+base,olmo-instruct,assistant,"entropy assistant slot (asst@asst), all tokens",290,1.7880848896551724,1.7319523206034482,1.8476471906896552
+base,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), all tokens",290,1.827698031034483,1.7637975096551726,1.8946462061206895
+sft,wildchat,user,"NLL user slot (user@user), excl. position 0",300,2.3270676733333335,2.1847125878333333,2.4740434281666666
+sft,wildchat,user,"NLL assistant slot (user@asst), excl. position 0",300,2.3312224599999998,2.1904308214999997,2.4746029792499997
+sft,wildchat,user,"NLL plain (no slot) (user@plain), excl. position 0",300,2.74767763,2.602812431833333,2.8939565803333327
+sft,wildchat,user,"NLL user slot (user@user), all tokens",300,2.4106560333333333,2.2636913423333334,2.5567261460833333
+sft,wildchat,user,"NLL assistant slot (user@asst), all tokens",300,2.66943247,2.5117775717499997,2.8237499385833336
+sft,wildchat,user,"NLL plain (no slot) (user@plain), all tokens",300,2.8476690833333334,2.7017894497500006,2.9949678635
+sft,wildchat,user,"slot effect, excl. position 0",300,-0.00415478666666666,-0.014615533833333336,0.006573515166666679
+sft,wildchat,user,"slot effect, all tokens",300,-0.2587764366666667,-0.2821816425833334,-0.23565391449999998
+sft,wildchat,user,"role-specific (user@user - user@plain), excl. position 0",300,-0.4206099566666667,-0.4606232831666667,-0.38224051200000003
+sft,wildchat,user,"role-specific (user@user - user@plain), all tokens",300,-0.43701305000000007,-0.47630009316666666,-0.39889787300000007
+sft,wildchat,user,"entropy user slot (user@user), excl. position 0",300,1.8579461333333331,1.74484308675,1.9755680190833331
+sft,wildchat,user,"entropy assistant slot (user@asst), excl. position 0",300,1.8960036266666664,1.7815900327500003,2.0116114080833336
+sft,wildchat,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.1544217733333335,2.0605097583333336,2.250993814416667
+sft,wildchat,user,"entropy user slot (user@user), all tokens",300,1.9077623333333331,1.7905706046666667,2.0230287275
+sft,wildchat,user,"entropy assistant slot (user@asst), all tokens",300,1.8533606666666667,1.74062829175,1.9652350688333338
+sft,wildchat,user,"entropy plain (no slot) (user@plain), all tokens",300,2.2389304733333333,2.1437468649166664,2.3377993167499995
+sft,oasst1,user,"NLL user slot (user@user), excl. position 0",300,2.849252423333333,2.7698553035,2.9297892565
+sft,oasst1,user,"NLL assistant slot (user@asst), excl. position 0",300,2.849693766666667,2.769955851666667,2.930330881416667
+sft,oasst1,user,"NLL plain (no slot) (user@plain), excl. position 0",300,3.1345720066666667,3.0487500539166668,3.2232439859166666
+sft,oasst1,user,"NLL user slot (user@user), all tokens",300,2.915632186666667,2.8374537686666668,2.9969023146666665
+sft,oasst1,user,"NLL assistant slot (user@asst), all tokens",300,3.304198786666667,3.2170228821666664,3.3891071312500003
+sft,oasst1,user,"NLL plain (no slot) (user@plain), all tokens",300,3.2451863899999998,3.1569032555,3.3305308861666663
+sft,oasst1,user,"slot effect, excl. position 0",300,-0.00044134333333333535,-0.009903444333333344,0.008848429666666673
+sft,oasst1,user,"slot effect, all tokens",300,-0.3885666,-0.41155896283333326,-0.3652318093333333
+sft,oasst1,user,"role-specific (user@user - user@plain), excl. position 0",300,-0.2853195833333333,-0.3131723305,-0.2577853647500001
+sft,oasst1,user,"role-specific (user@user - user@plain), all tokens",300,-0.3295542033333333,-0.3574730728333333,-0.30260365883333334
+sft,oasst1,user,"entropy user slot (user@user), excl. position 0",300,2.38008304,2.3188182315,2.4419672085833333
+sft,oasst1,user,"entropy assistant slot (user@asst), excl. position 0",300,2.385966633333333,2.32468819325,2.4464313208333333
+sft,oasst1,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.280090943333333,2.2211605806666666,2.3380883029166672
+sft,oasst1,user,"entropy user slot (user@user), all tokens",300,2.4444150966666665,2.3853008315833337,2.50320688675
+sft,oasst1,user,"entropy assistant slot (user@asst), all tokens",300,2.31838651,2.2592020561666666,2.3762628366666667
+sft,oasst1,user,"entropy plain (no slot) (user@plain), all tokens",300,2.4045077066666667,2.3477760099166667,2.462291878916666
+sft,wildchat,assistant,"NLL user slot (asst@user), excl. position 0",300,2.1684164066666667,2.0890624840833336,2.25116752825
+sft,wildchat,assistant,"NLL assistant slot (asst@asst), excl. position 0",300,2.0813462366666666,2.0014378409999996,2.1639795886666664
+sft,wildchat,assistant,"NLL plain (no slot) (asst@plain), excl. position 0",300,2.353217893333333,2.264745613666667,2.44692266775
+sft,wildchat,assistant,"NLL user slot (asst@user), all tokens",300,2.2286739800000004,2.1479865995000003,2.312699885
+sft,wildchat,assistant,"NLL assistant slot (asst@asst), all tokens",300,2.305943006666667,2.214064514666667,2.396909247666667
+sft,wildchat,assistant,"NLL plain (no slot) (asst@plain), all tokens",300,2.4196016033333336,2.328861196,2.5129128025833336
+sft,wildchat,assistant,"slot effect, excl. position 0",300,0.08707017,0.07625886991666667,0.09792565041666666
+sft,wildchat,assistant,"slot effect, all tokens",300,-0.07726902666666667,-0.09256716216666665,-0.06259806416666668
+sft,wildchat,assistant,"role-specific (asst@asst - asst@plain), excl. position 0",300,-0.2718716566666667,-0.29840440683333336,-0.2471014433333333
+sft,wildchat,assistant,"role-specific (asst@asst - asst@plain), all tokens",300,-0.11365859666666665,-0.13706673975,-0.09144087575000003
+sft,wildchat,assistant,"entropy user slot (asst@user), excl. position 0",300,1.7548087533333334,1.6889963969999997,1.8234860780833335
+sft,wildchat,assistant,"entropy assistant slot (asst@asst), excl. position 0",300,1.6501676266666667,1.5862496265,1.7189361784166666
+sft,wildchat,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",300,1.7207233233333332,1.6511123195833333,1.7927883408333334
+sft,wildchat,assistant,"entropy user slot (asst@user), all tokens",300,1.7906928766666665,1.7219950804166668,1.8583154969999995
+sft,wildchat,assistant,"entropy assistant slot (asst@asst), all tokens",300,1.6253654199999998,1.5618901593333332,1.6882999285833333
+sft,wildchat,assistant,"entropy plain (no slot) (asst@plain), all tokens",300,1.783765423333333,1.7109486034166665,1.8584848486666665
+sft,olmo-instruct,assistant,"NLL user slot (asst@user), excl. position 0",290,1.5735621137931035,1.5074751517241378,1.642670684137931
+sft,olmo-instruct,assistant,"NLL assistant slot (asst@asst), excl. position 0",290,1.4569594827586205,1.3923479888793104,1.526375473534483
+sft,olmo-instruct,assistant,"NLL plain (no slot) (asst@plain), excl. position 0",290,1.707387975862069,1.6380612119827584,1.779663072672414
+sft,olmo-instruct,assistant,"NLL user slot (asst@user), all tokens",290,1.6157169896551724,1.5477479488793104,1.6875110349137932
+sft,olmo-instruct,assistant,"NLL assistant slot (asst@asst), all tokens",290,1.5766613896551724,1.5018935606034485,1.6555958002586206
+sft,olmo-instruct,assistant,"NLL plain (no slot) (asst@plain), all tokens",290,1.7497072172413795,1.6762018938793104,1.8258696144827589
+sft,olmo-instruct,assistant,"slot effect, excl. position 0",290,0.11660263103448276,0.10501540025862069,0.12887725586206894
+sft,olmo-instruct,assistant,"slot effect, all tokens",290,0.0390556,0.02570304991379312,0.05199444241379309
+sft,olmo-instruct,assistant,"role-specific (asst@asst - asst@plain), excl. position 0",290,-0.2504284931034483,-0.27281482870689655,-0.2290795505172414
+sft,olmo-instruct,assistant,"role-specific (asst@asst - asst@plain), all tokens",290,-0.1730458275862069,-0.19452405353448277,-0.15260597137931037
+sft,olmo-instruct,assistant,"entropy user slot (asst@user), excl. position 0",290,1.5513467172413793,1.501084830775862,1.6041468151724139
+sft,olmo-instruct,assistant,"entropy assistant slot (asst@asst), excl. position 0",290,1.4949948413793104,1.445061201637931,1.5476686672413793
+sft,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",290,1.565512748275862,1.5135375800862068,1.6200909070689653
+sft,olmo-instruct,assistant,"entropy user slot (asst@user), all tokens",290,1.5714811103448276,1.520278347672414,1.6266661740517239
+sft,olmo-instruct,assistant,"entropy assistant slot (asst@asst), all tokens",290,1.4834589137931034,1.4350423638793104,1.5341799914655174
+sft,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), all tokens",290,1.5995061103448276,1.5452432931034483,1.6575922106896548
+dpo,wildchat,user,"NLL user slot (user@user), excl. position 0",300,2.4700532833333333,2.3210991917500006,2.6230152527499997
+dpo,wildchat,user,"NLL assistant slot (user@asst), excl. position 0",300,2.510743173333333,2.3608131739166667,2.659787715333333
+dpo,wildchat,user,"NLL plain (no slot) (user@plain), excl. position 0",300,2.856835896666667,2.7044795801666672,3.006260601083333
+dpo,wildchat,user,"NLL user slot (user@user), all tokens",300,2.551848816666667,2.3969175634999997,2.71023612375
+dpo,wildchat,user,"NLL assistant slot (user@asst), all tokens",300,2.678757576666667,2.5255794775,2.828866012833333
+dpo,wildchat,user,"NLL plain (no slot) (user@plain), all tokens",300,2.9577481,2.8098641417500003,3.1075197763333335
+dpo,wildchat,user,"slot effect, excl. position 0",300,-0.040689889999999986,-0.05840306116666667,-0.023069621499999995
+dpo,wildchat,user,"slot effect, all tokens",300,-0.12690875999999998,-0.1454995274166667,-0.10888558816666666
+dpo,wildchat,user,"role-specific (user@user - user@plain), excl. position 0",300,-0.38678261333333336,-0.42921379699999995,-0.34547418575
+dpo,wildchat,user,"role-specific (user@user - user@plain), all tokens",300,-0.40589928333333336,-0.4487814281666667,-0.3663245881666667
+dpo,wildchat,user,"entropy user slot (user@user), excl. position 0",300,1.7492749366666664,1.63825318,1.8608653040833334
+dpo,wildchat,user,"entropy assistant slot (user@asst), excl. position 0",300,1.7932172233333334,1.6823222709999999,1.9012893345833335
+dpo,wildchat,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.0762592966666666,1.9797167174999997,2.172444520083333
+dpo,wildchat,user,"entropy user slot (user@user), all tokens",300,1.79998576,1.689327622,1.912027639666667
+dpo,wildchat,user,"entropy assistant slot (user@asst), all tokens",300,1.7598118,1.651917666,1.8649956056666663
+dpo,wildchat,user,"entropy plain (no slot) (user@plain), all tokens",300,2.1577231866666664,2.0582429519166667,2.2564025587499996
+dpo,oasst1,user,"NLL user slot (user@user), excl. position 0",300,2.958384416666667,2.87458239625,3.0433334345
+dpo,oasst1,user,"NLL assistant slot (user@asst), excl. position 0",300,2.995246666666667,2.9100033201666666,3.0794303745
+dpo,oasst1,user,"NLL plain (no slot) (user@plain), excl. position 0",300,3.261296976666667,3.171940623166667,3.3520719513333335
+dpo,oasst1,user,"NLL user slot (user@user), all tokens",300,3.0219911533333335,2.9382759993333334,3.104399229166667
+dpo,oasst1,user,"NLL assistant slot (user@asst), all tokens",300,3.17686436,3.0911140483333335,3.2657655254999995
+dpo,oasst1,user,"NLL plain (no slot) (user@plain), all tokens",300,3.369329046666667,3.2807174626666664,3.458715092333333
+dpo,oasst1,user,"slot effect, excl. position 0",300,-0.036862250000000006,-0.05228125916666666,-0.021568953249999988
+dpo,oasst1,user,"slot effect, all tokens",300,-0.15487320666666668,-0.17207119466666668,-0.13777732358333336
+dpo,oasst1,user,"role-specific (user@user - user@plain), excl. position 0",300,-0.30291256000000005,-0.33304565091666666,-0.27358460708333343
+dpo,oasst1,user,"role-specific (user@user - user@plain), all tokens",300,-0.3473378933333333,-0.37705382775,-0.31773423416666663
+dpo,oasst1,user,"entropy user slot (user@user), excl. position 0",300,2.2526587566666665,2.192920667,2.3129582198333334
+dpo,oasst1,user,"entropy assistant slot (user@asst), excl. position 0",300,2.2194751866666667,2.1585865188333333,2.2803486908333332
+dpo,oasst1,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.1776990766666664,2.1198193111666668,2.2382165699166667
+dpo,oasst1,user,"entropy user slot (user@user), all tokens",300,2.3185174666666666,2.260333516666667,2.3764142866666664
+dpo,oasst1,user,"entropy assistant slot (user@asst), all tokens",300,2.1665127533333335,2.1070612212500004,2.224932367666667
+dpo,oasst1,user,"entropy plain (no slot) (user@plain), all tokens",300,2.298257323333333,2.2380717185,2.3575083079166665
+dpo,wildchat,assistant,"NLL user slot (asst@user), excl. position 0",300,2.40459291,2.3222995511666666,2.4880821208333335
+dpo,wildchat,assistant,"NLL assistant slot (asst@asst), excl. position 0",300,2.469905386666667,2.3831858336666665,2.55577496825
+dpo,wildchat,assistant,"NLL plain (no slot) (asst@plain), excl. position 0",300,2.5562554933333335,2.4684670890833336,2.6477285485
+dpo,wildchat,assistant,"NLL user slot (asst@user), all tokens",300,2.46295002,2.37849476275,2.5484278030000005
+dpo,wildchat,assistant,"NLL assistant slot (asst@asst), all tokens",300,2.56805253,2.479969549083333,2.6609330303333336
+dpo,wildchat,assistant,"NLL plain (no slot) (asst@plain), all tokens",300,2.6233131766666666,2.533366354166667,2.7192156644166667
+dpo,wildchat,assistant,"slot effect, excl. position 0",300,-0.06531247666666667,-0.08825126441666667,-0.04304924733333337
+dpo,wildchat,assistant,"slot effect, all tokens",300,-0.10510251000000001,-0.12684581050000004,-0.08373866783333335
+dpo,wildchat,assistant,"role-specific (asst@asst - asst@plain), excl. position 0",300,-0.08635010666666668,-0.11884377566666668,-0.05534805433333335
+dpo,wildchat,assistant,"role-specific (asst@asst - asst@plain), all tokens",300,-0.05526064666666666,-0.08416921749999999,-0.025872094916666685
+dpo,wildchat,assistant,"entropy user slot (asst@user), excl. position 0",300,1.5898494300000003,1.5246051568333332,1.6582308938333332
+dpo,wildchat,assistant,"entropy assistant slot (asst@asst), excl. position 0",300,1.4823579066666666,1.4211618275833335,1.5438256859166666
+dpo,wildchat,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",300,1.6839735366666666,1.6135480235,1.7546359801666667
+dpo,wildchat,assistant,"entropy user slot (asst@user), all tokens",300,1.6270303199999998,1.5579994211666668,1.6962020984999997
+dpo,wildchat,assistant,"entropy assistant slot (asst@asst), all tokens",300,1.4650817166666665,1.4055491043333335,1.52658209475
+dpo,wildchat,assistant,"entropy plain (no slot) (asst@plain), all tokens",300,1.7445586399999997,1.674522751916667,1.8195820768333333
+dpo,olmo-instruct,assistant,"NLL user slot (asst@user), excl. position 0",290,1.5946556448275861,1.522975824051724,1.671393939224138
+dpo,olmo-instruct,assistant,"NLL assistant slot (asst@asst), excl. position 0",290,1.5257308827586207,1.45051416,1.6043707857758622
+dpo,olmo-instruct,assistant,"NLL plain (no slot) (asst@plain), excl. position 0",290,1.744498544827586,1.6703008304310345,1.8220624128448275
+dpo,olmo-instruct,assistant,"NLL user slot (asst@user), all tokens",290,1.6369760551724135,1.5618212375,1.7165968276724137
+dpo,olmo-instruct,assistant,"NLL assistant slot (asst@asst), all tokens",290,1.5792323034482758,1.501971284051724,1.6613572465517241
+dpo,olmo-instruct,assistant,"NLL plain (no slot) (asst@plain), all tokens",290,1.7873696241379313,1.7108744457758622,1.8676795149137932
+dpo,olmo-instruct,assistant,"slot effect, excl. position 0",290,0.06892476206896553,0.05215133750000001,0.08589368810344827
+dpo,olmo-instruct,assistant,"slot effect, all tokens",290,0.057743751724137926,0.0410183926724138,0.07391805224137932
+dpo,olmo-instruct,assistant,"role-specific (asst@asst - asst@plain), excl. position 0",290,-0.2187676620689655,-0.24300750629310344,-0.19522512655172417
+dpo,olmo-instruct,assistant,"role-specific (asst@asst - asst@plain), all tokens",290,-0.20813732068965518,-0.23172537241379304,-0.18445516448275864
+dpo,olmo-instruct,assistant,"entropy user slot (asst@user), excl. position 0",290,1.4238413896551723,1.373092481724138,1.4781143471551725
+dpo,olmo-instruct,assistant,"entropy assistant slot (asst@asst), excl. position 0",290,1.3685325137931033,1.3190470877586205,1.4207652362068965
+dpo,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",290,1.5213605413793105,1.466951316551724,1.5781407050862069
+dpo,olmo-instruct,assistant,"entropy user slot (asst@user), all tokens",290,1.444511644827586,1.3922177996551721,1.4986663298275862
+dpo,olmo-instruct,assistant,"entropy assistant slot (asst@asst), all tokens",290,1.3606139379310345,1.3136648800000001,1.4101817118965516
+dpo,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), all tokens",290,1.5542085344827588,1.498214948275862,1.6134021136206895
+instruct,wildchat,user,"NLL user slot (user@user), excl. position 0",300,2.5002760066666663,2.3490875875,2.65455183725
+instruct,wildchat,user,"NLL assistant slot (user@asst), excl. position 0",300,2.5491924133333335,2.394676903833333,2.6967003440833333
+instruct,wildchat,user,"NLL plain (no slot) (user@plain), excl. position 0",300,2.9123360266666665,2.759723593083333,3.065222064666666
+instruct,wildchat,user,"NLL user slot (user@user), all tokens",300,2.58175167,2.4289298647499997,2.7333968854999995
+instruct,wildchat,user,"NLL assistant slot (user@asst), all tokens",300,2.694349026666667,2.543019758583333,2.844739307916666
+instruct,wildchat,user,"NLL plain (no slot) (user@plain), all tokens",300,3.011305126666667,2.8591305743333333,3.1615553905000002
+instruct,wildchat,user,"slot effect, excl. position 0",300,-0.04891640666666664,-0.06887957649999996,-0.029454108749999992
+instruct,wildchat,user,"slot effect, all tokens",300,-0.11259735666666666,-0.13241097016666667,-0.09250339891666669
+instruct,wildchat,user,"role-specific (user@user - user@plain), excl. position 0",300,-0.41206001999999997,-0.4551605005833333,-0.3715325765833334
+instruct,wildchat,user,"role-specific (user@user - user@plain), all tokens",300,-0.42955345666666667,-0.47107575675,-0.3886813758333334
+instruct,wildchat,user,"entropy user slot (user@user), excl. position 0",300,1.5910777600000001,1.4877597633333335,1.69767488575
+instruct,wildchat,user,"entropy assistant slot (user@asst), excl. position 0",300,1.64527262,1.5410518371666664,1.7468735219999998
+instruct,wildchat,user,"entropy plain (no slot) (user@plain), excl. position 0",300,1.856569476666667,1.7661327299999998,1.94559833575
+instruct,wildchat,user,"entropy user slot (user@user), all tokens",300,1.64422393,1.5382686051666667,1.7489699752499999
+instruct,wildchat,user,"entropy assistant slot (user@asst), all tokens",300,1.62586637,1.529562194833333,1.724946068583333
+instruct,wildchat,user,"entropy plain (no slot) (user@plain), all tokens",300,1.9363819066666668,1.8457185868333335,2.0262190380833336
+instruct,oasst1,user,"NLL user slot (user@user), excl. position 0",300,2.985969493333333,2.8998404087499994,3.0717735509166664
+instruct,oasst1,user,"NLL assistant slot (user@asst), excl. position 0",300,3.03130981,2.946241821583333,3.116812133416667
+instruct,oasst1,user,"NLL plain (no slot) (user@plain), excl. position 0",300,3.3191158566666665,3.2294472929999998,3.4121369130833337
+instruct,oasst1,user,"NLL user slot (user@user), all tokens",300,3.0486947333333334,2.9642235099166667,3.1326153074999996
+instruct,oasst1,user,"NLL assistant slot (user@asst), all tokens",300,3.175776406666667,3.0912418474166667,3.261234508166667
+instruct,oasst1,user,"NLL plain (no slot) (user@plain), all tokens",300,3.4227856199999995,3.3341713748333337,3.5139009785000006
+instruct,oasst1,user,"slot effect, excl. position 0",300,-0.045340316666666665,-0.06312016208333336,-0.027645567833333325
+instruct,oasst1,user,"slot effect, all tokens",300,-0.12708167333333334,-0.1453640111666667,-0.10917341758333333
+instruct,oasst1,user,"role-specific (user@user - user@plain), excl. position 0",300,-0.3331463633333333,-0.3652363745833333,-0.30138575866666667
+instruct,oasst1,user,"role-specific (user@user - user@plain), all tokens",300,-0.37409088666666673,-0.4062378665,-0.3423535266666667
+instruct,oasst1,user,"entropy user slot (user@user), excl. position 0",300,2.0998172299999998,2.0404540740833332,2.1579672828333334
+instruct,oasst1,user,"entropy assistant slot (user@asst), excl. position 0",300,2.0695452133333334,2.0114544111666666,2.129309088416666
+instruct,oasst1,user,"entropy plain (no slot) (user@plain), excl. position 0",300,2.00136909,1.9458566330833331,2.057784036916667
+instruct,oasst1,user,"entropy user slot (user@user), all tokens",300,2.168660576666667,2.1105006065,2.225298496833333
+instruct,oasst1,user,"entropy assistant slot (user@asst), all tokens",300,2.0364192566666666,1.9795618815833333,2.0941889708333328
+instruct,oasst1,user,"entropy plain (no slot) (user@plain), all tokens",300,2.1179842566666665,2.0625140599166665,2.173769138833333
+instruct,wildchat,assistant,"NLL user slot (asst@user), excl. position 0",300,2.4446280366666664,2.362957025,2.5290208171666664
+instruct,wildchat,assistant,"NLL assistant slot (asst@asst), excl. position 0",300,2.521848903333334,2.4344112664166664,2.6097206826666666
+instruct,wildchat,assistant,"NLL plain (no slot) (asst@plain), excl. position 0",300,2.61120565,2.5213722288333336,2.7039865446666664
+instruct,wildchat,assistant,"NLL user slot (asst@user), all tokens",300,2.502648876666666,2.419638184583334,2.5883255594166665
+instruct,wildchat,assistant,"NLL assistant slot (asst@asst), all tokens",300,2.602328206666667,2.5132248057499997,2.692213854833333
+instruct,wildchat,assistant,"NLL plain (no slot) (asst@plain), all tokens",300,2.6752752533333335,2.585142188,2.768899209
+instruct,wildchat,assistant,"slot effect, excl. position 0",300,-0.07722086666666667,-0.10131957491666665,-0.05369435583333332
+instruct,wildchat,assistant,"slot effect, all tokens",300,-0.09967933000000001,-0.12298744966666669,-0.07700045150000001
+instruct,wildchat,assistant,"role-specific (asst@asst - asst@plain), excl. position 0",300,-0.08935674666666667,-0.12214743941666666,-0.056788449166666664
+instruct,wildchat,assistant,"role-specific (asst@asst - asst@plain), all tokens",300,-0.07294704666666668,-0.10477620750000002,-0.04245948950000001
+instruct,wildchat,assistant,"entropy user slot (asst@user), excl. position 0",300,1.4541985866666667,1.3935628674166667,1.5164131620833334
+instruct,wildchat,assistant,"entropy assistant slot (asst@asst), excl. position 0",300,1.3620960833333333,1.3077317491666667,1.4185526823333334
+instruct,wildchat,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",300,1.5232778933333333,1.4627106380833335,1.5852738032499998
+instruct,wildchat,assistant,"entropy user slot (asst@user), all tokens",300,1.4928587533333333,1.4329331840833335,1.5566255441666668
+instruct,wildchat,assistant,"entropy assistant slot (asst@asst), all tokens",300,1.35408966,1.3002572414166669,1.40948188075
+instruct,wildchat,assistant,"entropy plain (no slot) (asst@plain), all tokens",300,1.5822194733333332,1.5184990489999999,1.6474157230833335
+instruct,olmo-instruct,assistant,"NLL user slot (asst@user), excl. position 0",290,1.5883824379310345,1.5134506288793101,1.6683026408620687
+instruct,olmo-instruct,assistant,"NLL assistant slot (asst@asst), excl. position 0",290,1.5218953620689657,1.4464456761206896,1.6005236668965517
+instruct,olmo-instruct,assistant,"NLL plain (no slot) (asst@plain), excl. position 0",290,1.7522782482758623,1.6760341537068968,1.8318059560344828
+instruct,olmo-instruct,assistant,"NLL user slot (asst@user), all tokens",290,1.630760951724138,1.5536763938793103,1.7113095660344828
+instruct,olmo-instruct,assistant,"NLL assistant slot (asst@asst), all tokens",290,1.5662695827586206,1.4862927238793102,1.6496684773275863
+instruct,olmo-instruct,assistant,"NLL plain (no slot) (asst@plain), all tokens",290,1.7944999862068964,1.7153917458620689,1.8764385943965514
+instruct,olmo-instruct,assistant,"slot effect, excl. position 0",290,0.06648707586206898,0.04861315689655172,0.08439298948275861
+instruct,olmo-instruct,assistant,"slot effect, all tokens",290,0.06449136896551723,0.04729340827586205,0.08125736568965516
+instruct,olmo-instruct,assistant,"role-specific (asst@asst - asst@plain), excl. position 0",290,-0.23038288620689654,-0.2551543486206897,-0.20629141870689655
+instruct,olmo-instruct,assistant,"role-specific (asst@asst - asst@plain), all tokens",290,-0.22823040344827583,-0.25333055051724135,-0.20432678068965518
+instruct,olmo-instruct,assistant,"entropy user slot (asst@user), excl. position 0",290,1.295987827586207,1.2485751855172413,1.3459031643103447
+instruct,olmo-instruct,assistant,"entropy assistant slot (asst@asst), excl. position 0",290,1.2580774758620688,1.213070171724138,1.3058546956896553
+instruct,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), excl. position 0",290,1.3816497931034484,1.3329760766379313,1.4335465452586207
+instruct,olmo-instruct,assistant,"entropy user slot (asst@user), all tokens",290,1.3172795000000002,1.269551365086207,1.367782503362069
+instruct,olmo-instruct,assistant,"entropy assistant slot (asst@asst), all tokens",290,1.2548248068965515,1.211268461896552,1.3010298171551724
+instruct,olmo-instruct,assistant,"entropy plain (no slot) (asst@plain), all tokens",290,1.413407924137931,1.3636555966379311,1.4671305772413792
