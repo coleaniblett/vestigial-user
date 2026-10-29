@@ -25,9 +25,12 @@ def resolve(model_arg, stage=None):
     return model_id, stage
 
 
-def load_model(model_id):
+def load_model(model_id, dtype=None):
+    """dtype None: bf16 on GPU, fp32 on CPU. Scoring passes fp32: in bf16 a text's NLL shifts by
+    up to ~0.05 nats with batch composition (measured on OLMo 3 7B), comparable to slot effects."""
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    dtype = torch.bfloat16 if device == "cuda" else torch.float32
+    if dtype is None:
+        dtype = torch.bfloat16 if device == "cuda" else torch.float32
     model = AutoModelForCausalLM.from_pretrained(model_id, dtype=dtype).to(device).eval()
     return model, device
 
@@ -61,7 +64,7 @@ def main():
     ap.add_argument("--tokenizer", default=config.TEMPLATE_MODEL)
     ap.add_argument("--dataset", default=config.DATA_PATH)
     ap.add_argument("--limit", type=int)
-    ap.add_argument("--batch-size", type=int, default=16)
+    ap.add_argument("--batch-size", type=int, default=8)  # fp32 7B on 48 GB: 16 runs short on long texts
     ap.add_argument("--preceding-turn", action="store_true", default=config.PRECEDING_TURN)
     ap.add_argument("--out", default="results/scores")
     args = ap.parse_args()
@@ -74,7 +77,7 @@ def main():
         for cond, r in render_all(tok, row, args.preceding_turn).items():
             items.append(((row["id"], cond), r))
 
-    model, device = load_model(model_id)
+    model, device = load_model(model_id, torch.float32)
     n_vocab = model.get_input_embeddings().num_embeddings
     assert max(max(r.input_ids) for _, r in items) < n_vocab, "tokenizer ids exceed model vocab"
     pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id

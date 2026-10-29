@@ -79,7 +79,7 @@ def test_generations_and_analysis(pipeline):
 def test_suffix_does_not_change_scores(pipeline):
     """The end-of-turn suffix differs by role but follows the scored span, so it must not matter."""
     tok = load_tokenizer(MODEL)
-    model, device = load_model(MODEL)
+    model, device = load_model(MODEL, torch.float32)
     full = [((r["id"], c), x) for r in load_jsonl(pipeline / "texts.jsonl")[:4] for c, x in render_all(tok, r).items()]
     cut = [(k, Rendered(x.input_ids[: x.end], x.start, x.end, x.text)) for k, x in full]
     assert any(len(x.input_ids) > x.end for _, x in full)
@@ -91,7 +91,7 @@ def test_suffix_does_not_change_scores(pipeline):
 
 def test_batching_matches_single(pipeline):
     tok = load_tokenizer(MODEL)
-    model, device = load_model(MODEL)
+    model, device = load_model(MODEL, torch.float32)
     items = [((r["id"], c), x) for r in load_jsonl(pipeline / "texts.jsonl")[:4] for c, x in render_all(tok, r).items()]
     batched = content_nll(model, device, items, tok.pad_token_id, batch_size=8)
     single = content_nll(model, device, items, tok.pad_token_id, batch_size=1)

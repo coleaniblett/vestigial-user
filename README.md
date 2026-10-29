@@ -30,7 +30,7 @@ We look at one dimension, *vestigial regression* (Shiller 2026): the model losin
   `--preceding-turn` (off by default; `config.PRECEDING_TURN`) puts one fixed neutral turn of the opposite role before the scored turn, since a lone assistant turn is itself unusual input. This adds a second difference between slots (the preceding turn's text), so treat it as a robustness check.
 - **One template for every stage.** All stages, base included, are scored with the Instruct tokenizer and chat template, so token sequences are identical across stages. Base is the symmetric baseline. Caveat: the chat special tokens may be poorly trained in base.
 - **Rendering** (`render.py`). The content is tokenized on its own. The full rendered sequence must equal `tokens(prefix) + tokens(content) + tokens(suffix)`, which rules out merges at the header boundary. As a result, the content tokens are identical across all conditions, the control included. Decoding the span must reproduce the text exactly. Texts that fail these checks are filtered out at sampling time. `python render.py` dumps examples to `docs/rendered_examples.md`.
-- **Scoring** (`score.py`). Batched, right-padded per-token NLL over content tokens only. Runs in bf16 on GPU and fp32 on CPU. Writes `results/scores/<stage>.csv` with columns `text_id, condition, n_tokens, mean_nll`.
+- **Scoring** (`score.py`). Batched, right-padded per-token NLL over content tokens only. Runs in fp32 everywhere (a 7B model takes ~33 GB on GPU): in bf16, per-text NLL moves by up to 0.05 nats depending on batch composition, comparable to the effects of interest. Generation runs in bf16. Writes `results/scores/<stage>.csv` with columns `text_id, condition, n_tokens, mean_nll`.
 - **Generation** (`generate.py`). Opens a user turn with each prefill sentence, leaves it unterminated, and samples 3 × 120 tokens at T=0.7. It counts four flags per sample: `ended_turn` (closed the user turn), `handoff_to_assistant` (wrote the assistant header), `assistant_register` (assistant phrases such as "I'd be happy to"), and `repetition_loop` (any word 4-gram repeated 3 or more times).
 - **Analysis** (`analyze.py`). The slot effect is NLL(user slot) − NLL(assistant slot), computed per text type:
   - user text: `user@user − user@asst`
@@ -38,7 +38,7 @@ We look at one dimension, *vestigial regression* (Shiller 2026): the model losin
 
   95% bootstrap CIs are taken over texts (paired). Writes `results/nll_by_stage.png` (stage on x, one line per condition), `results/results.md`, and `results/summary.csv`.
 
-## Running on the GPU (single 80 GB card)
+## Running on the GPU (single 48 GB+ card)
 
 ```bash
 uv sync                                   # lockfile: uv.lock
