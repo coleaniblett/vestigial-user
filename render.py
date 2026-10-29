@@ -1,12 +1,13 @@
 """Build each scoring condition from the chat template and locate the content tokens.
 
-A text is rendered alone as the first turn (optionally after one fixed neutral turn),
-so across slot conditions only the role header differs. The content is tokenized on its
+Each data row is one text (a source and a kind, user or assistant). It is rendered alone
+as the first turn (optionally after one fixed neutral turn), so across slot conditions
+only the role header differs. The content is tokenized on its
 own and the full sequence must equal prefix + content + suffix tokenized separately;
 this rules out merges at the header/footer boundary and makes the content tokens
 identical in every condition, plain-prose control included.
 
-    python render.py --tokenizer allenai/Olmo-3-7B-Instruct --n 3   # dump examples to docs/
+    python render.py --tokenizer allenai/Olmo-3-7B-Instruct --n 2   # dump examples per source to docs/
 """
 
 import argparse
@@ -104,13 +105,10 @@ def render(tok, text, slot, preceding=False):
 
 
 def render_all(tok, row, preceding=False):
-    """All conditions for one data row; asserts content tokens match across them."""
-    out = {}
-    for cond, kind, slot in config.CONDITIONS:
-        out[cond] = render(tok, row[kind], slot, preceding)
-    for kind in ("user", "assistant"):
-        spans = [out[c].input_ids[out[c].start : out[c].end] for c, k, _ in config.CONDITIONS if k == kind]
-        assert all(s == spans[0] for s in spans), f"content tokens differ across slots ({kind})"
+    """One text (a data row) in every slot; asserts its content tokens match across slots."""
+    out = {cond: render(tok, row["text"], slot, preceding) for cond, slot in config.conditions(row["kind"])}
+    spans = [r.input_ids[r.start : r.end] for r in out.values()]
+    assert all(s == spans[0] for s in spans), f"content tokens differ across slots ({row['id']})"
     return out
 
 
@@ -135,7 +133,7 @@ def dump_examples(tok, rows, path, preceding=False):
         "",
     ]
     for row in rows:
-        lines.append(f"## {row['id']}\n")
+        lines.append(f"## {row['id']} ({row['source']} {row['kind']} text)\n")
         for cond, r in render_all(tok, row, preceding).items():
             before = tok.decode(r.input_ids[: r.start])
             content = tok.decode(r.input_ids[r.start : r.end])
@@ -156,10 +154,16 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--tokenizer", default=config.TEMPLATE_MODEL)
     ap.add_argument("--dataset", default=config.DATA_PATH)
-    ap.add_argument("--n", type=int, default=3)
+    ap.add_argument("--n", type=int, default=2, help="examples per source and kind")
     ap.add_argument("--preceding-turn", action="store_true", default=config.PRECEDING_TURN)
     ap.add_argument("--out", default="docs/rendered_examples.md")
     args = ap.parse_args()
     tok = load_tokenizer(args.tokenizer)
-    dump_examples(tok, load_jsonl(args.dataset)[: args.n], args.out, args.preceding_turn)
+    rows, count = [], {}
+    for row in load_jsonl(args.dataset):
+        key = (row["source"], row["kind"])
+        if count.get(key, 0) < args.n:
+            count[key] = count.get(key, 0) + 1
+            rows.append(row)
+    dump_examples(tok, rows, args.out, args.preceding_turn)
     print(f"wrote {args.out}")

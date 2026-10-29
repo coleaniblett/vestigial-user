@@ -1,16 +1,24 @@
-"""Sample first user turn + first assistant reply pairs and a user-turn prefill set.
+"""Sample held-out user + assistant texts and a user-turn prefill set.
 
-    python prepare_data.py                    # WildChat-1M (gated; needs HF_TOKEN)
-    python prepare_data.py --dataset oasst1   # open stand-in
+    python prepare_data.py                                  # WildChat pairs + oasst1 user prompts
+    python prepare_data.py --pairs oasst1 --extra-user none --no-exclude-dolci   # smoke test
 
-Writes data/texts.jsonl (id, user, assistant, source, n_user_tokens, n_assistant_tokens)
-and data/prefill.jsonl (id, text_id, prefill).
+Pair source (default WildChat-1M): first user turn + first assistant reply of each conversation.
+Extra user source (default oasst1): root prompts only. Conversations whose user turn appears in
+the Dolci-Instruct SFT, DPO or RL data are skipped before the other filters (see
+check_contamination.py), and sampling continues until --n clean texts per source survive.
+
+Writes data/texts.jsonl, one text per row (id, source, kind, text, n_tokens, pair_id,
+source_id, dataset), and data/prefill.jsonl (id, text_id, prefill) from the pair source's user
+turns. OLMo replies are added afterwards by add_replies.py.
 """
 
 import argparse
 import json
 import os
+import random
 import re
+from collections import Counter
 
 from datasets import load_dataset
 
@@ -40,17 +48,20 @@ def oasst_toxicity(msg):
     return (msg.get("detoxify") or {}).get("toxicity") or 0.0
 
 
-def oasst_pairs(seed):
-    import random
-
+def oasst_messages(seed):
     ds = load_dataset(config.DATASET_IDS["oasst1"], split="train")
     ok = [m for m in ds if not m["deleted"] and m["review_result"] and m["lang"] == "en"]
+    roots = [m for m in ok if m["role"] == "prompter" and m["parent_id"] is None]
+    random.Random(seed).shuffle(roots)
+    return ok, roots
+
+
+def oasst_pairs(seed):
+    ok, roots = oasst_messages(seed)
     replies = {}
     for m in ok:
         if m["role"] == "assistant" and m["parent_id"] is not None:
             replies.setdefault(m["parent_id"], []).append(m)
-    roots = [m for m in ok if m["role"] == "prompter" and m["parent_id"] is None]
-    random.Random(seed).shuffle(roots)
     for root in roots:
         kids = replies.get(root["message_id"])
         if not kids:
@@ -60,6 +71,18 @@ def oasst_pairs(seed):
         if oasst_toxicity(root) >= 0.5 or oasst_toxicity(reply) >= 0.5:
             continue
         yield root["message_id"], root["text"], reply["text"]
+
+
+def oasst_prompts(seed):
+    """Root prompts only (no reply required), same language/review/toxicity filters."""
+    _, roots = oasst_messages(seed)
+    for root in roots:
+        if oasst_toxicity(root) < 0.5:
+            yield root["message_id"], root["text"], None
+
+
+SOURCES = {"wildchat": wildchat_pairs, "oasst1": oasst_pairs}
+USER_ONLY = {"oasst1": oasst_prompts}
 
 
 def clean(text):
@@ -79,6 +102,40 @@ def usable(tok, text):
     return n
 
 
+def sample(source, stream, tok, n, turns, kinds):
+    """First n candidates from stream whose texts pass every filter. kinds: ("user",) or ("user", "assistant")."""
+    from check_contamination import is_contaminated
+
+    rows, seen, stats = [], set(), Counter()
+    for src_id, user, asst in stream:
+        stats["candidates"] += 1
+        user = clean(user)
+        if src_id in seen or user in seen:
+            stats["duplicate"] += 1
+            continue
+        if turns is not None and is_contaminated(turns, user, "user", src_id):
+            stats["in Dolci"] += 1
+            continue
+        texts = {"user": user, "assistant": clean(asst) if asst is not None else None}
+        lengths = {k: usable(tok, texts[k]) for k in kinds}
+        if any(v is None for v in lengths.values()):
+            stats["length/render"] += 1
+            continue
+        seen.update([src_id, user])
+        pair_id = f"{source}-{len(rows) // len(kinds):04d}"
+        for k in kinds:
+            rows.append(dict(id=f"{source}-{k}-{pair_id[-4:]}", source=source, kind=k, text=texts[k],
+                             n_tokens=lengths[k], pair_id=pair_id, source_id=src_id,
+                             dataset=config.DATASET_IDS[source]))
+        if len(rows) == n * len(kinds):
+            break
+    stats["kept"] = len(rows) // len(kinds)
+    print(f"{source} ({'+'.join(kinds)}): {dict(stats)}", flush=True)
+    if len(rows) < n * len(kinds):
+        raise SystemExit(f"only found {len(rows) // len(kinds)} usable {source} texts")
+    return rows
+
+
 FIRST_SENTENCE = re.compile(r"^(.+?[.!?])\s+\S", re.S)
 
 
@@ -92,7 +149,9 @@ def first_sentence(text):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--dataset", choices=list(config.DATASET_IDS), default=config.DATASET)
+    ap.add_argument("--pairs", choices=list(SOURCES), default=config.PAIR_SOURCE)
+    ap.add_argument("--extra-user", choices=[*USER_ONLY, "none"], default=config.EXTRA_USER_SOURCE)
+    ap.add_argument("--exclude-dolci", action=argparse.BooleanOptionalAction, default=config.EXCLUDE_DOLCI)
     ap.add_argument("--tokenizer", default=config.TEMPLATE_MODEL)
     ap.add_argument("--n", type=int, default=config.N_TEXTS)
     ap.add_argument("--n-prefill", type=int, default=config.N_PREFILL)
@@ -100,30 +159,24 @@ def main():
     ap.add_argument("--out", default=config.DATA_PATH)
     ap.add_argument("--prefill-out", default=config.PREFILL_PATH)
     args = ap.parse_args()
+    if args.extra_user == args.pairs:
+        ap.error("--extra-user must differ from --pairs")
 
     tok = load_tokenizer(args.tokenizer)
-    pairs = {"wildchat": wildchat_pairs, "oasst1": oasst_pairs}[args.dataset](args.seed)
-    rows, seen = [], set()
-    for src_id, user, asst in pairs:
-        user, asst = clean(user), clean(asst)
-        if src_id in seen or user in seen:
-            continue
-        nu, na = usable(tok, user), usable(tok, asst)
-        if nu is None or na is None:
-            continue
-        seen.update([src_id, user])
-        rows.append(
-            dict(id=f"{args.dataset}-{len(rows):04d}", source_id=src_id, source=config.DATASET_IDS[args.dataset],
-                 user=user, assistant=asst, n_user_tokens=nu, n_assistant_tokens=na)
-        )
-        if len(rows) == args.n:
-            break
-    if len(rows) < args.n:
-        raise SystemExit(f"only found {len(rows)} usable pairs")
+    turns = None
+    if args.exclude_dolci:
+        from check_contamination import dolci_turns
+
+        turns = dolci_turns()
+    rows = sample(args.pairs, SOURCES[args.pairs](args.seed), tok, args.n, turns, ("user", "assistant"))
+    if args.extra_user != "none":
+        rows += sample(args.extra_user, USER_ONLY[args.extra_user](args.seed), tok, args.n, turns, ("user",))
 
     prefill, seen_sentences = [], set()
     for row in rows:
-        s = first_sentence(row["user"])
+        if row["source"] != args.pairs or row["kind"] != "user":
+            continue
+        s = first_sentence(row["text"])
         if s and s not in seen_sentences:  # distinct conversations can share an opening sentence
             seen_sentences.add(s)
             prefill.append(dict(id=f"prefill-{len(prefill):02d}", text_id=row["id"], prefill=s))

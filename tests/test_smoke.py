@@ -1,6 +1,6 @@
-"""End-to-end smoke test on CPU: prepare_data -> score -> generate -> analyze with SmolLM2-135M-Instruct.
+"""End-to-end smoke test on CPU: prepare_data -> add_replies -> score -> generate -> analyze with SmolLM2-135M-Instruct.
 
-Uses the open oasst1 stand-in so it runs without a gated-dataset token. The same model is
+Uses oasst1 pairs without the Dolci exclusion so it stays small and fast. The same model is
 scored under two stage labels so analyze.py has more than one stage to plot.
 """
 
@@ -29,8 +29,10 @@ def run(*args):
 def pipeline(tmp_path_factory):
     d = tmp_path_factory.mktemp("smoke")
     common = ["--tokenizer", MODEL]
-    run("prepare_data.py", "--dataset", "oasst1", *common, "--n", "10", "--n-prefill", "3",
-        "--out", str(d / "texts.jsonl"), "--prefill-out", str(d / "prefill.jsonl"))
+    run("prepare_data.py", "--pairs", "oasst1", "--extra-user", "none", "--no-exclude-dolci", *common, "--n", "10",
+        "--n-prefill", "3", "--out", str(d / "texts.jsonl"), "--prefill-out", str(d / "prefill.jsonl"))
+    run("add_replies.py", "--model", MODEL, *common, "--dataset", str(d / "texts.jsonl"), "--prompt-source", "oasst1",
+        "--source", "smollm")
     for stage in STAGES:
         run("score.py", "--model", MODEL, "--stage", stage, *common, "--dataset", str(d / "texts.jsonl"),
             "--batch-size", "4", "--out", str(d / "scores"))
@@ -41,29 +43,36 @@ def pipeline(tmp_path_factory):
     return d
 
 
+def text_sets(rows):
+    return {(r["source"], r["kind"]) for r in rows}
+
+
 def test_data(pipeline):
     rows = load_jsonl(pipeline / "texts.jsonl")
-    assert len(rows) == 10 and len({r["id"] for r in rows}) == 10
+    assert len({r["id"] for r in rows}) == len(rows)
+    assert sum(r["source"] == "oasst1" for r in rows) == 20
+    assert text_sets(rows) <= {("oasst1", "user"), ("oasst1", "assistant"), ("smollm", "assistant")}
     for r in rows:
-        assert config.MIN_TOKENS <= r["n_user_tokens"] <= config.MAX_TOKENS
-        assert config.MIN_TOKENS <= r["n_assistant_tokens"] <= config.MAX_TOKENS
+        assert config.MIN_TOKENS <= r["n_tokens"] <= config.MAX_TOKENS
+    pairs = {r["pair_id"] for r in rows if r["source"] == "oasst1"}
+    assert all(r["pair_id"] in pairs for r in rows if r["source"] == "smollm")
     prefill = load_jsonl(pipeline / "prefill.jsonl")
     assert len(prefill) == 3
-    texts = {r["id"]: r["user"] for r in rows}
+    texts = {r["id"]: r["text"] for r in rows}
     assert all(texts[p["text_id"]].startswith(p["prefill"]) for p in prefill)
 
 
 def test_scores(pipeline):
-    conds = [c for c, _, _ in config.CONDITIONS]
+    rows = load_jsonl(pipeline / "texts.jsonl")
     for stage in STAGES:
         df = pd.read_csv(pipeline / "scores" / f"{stage}.csv")
-        assert list(df.columns) == ["text_id", "condition", "n_tokens", "mean_nll"]
-        assert len(df) == 10 * len(conds) and set(df.condition) == set(conds)
+        assert list(df.columns) == ["text_id", "source", "kind", "condition", "n_tokens", "mean_nll"]
+        assert len(df) == len(rows) * len(config.SLOTS)
+        for kind, d in df.groupby("kind"):
+            assert set(d.condition) == {c for c, _ in config.conditions(kind)}
         assert df.mean_nll.notna().all() and (df.mean_nll > 0).all()
-        # same content tokens in every condition of a text type
-        n = df.pivot(index="text_id", columns="condition", values="n_tokens")
-        assert (n[["user@user", "user@asst", "user@plain"]].nunique(axis=1) == 1).all()
-        assert (n[["asst@asst", "asst@user", "asst@plain"]].nunique(axis=1) == 1).all()
+        # same content tokens in every slot of a text
+        assert (df.groupby("text_id").n_tokens.nunique() == 1).all()
 
 
 def test_generations_and_analysis(pipeline):
@@ -71,9 +80,11 @@ def test_generations_and_analysis(pipeline):
         lines = load_jsonl(pipeline / "generations" / f"{stage}.jsonl")
         assert len(lines) == 3 * 2
         assert {"ended_turn", "handoff_to_assistant", "assistant_register", "repetition_loop"} <= set(lines[0])
-    assert (pipeline / "nll_by_stage.png").stat().st_size > 0
     md = (pipeline / "results.md").read_text()
-    assert "slot effect, user text" in md and "slot effect, assistant text" in md
+    assert "Raw mean NLL" in md and "Slot effect" in md and "Role-specific" in md
+    for src, kind in text_sets(load_jsonl(pipeline / "texts.jsonl")):
+        assert f"{src} {kind}" in md
+        assert (pipeline / f"nll_{src}_{kind}.png").stat().st_size > 0
 
 
 def test_suffix_does_not_change_scores(pipeline):

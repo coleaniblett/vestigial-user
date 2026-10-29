@@ -3,7 +3,7 @@
     python score.py --model sft                     # a stage name from config.MODELS, or any HF id
     python score.py --model HuggingFaceTB/SmolLM2-135M-Instruct --tokenizer HuggingFaceTB/SmolLM2-135M-Instruct
 
-Writes <out>/<stage>.csv with columns text_id, condition, n_tokens, mean_nll.
+Writes <out>/<stage>.csv with columns text_id, source, kind, condition, n_tokens, mean_nll.
 """
 
 import argparse
@@ -72,6 +72,8 @@ def main():
     model_id, stage = resolve(args.model, args.stage)
     tok = load_tokenizer(args.tokenizer)
     rows = load_jsonl(args.dataset)[: args.limit]
+    by_id = {row["id"]: row for row in rows}
+    assert len(by_id) == len(rows), "text ids must be unique"
     items = []
     for row in rows:
         for cond, r in render_all(tok, row, args.preceding_turn).items():
@@ -87,10 +89,11 @@ def main():
     path = os.path.join(args.out, f"{stage}.csv")
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["text_id", "condition", "n_tokens", "mean_nll"])
+        w.writerow(["text_id", "source", "kind", "condition", "n_tokens", "mean_nll"])
         for (text_id, cond), _ in items:
             v = nll[(text_id, cond)]
-            w.writerow([text_id, cond, len(v), f"{v.mean().item():.6f}"])
+            row = by_id[text_id]
+            w.writerow([text_id, row["source"], row["kind"], cond, len(v), f"{v.mean().item():.6f}"])
     print(f"{model_id}: wrote {len(items)} rows to {path}")
 
 

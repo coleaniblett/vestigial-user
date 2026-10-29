@@ -1,10 +1,15 @@
-"""Slot effects with bootstrap CIs, one figure and a results table.
+"""Raw NLL, slot effects and role-specific quantities per text source, with bootstrap CIs.
 
     python analyze.py                    # reads results/scores/*.csv (+ results/generations/*_counts.csv)
 
-Slot effect = NLL(text in user slot) - NLL(same text in assistant slot), per text type:
-    user text:      user@user - user@asst
-    assistant text: asst@user - asst@asst
+A text set is one (source, kind), e.g. wildchat user or olmo-instruct assistant. Sets are never
+pooled. Every text is scored in every slot; per set and stage we report
+    raw NLL        mean content NLL in the user, assistant and plain-prose slot
+    slot effect    NLL(user slot) - NLL(assistant slot), paired over texts
+    role-specific  NLL(own slot) - NLL(plain): user@user - user@plain for user text,
+                   asst@asst - asst@plain for assistant text
+95% bootstrap CIs are over texts. Writes results/summary.csv, results/results.md and one
+figure per text set, results/nll_<source>_<kind>.png (stage on x, one line per slot).
 """
 
 import argparse
@@ -20,7 +25,8 @@ import pandas as pd  # noqa: E402
 
 import config  # noqa: E402
 
-SLOT_EFFECTS = {"user text": ("user@user", "user@asst"), "assistant text": ("asst@user", "asst@asst")}
+SOURCE_ORDER = ["wildchat", "oasst1", "olmo-instruct"]
+SLOT_NAMES = {"user": "user slot", "asst": "assistant slot", "plain": "plain (no slot)"}
 
 
 def load_scores(score_dir):
@@ -28,7 +34,17 @@ def load_scores(score_dir):
     if not frames:
         raise SystemExit(f"no score CSVs in {score_dir}")
     stages = [s for s in config.STAGES if s in frames] + sorted(s for s in frames if s not in config.STAGES)
-    return {s: frames[s].pivot(index="text_id", columns="condition", values="mean_nll") for s in stages}
+    return {s: frames[s] for s in stages}
+
+
+def text_sets(frames):
+    sets = {(src, kind) for df in frames.values() for src, kind in zip(df.source, df.kind)}
+    rank = lambda s: (s[1] != "user", SOURCE_ORDER.index(s[0]) if s[0] in SOURCE_ORDER else len(SOURCE_ORDER), s[0])
+    return sorted(sets, key=rank)
+
+
+def set_name(src, kind):
+    return f"{src} {kind}"
 
 
 def bootstrap_ci(x, n_boot, rng):
@@ -38,54 +54,88 @@ def bootstrap_ci(x, n_boot, rng):
     return x.mean(), lo, hi
 
 
-def summarize(tables, n_boot, seed):
+def quantities(kind):
+    """[(quantity label, function of the text x condition table)] for one text set."""
+    k = config.KIND_ABBR[kind]
+    own = "user" if kind == "user" else "asst"
+    qs = [(f"NLL {SLOT_NAMES[a]} ({k}@{a})", (lambda t, c=f"{k}@{a}": t[c])) for a, _ in config.SLOTS]
+    qs.append(("slot effect (user - assistant slot)", lambda t: t[f"{k}@user"] - t[f"{k}@asst"]))
+    qs.append((f"role-specific ({k}@{own} - {k}@plain)", lambda t: t[f"{k}@{own}"] - t[f"{k}@plain"]))
+    return qs
+
+
+def summarize(frames, n_boot, seed):
     rng = np.random.default_rng(seed)
     rows = []
-    for stage, t in tables.items():
-        for cond in t.columns:
-            rows.append(dict(stage=stage, quantity=f"NLL {cond}", **dict(zip(["mean", "lo", "hi"], bootstrap_ci(t[cond], n_boot, rng)))))
-        for name, (u, a) in SLOT_EFFECTS.items():
-            if u in t and a in t:
-                rows.append(dict(stage=stage, quantity=f"slot effect, {name}",
-                                 **dict(zip(["mean", "lo", "hi"], bootstrap_ci(t[u] - t[a], n_boot, rng)))))
+    for stage, df in frames.items():
+        for src, kind in text_sets(frames):
+            d = df[(df.source == src) & (df.kind == kind)]
+            if d.empty:
+                continue
+            t = d.pivot(index="text_id", columns="condition", values="mean_nll")
+            for q, f in quantities(kind):
+                m, lo, hi = bootstrap_ci(f(t), n_boot, rng)
+                rows.append(dict(stage=stage, source=src, kind=kind, quantity=q, n=len(t), mean=m, lo=lo, hi=hi))
     return pd.DataFrame(rows)
 
 
-def plot(summary, path):
+def plot(summary, out_dir):
     stages = list(dict.fromkeys(summary["stage"]))
     x = np.arange(len(stages))
-    fig, ax = plt.subplots(figsize=(7, 4.5))
-    for cond, _, slot in config.CONDITIONS:
-        d = summary[summary.quantity == f"NLL {cond}"].set_index("stage").reindex(stages)
-        if d["mean"].isna().all():
-            continue
-        ax.errorbar(x, d["mean"], yerr=[d["mean"] - d["lo"], d["hi"] - d["mean"]], capsize=3, marker="o",
-                    linestyle=":" if slot is None else "-", label=cond)
-    ax.set_xticks(x, stages)
-    ax.set_xlabel("post-training stage")
-    ax.set_ylabel("mean per-token NLL of content (nats)")
-    ax.set_title("Content NLL by role slot (text@slot), 95% bootstrap CI")
-    ax.legend(fontsize=8, ncol=2)
-    fig.tight_layout()
-    fig.savefig(path, dpi=150)
+    paths = []
+    for (src, kind), g in summary.groupby(["source", "kind"], sort=False):
+        fig, ax = plt.subplots(figsize=(6, 4.2))
+        for a, slot in config.SLOTS:
+            d = g[g.quantity.str.startswith(f"NLL {SLOT_NAMES[a]} (")].set_index("stage").reindex(stages)
+            ax.errorbar(x, d["mean"], yerr=[d["mean"] - d["lo"], d["hi"] - d["mean"]], capsize=3, marker="o",
+                        linestyle=":" if slot is None else "-", label=SLOT_NAMES[a])
+        ax.set_xticks(x, stages)
+        ax.set_xlabel("post-training stage")
+        ax.set_ylabel("mean per-token NLL of content (nats)")
+        ax.set_title(f"{set_name(src, kind)} text (n={g.n.iloc[0]}), 95% bootstrap CI")
+        ax.legend(fontsize=8)
+        fig.tight_layout()
+        path = os.path.join(out_dir, f"nll_{src}_{kind}.png")
+        fig.savefig(path, dpi=150)
+        plt.close(fig)
+        paths.append(path)
+    return paths
 
 
 def fmt(r):
     return f"{r['mean']:.3f} [{r['lo']:.3f}, {r['hi']:.3f}]"
 
 
+def table(summary, select, index):
+    d = summary[select(summary)].copy()
+    d["text set"] = [set_name(s, k) for s, k in zip(d.source, d.kind)]
+    d["cell"] = d.apply(fmt, axis=1)
+    order = list(dict.fromkeys(zip(*(d[c] for c in index)) if len(index) > 1 else d[index[0]]))
+    wide = d.pivot_table(index=index, columns="stage", values="cell", aggfunc="first")
+    wide = wide.reindex(order)[list(dict.fromkeys(summary["stage"]))]
+    return wide.reset_index().to_markdown(index=False)
+
+
 def results_table(summary, gen_dir):
-    wide = summary.assign(cell=summary.apply(fmt, axis=1)).pivot(index="quantity", columns="stage", values="cell")
-    wide = wide[list(dict.fromkeys(summary["stage"]))]
-    order = [f"slot effect, {k}" for k in SLOT_EFFECTS] + [f"NLL {c}" for c, _, _ in config.CONDITIONS]
-    wide = wide.reindex([q for q in order if q in wide.index])
-    md = ["# Results", "", "Mean over texts, 95% bootstrap CI over texts. Slot effect = NLL(user slot) - NLL(assistant slot).",
-          "", wide.to_markdown()]
+    sets = summary.drop_duplicates(["source", "kind"])
+    md = ["# Results", "",
+          "Mean over texts, 95% bootstrap CI over texts. Text sources are analyzed separately and never pooled.", "",
+          "Texts per set: " + ", ".join(f"{set_name(s, k)} {n}" for s, k, n in zip(sets.source, sets.kind, sets.n)) + ".",
+          "", "## Raw mean NLL by text set and slot", "",
+          table(summary, lambda d: d.quantity.str.startswith("NLL "), ["text set", "quantity"]),
+          "", "## Slot effect: NLL(user slot) - NLL(assistant slot)", "",
+          table(summary, lambda d: d.quantity.str.startswith("slot effect"), ["text set"]),
+          "", "## Role-specific: NLL(own slot) - NLL(plain)", "",
+          "user@user - user@plain for user text; asst@asst - asst@plain for assistant text.", "",
+          table(summary, lambda d: d.quantity.str.startswith("role-specific"), ["text set", "quantity"])]
     counts = sorted(glob.glob(os.path.join(gen_dir, "*_counts.csv")))
     if counts:
         g = pd.concat(pd.read_csv(p) for p in counts).set_index("stage")
         g = g.reindex([s for s in config.STAGES if s in g.index] + [s for s in g.index if s not in config.STAGES])
-        md += ["", "## Prefilled user-turn continuations (counts of samples)", "", g.to_markdown()]
+        md += ["", "## Prefilled user-turn continuations (counts of samples)", "",
+               "ended_turn: closed the user turn; handoff_to_assistant: then wrote the assistant header (a subset of "
+               "ended_turn); assistant_register and repetition_loop: checked on the user portion only.", "",
+               g.to_markdown()]
     return "\n".join(md) + "\n"
 
 
@@ -101,7 +151,7 @@ def main():
     summary = summarize(load_scores(args.scores), args.n_boot, args.seed)
     os.makedirs(args.out, exist_ok=True)
     summary.to_csv(os.path.join(args.out, "summary.csv"), index=False)
-    plot(summary, os.path.join(args.out, "nll_by_stage.png"))
+    plot(summary, args.out)
     with open(os.path.join(args.out, "results.md"), "w") as f:
         f.write(results_table(summary, args.generations))
     print(open(os.path.join(args.out, "results.md")).read())

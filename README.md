@@ -16,42 +16,50 @@ We look at one dimension, *vestigial regression* (Shiller 2026): the model losin
 
 ## Design
 
-- **Data** (`prepare_data.py` → `data/texts.jsonl`, `data/prefill.jsonl`). We sample 300 English conversations and drop any flagged toxic or redacted. From each we keep the first user turn and the first assistant reply. Each text must be 20–300 tokens by the OLMo tokenizer and render cleanly (see below). The default dataset is `allenai/WildChat-1M`, which is gated and needs `HF_TOKEN` with its terms accepted; the committed `data/` was sampled from it (seed 0, reproducible). `--dataset oasst1` switches to `OpenAssistant/oasst1` (root prompt plus its top-ranked reply). Each row records its `source`. The prefill set is the first sentence of 20 sampled user turns (distinct sentences; different conversations can share an opening).
-- **Conditions** (`config.CONDITIONS`). Each text is scored alone as the first turn, so the role header is the only difference between slot conditions before the scored span (the Instruct template also prepends a fixed default system turn, identical in every slot condition). After the span the template closes a user turn with `<|im_end|>\n` and a final assistant turn with `<|endoftext|>`; this suffix follows the scored tokens, so under causal attention it cannot change their NLL (checked in the smoke test).
+- **Data** (`prepare_data.py` → `data/texts.jsonl`, `data/prefill.jsonl`; `add_replies.py`). Each row of `texts.jsonl` is one text with a `source` and a `kind` (user or assistant). Sources are analyzed separately and never pooled:
 
-  | condition | text | slot |
+  | source | kind | n | what |
+  |---|---|---|---|
+  | `wildchat` | user, assistant | 300 pairs | first user turn and first assistant reply (ChatGPT) of English `allenai/WildChat-1M` conversations, toxic/redacted dropped |
+  | `oasst1` | user | 300 | English `OpenAssistant/oasst1` root prompts, toxicity < 0.5 |
+  | `olmo-instruct` | assistant | ≤ 300 | OLMo 3 7B Instruct's greedy reply to each `wildchat` user turn, cut at 300 new tokens; cut replies are kept and marked `truncated` (causal attention: their NLL is that of the reply's first 300 tokens) |
+
+  **Held out from post-training.** OLMo 3's SFT data contains most of WildChat (86% of an unfiltered sample's user turns appear verbatim) and some oasst1, so `prepare_data.py` skips any conversation whose user turn appears in the Dolci-Instruct SFT, DPO or RL data (`check_contamination.py`: exact match after whitespace normalization; RL prompts are parsed out of their `user: ...` strings and also matched on WildChat's `conversation_hash`), then keeps sampling (seed 0) until 300 clean texts per source pass the other filters. Each text must be 20–300 tokens by the OLMo tokenizer and render cleanly (see below). `allenai/WildChat-1M` is no longer gated. Rows record `pair_id` (links a WildChat user turn, its reply and OLMo's reply) and `source_id`. The prefill set is the first sentence of 20 sampled WildChat user turns (distinct sentences; different conversations can share an opening). `--pairs oasst1 --extra-user none --no-exclude-dolci` gives the small oasst1-only set the smoke test uses.
+- **Conditions** (`config.SLOTS`). Every text is scored in every slot; the condition name is `<kind>@<slot>`, e.g. `user@asst` is user text in the assistant slot. Each text is scored alone as the first turn, so the role header is the only difference between slot conditions before the scored span (the Instruct template also prepends a fixed default system turn, identical in every slot condition). After the span the template closes a user turn with `<|im_end|>\n` and a final assistant turn with `<|endoftext|>`; this suffix follows the scored tokens, so under causal attention it cannot change their NLL (checked in the smoke test).
+
+  | slot | user text | assistant text |
   |---|---|---|
-  | `user@user` | user | user |
-  | `asst@asst` | assistant | assistant |
-  | `user@asst` | user | assistant (swap) |
-  | `asst@user` | assistant | user (swap) |
-  | `user@plain`, `asst@plain` | either | none: plain prose after `<\|endoftext\|>` (control) |
+  | user | `user@user` | `asst@user` (swap) |
+  | assistant | `user@asst` (swap) | `asst@asst` |
+  | none: plain prose after `<\|endoftext\|>` (control) | `user@plain` | `asst@plain` |
 
   `--preceding-turn` (off by default; `config.PRECEDING_TURN`) puts one fixed neutral turn of the opposite role before the scored turn, since a lone assistant turn is itself unusual input. This adds a second difference between slots (the preceding turn's text), so treat it as a robustness check.
 - **One template for every stage.** All stages, base included, are scored with the Instruct tokenizer and chat template, so token sequences are identical across stages. Base is the symmetric baseline. Caveat: the chat special tokens may be poorly trained in base.
 - **Rendering** (`render.py`). The content is tokenized on its own. The full rendered sequence must equal `tokens(prefix) + tokens(content) + tokens(suffix)`, which rules out merges at the header boundary. As a result, the content tokens are identical across all conditions, the control included. Decoding the span must reproduce the text exactly. Texts that fail these checks are filtered out at sampling time. `python render.py` dumps examples to `docs/rendered_examples.md`.
-- **Scoring** (`score.py`). Batched, right-padded per-token NLL over content tokens only. Runs in fp32 everywhere (a 7B model takes ~33 GB on GPU): in bf16, per-text NLL moves by up to 0.05 nats depending on batch composition, comparable to the effects of interest. Generation runs in bf16. Writes `results/scores/<stage>.csv` with columns `text_id, condition, n_tokens, mean_nll`.
-- **Generation** (`generate.py`). Opens a user turn with each prefill sentence, leaves it unterminated, and samples 3 × 120 tokens at T=0.7. It counts four flags per sample: `ended_turn` (closed the user turn), `handoff_to_assistant` (wrote the assistant header), `assistant_register` (assistant phrases such as "I'd be happy to"), and `repetition_loop` (any word 4-gram repeated 3 or more times).
-- **Analysis** (`analyze.py`). The slot effect is NLL(user slot) − NLL(assistant slot), computed per text type:
-  - user text: `user@user − user@asst`
-  - assistant text: `asst@user − asst@asst`
+- **Scoring** (`score.py`). Batched, right-padded per-token NLL over content tokens only. Runs in fp32 everywhere (a 7B model takes ~33 GB on GPU): in bf16, per-text NLL moves by up to 0.05 nats depending on batch composition, comparable to the effects of interest. Generation runs in bf16. Writes `results/scores/<stage>.csv` with columns `text_id, source, kind, condition, n_tokens, mean_nll`.
+- **Generation** (`generate.py`). Opens a user turn with each prefill sentence, leaves it unterminated, and samples 3 × 120 tokens at T=0.7. It counts four flags per sample: `ended_turn` (closed the user turn), `handoff_to_assistant` (then wrote the assistant header; a subset of `ended_turn`), `assistant_register` (assistant phrases such as "I'd be happy to") and `repetition_loop` (any word 4-gram repeated 3 or more times). The last two are checked on the user portion only, the text before the turn closes: a post-trained model usually finishes the user's message, closes the turn and answers as the assistant, and that reply is not the user's voice.
+- **Analysis** (`analyze.py`). Per text set (source × kind) and stage, with 95% bootstrap CIs over texts (paired across slots):
+  - raw mean NLL in each slot (user, assistant, plain);
+  - slot effect = NLL(user slot) − NLL(assistant slot): `user@user − user@asst` for user text, `asst@user − asst@asst` for assistant text;
+  - role-specific = NLL(own slot) − NLL(plain): `user@user − user@plain` for user text, `asst@asst − asst@plain` for assistant text.
 
-  95% bootstrap CIs are taken over texts (paired). Writes `results/nll_by_stage.png` (stage on x, one line per condition), `results/results.md`, and `results/summary.csv`.
+  Writes `results/results.md`, `results/summary.csv` and one figure per text set, `results/nll_<source>_<kind>.png` (stage on x, one line per slot).
 
 ## Running on the GPU (single 48 GB+ card)
 
 ```bash
 uv sync                                   # lockfile: uv.lock
-export HF_TOKEN=...                       # WildChat terms accepted on this account
 uv run python check_models.py             # IDs, licenses, shared chat template -> docs/models.md
-uv run python prepare_data.py             # optional: data/ is committed; rerun reproduces it
+uv run python prepare_data.py             # optional: data/ is committed; rerun reproduces it (streams WildChat, loads Dolci)
+uv run python add_replies.py              # optional: adds the olmo-instruct replies to data/texts.jsonl (GPU)
+uv run python check_contamination.py      # overlap of data/texts.jsonl with the Dolci SFT/DPO/RL data
 uv run python render.py                   # -> docs/rendered_examples.md; eyeball it
 uv run pytest                             # span alignment (OLMo tokenizer) + CPU smoke test (SmolLM2-135M)
 bash run_gpu.sh                           # score + generate per checkpoint, one process each, then analyze
 OUT=results_preceding bash run_gpu.sh --preceding-turn   # optional robustness run
 ```
 
-`run_gpu.sh` runs each checkpoint in its own process, so GPU memory is released between them. The checkpoints are roughly 15 GB each in bf16; set `CLEAR_CACHE=1` to delete each one from the HF cache after use. Scoring 300 texts × 6 conditions takes a few minutes per model.
+`run_gpu.sh` runs each checkpoint in its own process, so GPU memory is released between them. The checkpoints are roughly 15 GB each in bf16; set `CLEAR_CACHE=1` to delete each one from the HF cache after use. Scoring ~1,200 texts × 3 slots takes about five minutes per model in fp32.
 
 ## What the result pattern would mean
 

@@ -1,11 +1,12 @@
 """Span alignment on the OLMo 3 Instruct tokenizer and chat template."""
 
 import os
+from collections import Counter
 
 import pytest
 
 import config
-from generate import stop_ids, turn_markers
+from generate import flags, stop_ids, turn_markers, user_portion
 from render import AlignmentError, load_jsonl, load_tokenizer, render, render_all, template_parts
 
 EDGE_CASES = [
@@ -48,13 +49,15 @@ def test_slots_differ_only_in_role_header(tok):
 @pytest.mark.parametrize("preceding", [False, True])
 @pytest.mark.parametrize("text", EDGE_CASES)
 def test_edge_cases_align(tok, text, preceding):
-    row = {"id": "x", "user": text, "assistant": text}
-    out = render_all(tok, row, preceding)
-    spans = {c: r.input_ids[r.start : r.end] for c, r in out.items()}
-    assert len({tuple(s) for s in spans.values()}) == 1
-    for r in out.values():
-        assert tok.decode(r.input_ids[r.start : r.end], clean_up_tokenization_spaces=False) == text
-        assert r.start > 0
+    spans = set()
+    for kind in ("user", "assistant"):
+        out = render_all(tok, {"id": "x", "kind": kind, "text": text}, preceding)
+        assert len(out) == len(config.SLOTS)
+        spans |= {tuple(r.input_ids[r.start : r.end]) for r in out.values()}
+        for r in out.values():
+            assert tok.decode(r.input_ids[r.start : r.end], clean_up_tokenization_spaces=False) == text
+            assert r.start > 0
+    assert len(spans) == 1
 
 
 def test_generation_stops_only_at_end_of_document(tok):
@@ -76,9 +79,24 @@ def test_rejects_bad_text(tok):
 @pytest.mark.parametrize("preceding", [False, True])
 def test_committed_sample_aligns(tok, preceding):
     rows = load_jsonl(config.DATA_PATH)
-    assert len(rows) == config.N_TEXTS
     assert len({r["id"] for r in rows}) == len(rows)
+    sets = Counter((r["source"], r["kind"]) for r in rows)
+    for key in [(config.PAIR_SOURCE, "user"), (config.PAIR_SOURCE, "assistant"), (config.EXTRA_USER_SOURCE, "user")]:
+        assert sets[key] == config.N_TEXTS, key
+    assert 0 < sets[(config.REPLY_SOURCE, "assistant")] <= config.N_TEXTS
     for row in rows:
         out = render_all(tok, row, preceding)
-        assert out["user@user"].end - out["user@user"].start == row["n_user_tokens"]
-        assert out["asst@asst"].end - out["asst@asst"].start == row["n_assistant_tokens"]
+        assert all(r.end - r.start == row["n_tokens"] for r in out.values())
+
+
+def test_flags_use_user_portion_only(tok):
+    end_marker, handoff = turn_markers(tok)
+    loop = "the cat sat on " * 4
+    text = f"my cat is sick.{handoff}\nI'd be happy to help! {loop}<|endoftext|>"
+    user_text = user_portion(text, tok)
+    assert user_text == "my cat is sick."
+    f = flags(text, user_text, True, end_marker, handoff)
+    assert f == dict(ended_turn=True, handoff_to_assistant=True, assistant_register=False, repetition_loop=False)
+    unclosed = f"Sure! I'd be happy to help. {loop}"
+    f = flags(unclosed, user_portion(unclosed, tok), False, end_marker, handoff)
+    assert f == dict(ended_turn=False, handoff_to_assistant=False, assistant_register=True, repetition_loop=True)

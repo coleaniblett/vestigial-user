@@ -4,6 +4,14 @@
 
 Writes <out>/<stage>.jsonl (one line per sample, with counter flags) and
 <out>/<stage>_counts.csv (totals per flag).
+
+Flags per sample:
+    ended_turn            closed the user turn (<|im_end|> or end of document)
+    handoff_to_assistant  wrote the assistant header after closing the turn (a subset of ended_turn)
+    assistant_register    assistant phrases in the user portion (text before the turn closes)
+    repetition_loop       a word 4-gram repeated 3+ times in the user portion
+A post-trained model usually finishes the user's message, closes the turn and then answers as
+the assistant, so register and repetition are checked on the user portion only.
 """
 
 import argparse
@@ -50,12 +58,18 @@ def repetition_loop(text, n=4, k=3):
     return any(c >= k for c in grams.values())
 
 
-def flags(text, stopped_on_eos, end_marker, handoff):
+def user_portion(text, tok):
+    """Continuation text before the model closes (or abandons) the user turn."""
+    cut = min((text.find(t) for t in ("<|im_end|>", "<|im_start|>", tok.eos_token) if t and t in text), default=len(text))
+    return text[:cut]
+
+
+def flags(text, user_text, stopped_on_eos, end_marker, handoff):
     return dict(
         ended_turn=bool(stopped_on_eos or (end_marker and end_marker in text)),
         handoff_to_assistant=bool(handoff and handoff in text),
-        assistant_register=bool(ASSISTANT_REGISTER.search(text)),
-        repetition_loop=repetition_loop(text),
+        assistant_register=bool(ASSISTANT_REGISTER.search(user_text)),
+        repetition_loop=repetition_loop(user_text),
     )
 
 
@@ -102,10 +116,12 @@ def main():
             cut = next((i for i, t in enumerate(seq) if t in eos_ids), None)
             stopped = cut is not None
             text = tok.decode(seq[: cut + 1] if stopped else seq, skip_special_tokens=False)
-            f = flags(text, stopped, end_marker, handoff)
+            user_text = user_portion(text, tok)
+            f = flags(text, user_text, stopped, end_marker, handoff)
             totals.update({k: int(v) for k, v in f.items()})
             totals["n"] += 1
-            records.append(dict(prefill_id=item["id"], sample=s, prefill=item["prefill"], continuation=text, **f))
+            records.append(dict(prefill_id=item["id"], sample=s, prefill=item["prefill"], continuation=text,
+                                user_portion=user_text, **f))
 
     with open(os.path.join(args.out, f"{stage}.jsonl"), "w", encoding="utf-8") as f:
         for r in records:
