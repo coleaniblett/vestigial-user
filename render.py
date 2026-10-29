@@ -122,7 +122,7 @@ def render_prefill(tok, sentence, preceding=False):
 
 
 def load_jsonl(path):
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return [json.loads(line) for line in f]
 
 
@@ -148,7 +148,7 @@ def dump_examples(tok, rows, path, preceding=False):
                 "````",
                 "",
             ]
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
 

@@ -5,6 +5,7 @@ import os
 import pytest
 
 import config
+from generate import stop_ids, turn_markers
 from render import AlignmentError, load_jsonl, load_tokenizer, render, render_all, template_parts
 
 EDGE_CASES = [
@@ -54,6 +55,14 @@ def test_edge_cases_align(tok, text, preceding):
     for r in out.values():
         assert tok.decode(r.input_ids[r.start : r.end], clean_up_tokenization_spaces=False) == text
         assert r.start > 0
+
+
+def test_generation_stops_only_at_end_of_document(tok):
+    """Stopping at <|im_end|> would make a handoff to the assistant unobservable."""
+    end_marker, handoff = turn_markers(tok)
+    assert end_marker == "<|im_end|>" and handoff.startswith(end_marker) and "assistant" in handoff
+    assert stop_ids(tok) == [tok.convert_tokens_to_ids("<|endoftext|>")]
+    assert tok.convert_tokens_to_ids(end_marker) not in stop_ids(tok)
 
 
 def test_rejects_bad_text(tok):

@@ -37,6 +37,13 @@ def turn_markers(tok):
     return user_suffix.strip(), handoff.strip()
 
 
+def stop_ids(tok):
+    """End-of-document token, the one stop token for every stage. Post-trained checkpoints
+    also stop on <|im_end|> by default, which would hide any handoff to the assistant."""
+    vocab = tok.get_vocab()
+    return [vocab["<|endoftext|>"]] if "<|endoftext|>" in vocab else [tok.eos_token_id]
+
+
 def repetition_loop(text, n=4, k=3):
     words = text.split()
     grams = Counter(tuple(words[i : i + n]) for i in range(len(words) - n + 1))
@@ -71,8 +78,7 @@ def main():
     tok = load_tokenizer(args.tokenizer)
     end_marker, handoff = turn_markers(tok)
     model, device = load_model(model_id)
-    eos_ids = model.generation_config.eos_token_id
-    eos_ids = set(eos_ids if isinstance(eos_ids, list) else [eos_ids]) - {None}
+    eos_ids = stop_ids(tok)
     pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
     torch.manual_seed(args.seed)
 
@@ -89,6 +95,7 @@ def main():
             top_k=0,
             max_new_tokens=args.max_new_tokens,
             num_return_sequences=args.samples,
+            eos_token_id=eos_ids,
             pad_token_id=pad_id,
         )
         for s, seq in enumerate(gen[:, ids.shape[1] :].tolist()):
@@ -100,7 +107,7 @@ def main():
             totals["n"] += 1
             records.append(dict(prefill_id=item["id"], sample=s, prefill=item["prefill"], continuation=text, **f))
 
-    with open(os.path.join(args.out, f"{stage}.jsonl"), "w") as f:
+    with open(os.path.join(args.out, f"{stage}.jsonl"), "w", encoding="utf-8") as f:
         for r in records:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
     with open(os.path.join(args.out, f"{stage}_counts.csv"), "w", newline="") as f:

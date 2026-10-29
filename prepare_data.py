@@ -132,7 +132,7 @@ def main():
 
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     for path, items in ((args.out, rows), (args.prefill_out, prefill)):
-        with open(path, "w") as f:
+        with open(path, "w", encoding="utf-8") as f:
             for r in items:
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
         print(f"wrote {len(items)} rows to {path}")
